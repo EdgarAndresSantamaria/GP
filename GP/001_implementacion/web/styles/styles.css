@@ -36,7 +36,7 @@ html, body { /* Todo el alto */
   margin-top: 17%;
 }
 
-#username, #password {
+#username, #password, #email {
   width: 100%;
   background: #fffded;
   border: none;
