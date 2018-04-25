@@ -1,0 +1,54 @@
+html, body { /* Todo el alto */
+  padding: 0;
+  height: 100%;
+}
+
+/* Login */
+
+#main-container{
+  width: 100%;
+}
+
+#left-panel{
+  width: 37%;
+  background: #320D6D;
+  float: left;
+}
+
+#right-panel{
+  width: 63%;
+  background: #FFD447;
+  float: right;
+}
+
+#main-container, #left-panel, #right-panel{
+  height: 100%;
+}
+
+
+/* Formularios */
+.formulario{
+  width: 48%;
+  margin:0 auto;
+  margin-top: 17%;
+}
+
+#username, #password {
+  width: 100%;
+  background: #fffded;
+  border: none;
+  padding: 10px;
+  margin-bottom: 8%;
+  height: 27px;
+  border-radius: 2px;
+  box-shadow: 2px 2px 2px #0000001a;
+}
+
+.formulario button{
+  background: #C7D9B7;
+  border: none;
+  padding: 17px;
+  border-radius: 2px;
+  box-shadow: inset 1px 0px 2px #0003;
+  cursor: pointer;
+}
