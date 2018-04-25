@@ -3,7 +3,8 @@
 <head>
   <title>Log In</title>
 
-  <link rel="stylesheet" href="styles/styles.css">
+  <?php include 'parts/links.html';?>
+
 </head>
 <body>
 
@@ -26,12 +27,14 @@
           <input type="text" id="username" placeholder="Username..." required/>
           <input type="password" id="password" placeholder="Password..." required/>
           <button type="submit">Log In</button>
-          <span style="text-align: right">Don't have an account yet? Sign Up!</span>
-        </form>
-      </div>
+        </br>
+      </br>
+      <span style="text-align: right">Don't have an account yet? Sign Up!</span>
+    </form>
+  </div>
 
 
-    </div>
+</div>
 
-  </body>
-  </html>
+</body>
+</html>
