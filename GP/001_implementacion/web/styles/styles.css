@@ -28,6 +28,26 @@ html, body { /* Todo el alto */
   height: 100%;
 }
 
+/* Home */
+#main{
+    width: 100%;
+}
+
+#left{
+  width: 60%;
+  background: #FFBFB7;
+  float: left;
+}
+
+#right{
+  width: 40%;
+  background: #C7D9B7;
+  float: right;
+}
+
+#main, #left, #right{
+  height: 100%;
+}
 
 /* Formularios */
 .formulario{
@@ -48,6 +68,24 @@ html, body { /* Todo el alto */
 }
 
 .formulario button{
+  background: #720026;
+  border: none;
+  padding: 15px 28px;
+  border-radius: 2px;
+  box-shadow: inset 1px 0px 2px #0000001a;
+  cursor: pointer;
+  margin: 0 auto;
+  color: white;
+  font-family: Georgia;
+}
+
+.formularioHome{
+  width: 47%;
+  margin:0 auto;
+
+}
+
+.formularioHome button{
   background: #720026;
   border: none;
   padding: 15px 28px;
