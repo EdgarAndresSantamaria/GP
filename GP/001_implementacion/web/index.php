@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<!-- Se empieza una sesión -->
+<?php
+session_start();
+?>
+
 <html>
 <head>
 <title>Home</title>
