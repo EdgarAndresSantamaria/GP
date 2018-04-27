@@ -6,7 +6,7 @@ session_start();
 
 <!-- Si el usuario está identificado no se puede registrar -->
 <?php
-if(isset($_SESSION["username"])){
+if(isset($_SESSION["usuario"])){
   header("location: ../WEB");
 }
 ?>
@@ -72,15 +72,10 @@ mysqli_close($conn);
 <div id="right-panel">
 
   <div class="formulario">
-        <?php
-            $username = isset($_POST['username'])?$_POST['username']:'';
-            $password = isset($_POST['password'])?$_POST['password']:'';
-            $email = isset($_POST['email'])?$_POST['email']:'';
-        ?>
 
         <!--Obtener datos formulario y guardarlos en mysql -->
           <?php
-           if( isset($_POST["nombre"])) {
+           if( isset($_POST["username"])) {
            //se pone isset porque al principio no se le ha enviado nada al formulario y entonces sale error
 
          //Se conecta con la base de datos
@@ -107,14 +102,14 @@ mysqli_close($conn);
         ?>
         <!-- Fin -->
 
-        <form onsubmit="return datosUsuarioCorrectos(this)" action="<?php $_PHP_SELF ?>" method = "POST" >
+        <form action="<?php $_PHP_SELF ?>" method = "POST" >
           <input type="text" name="username" id="username" value="<?php echo $username;?>" placeholder="Username..." required/>
           <input type="email" name="email" id="email" value="<?php echo $email;?>" placeholder="Email..." required/>
           <input type="password" name="password" id="password" value="<?php echo $password;?>" placeholder="Password..." required/>
           <button type="submit">Sign Up</button>
         </br>
       </br>
-      <span style="text-align: right">Already signed up? Log In!</span>
+      <span style="text-align: right">Already signed up? <a href="login.php">Log In!</a></span>
     </form>
   </div>
 
