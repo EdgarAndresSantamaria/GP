@@ -6,7 +6,7 @@ html, body { /* Todo el alto */
   margin-right: 0px;
 }
 
-/* Login */
+/* Login / Register / Main */
 
 #main-container{
   width: 100%;
@@ -20,7 +20,7 @@ html, body { /* Todo el alto */
 
 #right-panel{
   width: 63%;
-  background: #FFD447;
+  background: #FFBFB7;
   float: right;
 }
 
@@ -29,9 +29,6 @@ html, body { /* Todo el alto */
 }
 
 /* Home */
-#main{
-    width: 100%;
-}
 
 #left{
   width: 60%;
@@ -41,11 +38,11 @@ html, body { /* Todo el alto */
 
 #right{
   width: 40%;
-  background: #C7D9B7;
+  background: #320D6D;
   float: right;
 }
 
-#main, #left, #right{
+#left, #right{
   height: 100%;
 }
 
