@@ -1,0 +1,424 @@
+/*******
+
+CSS creado por Paula de Jaime y Edurne Lopez
+
+Se han tenido en cuenta las distintas resoluciones de pantalla, haciendo la plantilla "responsive"
+
+*****/
+
+
+
+/************/
+/* 
+* 001 General
+* 002 Menu
+* 003 Logo (responsive)
+* 004 Main Wrapper
+    _ Left-Series (responsive)
+    _ Right-Sidebar (responsive)
+    _ Links register & login (responsive)
+    _ Encabezados
+    _ Créditos
+    _ Series por estrenar (responsive)
+* 005 Formulario Registro & Login 
+    - Register & Login
+    - Solo register (responsive)
+    - Solo login (responsive)
+* 006 Editar serie (responsive)
+* 007 Nueva serie/Mi cuenta (responsive)
+**/
+
+
+/* 001 General */
+
+body {
+    background: url(images/bg2_light.jpg) fixed no-repeat;
+    background-size: 100%;
+    background-position: bottom;
+    background-color: #eacdcf;
+    background-blend-mode: darken;
+    font-family: 'Merriweather', serif;
+    font-size: 14px;
+}
+li {
+    list-style-type: circle;
+}
+
+select {
+    border: 5px double #e2c4c6;
+    height: 40px;
+    padding: 5px;
+    width: 100%;
+    text-transform: capitalize;
+}
+
+/** 002 Menu*/
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.topMenuWrapper {
+    background: black;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 8px 0 8px 0;
+}
+.topMenuItems {
+    margin-left: 15%;
+}
+.topMenuItems a {
+    /*Links*/
+    
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    text-decoration: none;
+    padding: 0 30px 0 5px;
+    font-size: 14px;
+}
+/** 003 Logo **/
+
+.logo {
+    text-align: center;
+    width: 100%;
+    margin-top: 77px;
+}
+
+
+/**Responsive*/
+
+@media only screen and (max-width: 368px) {
+    .logo img{
+        width: 100%;
+    }
+}
+
+/*** 004 Main Wrapper**/
+
+.main-wrapper {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 25px;
+    z-index: 999;
+    height: 450px;
+}
+
+.main-wrapper a, .formulariotexto a {
+    text-decoration: none;
+    color: white;
+    background: black;
+    padding: 1px;
+}
+
+
+.left-series {
+    float: left;
+    width: 62%;
+    background-color: white;
+    padding: 10px;
+    line-height: 2em;
+    color: #484848;
+}
+
+
+
+.right-sidebar {
+    float: right;
+    width: 30%;
+    background: blue;
+    background-color: rgba(247, 243, 243, 0.64);
+    padding: 10px;
+    line-height: 2em;
+    color: #484848;
+}
+
+.buscar {
+  background: #f7f7f7;
+    text-align: center;
+    font-family: georgia;
+    text-transform: lowercase;
+    font-style: italic;
+    color: #c2a39f;
+    border: none;
+    width: 20%;
+    height: 20px;
+	cursor: pointer;
+}
+
+/*Links register & login*/
+
+.loginlink {
+    background: black;
+    width: 48%;
+    float: left;
+    text-align: center;
+}
+.loginlink a,
+.registerlink a {
+    color: white;
+    text-decoration: none;
+    font-family: calibri;
+    text-transform: uppercase;
+    padding: 5px;
+}
+.registerlink {
+    background: black;
+    width: 48%;
+    float: right;
+    text-align: center;
+}
+/*Encabezados*/
+
+.right-sidebar h1 {
+    font-family: georgia;
+    text-align: center;
+    background: black;
+    color: white;
+    font-weight: 100;
+    font-size: 16px;
+}
+.left-series h1 {
+    padding-bottom: 3px;
+}
+/*Créditos*/
+
+.credits {
+    font-size: 10px;
+    float: left;
+    width: 100%;
+}
+/**Responsive*/
+
+@media only screen and (max-width: 1063px) {
+    .left-series {
+        width: 100%;
+    }
+    .right-sidebar {
+        width: 100%;
+        float: left;
+    }
+
+}
+
+@media only screen and (max-width: 353px) {
+    .loginlink {
+        width: 100%;
+    }
+    .registerlink {
+        width: 100%;
+        float: left;
+        margin:6px 0 12px 0;
+    }
+
+        .right-sidebar h1 {
+        margin-top: 55px;
+    }
+
+}
+
+/*Series por estrenar*/
+
+.serie img {
+    width: 90%;
+    height: 200px;
+    object-fit: cover;
+    object-position: bottom;
+    background-image:url('images/no-cover.png');
+    background-size: 97%;
+    background-position-y: center;
+}
+
+.serie {
+    width: 50%;
+    float: left;
+    text-transform: capitalize;
+    font-size: 13px;
+    font-family: georgia;
+    text-align: center;
+}
+
+
+@media only screen and (max-width: 591px) {
+   .serie {
+        width: 100%;
+   }
+}
+
+
+
+/** 005 Formulario Registro & Login **/
+
+/**Comun a register y login **/
+
+.formulariotexto {
+    padding: 40px 50px 50px 50px;
+}
+
+.formularioregister tr:nth-child(2n+1) input, .formulariologin tr:nth-child(2n+1) input { /*impares*/
+    width: 100%;
+    border: 5px double #e2c4c6;
+    height: 40px;
+    padding: 5px;
+}
+.formularioregister tr:nth-child(2n+2) input, .formulariologin tr:nth-child(2n+2) input { /*pares*/
+    width: 100%;
+    border: 5px double #d3cdcf;
+    height: 40px;
+    padding: 5px;
+}
+
+.formularioregister tr, .formulariologin tr{
+    height: 70px;
+}
+
+.aceptar{
+    font-family: 'Amatic SC';
+    font-size: 60px;
+    background: rgba(211, 205, 207, 0.21);
+    border-radius: 100%;
+    border: 2px solid #f6f4f5;
+    cursor: pointer;
+    color: #717171;
+}
+
+.formulariocontainerRegistro, .formulariocontainerlogin {
+    margin: 0 auto;
+    margin-top: 25px;
+    z-index: 999;
+    background: rgb(255, 255, 255);
+    border-radius: 15px;
+    box-shadow: inset 1px 3px 2px 0px #bda3a5;
+    margin-bottom: 40px;
+}
+/**/
+
+/**Solo register*/
+.formulariocontainerRegistro {
+    width: 80%;
+}
+
+@media only screen and (max-width: 794px) {
+    .formularioregister tr td:nth-child(2n+1){ /**impares*/
+        float: left;
+        width: 100%
+    }
+
+    .formularioregister tr td:nth-child(2n+2) { /*pares*/
+    float: left;
+    width: 100%
+    }
+    .formulariocontainerRegistro h1 {
+        font-size: 20px;
+    }
+}
+
+/*Solo login*/
+.formulariocontainerlogin {
+    width: 35%;
+}
+
+@media only screen and (max-width: 1266px) {
+    .formulariologin tr td:nth-child(2n+1){ /**impares*/
+        float: left;
+        width: 100%
+    }
+
+    .formulariologin tr td:nth-child(2n+2) { /*pares*/
+    float: left;
+    width: 100%
+    }
+  
+}
+
+@media only screen and (max-width: 1064px) {
+    .formulariocontainerlogin{
+        width: 100%;
+    }
+       
+}
+
+/** 006 Editar serie**/
+.editarImagenserie {
+    width: 35%;
+    float: left;
+}
+
+.editarImagenserie img {
+    width: 90%;
+    background-image: url(images/no-cover.png);
+}
+
+.editarImagenserie input {
+    border: 5px double #222;
+    height: 40px;
+    padding: 5px;
+    width: 90%
+}
+
+.editarInfoserie {
+    width: 63%;
+    float: left;
+}
+
+.editarInfoserie input:nth-of-type(odd) {
+    border: 5px double #e2c4c6;
+    height: 40px;
+    padding: 5px;
+    width: 100%
+}
+
+.editarInfoserie input:nth-of-type(even) {
+    border: 5px double #d3cdcf;
+    height: 40px;
+    padding: 5px;
+    width: 100%;
+}
+
+@media only screen and (max-width: 811px) {
+    .editarImagenserie{
+        width: 100%;
+        text-align: center;
+    }
+    .editarInfoserie {
+        width: 100%;
+    }
+       
+}
+
+/** 007 Nueva serie & buscar**/
+
+.botonnuevaserie {
+    display: block;
+    background: #f7f7f7;
+    text-align: center;
+    font-family: georgia;
+    text-transform: lowercase;
+    font-style: italic;
+    color: #c2a39f;
+}
+
+
+.nuevaserie {
+    width: 100%;
+}
+
+.nuevaserie input:nth-of-type(1){
+    border: 5px double #222!important;
+}
+
+.nuevaserie input:nth-of-type(even) {
+    border: 5px double #e2c4c6;
+    height: 40px;
+    padding: 5px;
+    width: 100%
+}
+
+.nuevaserie input:nth-of-type(odd) {
+    border: 5px double #d3cdcf;
+    height: 40px;
+    padding: 5px;
+    width: 100%;
+}
