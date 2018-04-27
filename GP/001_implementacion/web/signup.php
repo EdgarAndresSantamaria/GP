@@ -36,9 +36,9 @@ if(isset($_SESSION["usuario"])){
 
 <div id="main-container">
   <div id="left-panel">
-    imagen
+    
   </div>
- 
+
 <div id="right-panel">
 
   <div class="formulario">
@@ -55,8 +55,12 @@ if(isset($_SESSION["usuario"])){
 
 		if (mysqli_query($conn, $sql)){
 		  //Si se ha registrado sale un link para identificarse.
-		   echo "<center>Te has registrado satisfactoriamente como " . $username . ". <br /><br /><a href=\"login.php\">Inicia sesión</a></center>";
-		   exit();
+		   echo "<center><div style=\"color: #060606;
+       font-size: 15px;
+       margin-bottom: 14px;
+       border-bottom: 3px solid #454545;
+       border-top: 3px solid #454545;
+       padding: 5px;\">You've signed up successfully " . $username . "!</div></center>";
 		} else {
 		  //Si el usuario ya existe sale un mensaje por pantalla
 		   if (mysqli_errno($conn) == 1062){ //Usuario ya en el sistema
@@ -66,7 +70,7 @@ if(isset($_SESSION["usuario"])){
           margin-bottom: 14px;
           border-bottom: 3px solid #454545;
           border-top: 3px solid #454545;
-          padding: 5px;\">-- Usuario ya registrado --</div></center>";
+          padding: 5px;\">-- The user is already in the system --</div></center>";
 
 		   }
 		}

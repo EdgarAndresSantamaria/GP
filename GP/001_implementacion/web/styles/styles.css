@@ -16,6 +16,9 @@ html, body { /* Todo el alto */
   width: 37%;
   background: #320D6D;
   float: left;
+  background: #320D6D url('images/fondo.png');
+  background-position-x: 0%;
+  background-position-x: center;
 }
 
 #right-panel{
@@ -40,6 +43,9 @@ html, body { /* Todo el alto */
   width: 40%;
   background: #320D6D;
   float: right;
+  background: #320D6D url('images/fondo.png');
+  background-position-x: 0%;
+  background-position-x: center;
 }
 
 #left, #right{
@@ -127,10 +133,10 @@ html, body { /* Todo el alto */
 
 /**Pong Game Draw */
 .raqueta {
-    width: 25%;
-    height: 17px;
-    background: #c0c0c0;
-    margin-left: 13%;
+  width: 25%;
+  height: 17px;
+  background: #c0c0c0;
+  margin-left: 13%;
 }
 
 /** Media queries **/

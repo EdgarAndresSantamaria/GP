@@ -33,7 +33,7 @@ session_start();
     </div>
 
     <div id="right">
-    insertar foto
+    
   </div>
 </div>
 

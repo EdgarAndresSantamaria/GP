@@ -31,7 +31,7 @@ if(isset($_SESSION["usuario"])){
 
   <div id="main-container">
     <div id="left-panel">
-      imagen
+      
     </div>
 
     <div id="right-panel">
