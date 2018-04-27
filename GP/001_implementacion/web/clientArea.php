@@ -17,7 +17,7 @@ header("location: ../WEB");
 <html>
 <head>
   <title>Client Area</title>
-  <link rel="stylesheet" href="styles/styles.css">
+  <?php include 'parts/links.html';?>
 </head>
 
 <body>

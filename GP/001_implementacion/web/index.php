@@ -7,7 +7,7 @@ session_start();
 <html>
 <head>
 <title>Home</title>
-    <link rel="stylesheet" href="styles/styles.css">
+    <?php include 'parts/links.html';?>
 </head>
 
 <body>
@@ -33,7 +33,7 @@ session_start();
     </div>
 
     <div id="right">
-    
+
   </div>
 </div>
 
