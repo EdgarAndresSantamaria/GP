@@ -1,3 +1,5 @@
+<!-- Se añade la codificación de la web -->
+<?php header('Content-Type: text/html; charset=UTF-8'); ?>
 
 <div id="menu">
   <div class="topnav" id="myTopnav">
@@ -17,7 +19,7 @@
       if($_SESSION['usuario'] == "admin"){ // Si el usuario además es admin
          echo "<a href=\"clientArea.php\">Client Area</a>";
       }
-       echo "<a href=\"logout.php\">Cerrar Sesión</a>";
+       echo "<a href=\"logout.php\">Log Out</a>";
     }
     ?>
 

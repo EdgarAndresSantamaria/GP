@@ -1,11 +1,11 @@
 <?php
 $servername = "localhost";
-$username = "Xpdejaime001";
-$password = "AIC7nDBJ";
+$user = "Xpdejaime001";
+$pass = "AIC7nDBJ";
 $database = "Xpdejaime001_pong";
 
 // La conexión se crea
-$conn = mysqli_connect($servername, $username, $password, $database);
+$conn = mysqli_connect($servername, $user, $pass, $database);
 
 // Se comprueba si se ha producido algún error
 if (!$conn){

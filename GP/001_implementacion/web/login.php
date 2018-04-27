@@ -22,7 +22,7 @@ if( isset($_POST["username"])) {
   include("database/connect-database.php");
 
   //Instrucción
-  $sql = "SELECT username, password FROM users WHERE username='". $_POST["username"] . "' AND password= MD5('" . $_POST["password"] . "')";
+  $sql = "SELECT username, password FROM users WHERE username='". $_POST["username"] . "' AND password=MD5('" . $_POST["password"] . "')";
   //Un resultado
   $result = mysqli_query($conn, $sql);
 

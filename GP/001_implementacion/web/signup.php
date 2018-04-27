@@ -43,6 +43,7 @@ if(isset($_SESSION["usuario"])){
 include("database/connect-database.php");
 
 //Instrucción
+//$sql= "INSERT INTO users VALUES ('".$username."','".$email."', MD5('".$password."'))";
 $sql= "INSERT INTO users VALUES ('".$username."','".$email."', MD5('".$password."'))";
 
 if (mysqli_query($conn, $sql)){
@@ -73,34 +74,6 @@ mysqli_close($conn);
 
   <div class="formulario">
 
-        <!--Obtener datos formulario y guardarlos en mysql -->
-          <?php
-           if( isset($_POST["username"])) {
-           //se pone isset porque al principio no se le ha enviado nada al formulario y entonces sale error
-
-         //Se conecta con la base de datos
-        include("database/connect-database.php");
-
-        //Instrucción
-        $sql= "INSERT INTO users VALUES ('".$username."','".$email."', MD5('".$password."'))";
-
-        if (mysqli_query($conn, $sql)){
-          //Si se ha registrado sale un link para identificarse.
-           echo "<center>Te has registrado satisfactoriamente como " . $username . ". <br /><br /><a href=\"login.php\">Inicia sesión</a></center>";
-           exit();
-        } else {
-          //Si el usuario ya existe sale un mensaje por pantalla
-           if (mysqli_errno($conn) == 1062){ //Usuario ya en el sistema
-              echo "<center><div style=\"color: red; font-size: 25px; background: black;\">-- Usuario ya registrado --</div></center>";
-           }
-        }
-
-         //La conexión se cierra
-        mysqli_close($conn);
-
-          }
-        ?>
-        <!-- Fin -->
 
         <form action="<?php $_PHP_SELF ?>" method = "POST" >
           <input type="text" name="username" id="username" value="<?php echo $username;?>" placeholder="Username..." required/>
