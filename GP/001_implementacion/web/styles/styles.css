@@ -125,7 +125,13 @@ html, body { /* Todo el alto */
   display: none;
 }
 
-
+/**Pong Game Draw */
+.raqueta {
+    width: 25%;
+    height: 17px;
+    background: #b0b0b0;
+    margin-left: 13%;
+}
 
 /** Media queries **/
 @media screen and (max-width: 600px) {
