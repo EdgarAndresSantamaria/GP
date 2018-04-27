@@ -21,8 +21,8 @@
         SIGN UP AND PLAY!</br/>
         PLAY NOW!</br/>
         Escribir algo</br/>
-        <button  style="position: absolute; top: 400px; left: 200px;" type="submit" >Sign up </button> </br/> </br/>
-        <button style="position: absolute; top: 450px; left: 200px;" type="submit" >Download </button>
+        <button type="submit" >Sign up </button> </br/> </br/>
+        <button type="submit" >Download </button>
 
       </form>
     </div>
