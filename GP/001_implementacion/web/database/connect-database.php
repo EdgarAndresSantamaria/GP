@@ -1,5 +1,5 @@
 <?php
-$servername = "galan.ehu.eus";
+$servername = "localhost";
 $username = "Xpdejaime001";
 $password = "AIC7nDBJ";
 $database = "Xpdejaime001_pong";
