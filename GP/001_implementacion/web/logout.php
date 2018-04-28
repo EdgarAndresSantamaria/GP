@@ -20,6 +20,6 @@ session_destroy();
 header("location: ../WEB");
 ?>
 
-
+  <?php include 'parts/creditos.html';?>
 </body>
 </html>

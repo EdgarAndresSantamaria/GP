@@ -32,7 +32,7 @@ if(!isset($_SESSION["usuario"])){
   <div class="main-container">
 
     <div class="table-container">
-      <table width="100%">
+      <table>
         <tr>
           <th>Username</th>
           <th>Email</th>
@@ -67,6 +67,6 @@ if(!isset($_SESSION["usuario"])){
 
     </div>
   </div>
-
+  <?php include 'parts/creditos.html';?>
 </body>
 </html>

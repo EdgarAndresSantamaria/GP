@@ -36,6 +36,6 @@ session_start();
 
   </div>
 </div>
-
+  <?php include 'parts/creditos.html';?>
 </body>
 </html>

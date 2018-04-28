@@ -31,7 +31,7 @@ if(isset($_SESSION["usuario"])){
 
   <div id="main-container">
     <div id="left-panel">
-      
+
     </div>
 
     <div id="right-panel">
@@ -87,6 +87,6 @@ if(isset($_SESSION["usuario"])){
 
 
 </div>
-
+  <?php include 'parts/creditos.html';?>
 </body>
 </html>

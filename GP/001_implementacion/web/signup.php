@@ -99,6 +99,6 @@ if(isset($_SESSION["usuario"])){
 
 
 </div>
-
+  <?php include 'parts/creditos.html';?>
 </body>
 </html>
