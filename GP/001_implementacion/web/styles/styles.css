@@ -139,6 +139,22 @@ html, body { /* Todo el alto */
   margin-left: 13%;
 }
 
+/** Cliente **/
+.main-container {
+    background: #320D6D url('../images/fondo.png');
+    height: 100%;
+    margin-top: 0px;
+    width: 100%;
+}
+
+.table-container {
+    background: whitesmoke;
+    width: 50%;
+    margin: 0 auto;
+    height: 100%;
+    padding: 50px;
+}
+
 /** Media queries **/
 @media screen and (max-width: 600px) {
   .topnav a:not(:first-child) {display: none;}
