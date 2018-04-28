@@ -32,7 +32,7 @@ if(!isset($_SESSION["usuario"])){
   <div class="main-container">
 
     <div class="table-container">
-      <table>
+      <table width="100%">
         <tr>
           <th>Username</th>
           <th>Email</th>
