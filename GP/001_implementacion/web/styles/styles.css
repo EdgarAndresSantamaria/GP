@@ -141,18 +141,30 @@ html, body { /* Todo el alto */
 
 /** Cliente **/
 .main-container {
-    background: #320D6D url('../images/fondo.png');
-    height: 100%;
-    margin-top: 0px;
-    width: 100%;
+  background: #320D6D url('../images/fondo.png');
+  height: 100%;
+  margin-top: 0px;
+  width: 100%;
 }
 
 .table-container {
-    background: whitesmoke;
-    width: 50%;
-    margin: 0 auto;
-    height: 100%;
-    padding: 50px;
+  background: whitesmoke;
+  width: 50%;
+  margin: 0 auto;
+  height: 400px;
+  padding: 50px;
+  box-shadow: 1px 1px 3px #1d1d1d;
+}
+
+.table-container th {
+    background: #ee8c1333;
+}
+.table-container table, th, td {
+    border: 5px solid #ee8c1333;
+    padding: 10px;
+}
+.table-container table {
+    border-collapse: collapse;
 }
 
 /** Media queries **/
