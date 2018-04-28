@@ -154,6 +154,7 @@ html, body { /* Todo el alto */
   height: 400px;
   padding: 50px;
   box-shadow: 1px 1px 3px #1d1d1d;
+  overflow: scroll;
 }
 
 .table-container th {
