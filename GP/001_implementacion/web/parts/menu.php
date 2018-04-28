@@ -23,6 +23,5 @@
     }
     ?>
 
-    <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
   </div>
 </div>
