@@ -36,7 +36,7 @@ if(isset($_SESSION["usuario"])){
 
 <div id="main-container">
   <div id="left-panel">
-    
+
   </div>
 
 <div id="right-panel">
@@ -61,6 +61,10 @@ if(isset($_SESSION["usuario"])){
        border-bottom: 3px solid #454545;
        border-top: 3px solid #454545;
        padding: 5px;\">You've signed up successfully " . $username . "!</div></center>";
+
+       $username = "";
+       $email = "";
+       $password = "";
 		} else {
 		  //Si el usuario ya existe sale un mensaje por pantalla
 		   if (mysqli_errno($conn) == 1062){ //Usuario ya en el sistema
