@@ -43,7 +43,7 @@ public class Pong {
 		probabilidadPotenciador=0.6;
 	}
 	
-	public json mostrar() {
+	public JSONArray mostrar() {
 		//generar un json con los atributos de los elementos
 	}
 	
