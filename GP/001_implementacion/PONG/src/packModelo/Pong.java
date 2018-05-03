@@ -115,22 +115,22 @@ public class Pong {
 	     
 	    for(Bola unaBola : lBola) { 
 	      JSONObject bola = new JSONObject(); 
-	      raquetas.put("nombre", xxx); 
-	      raquetas.put("width", xxx); 
-	      raquetas.put("height", sss); 
-	      raquetas.put("x", asklf); 
-	      raquetas.put("y", dfff); 
+	      bola.put("nombre", xxx); 
+	      bola.put("width", xxx); 
+	      bola.put("height", sss); 
+	      bola.put("x", asklf); 
+	      bola.put("y", dfff); 
 	       
 	      listaObjetos.add(bola); 
 	    } 
 	     
 	    for(Potenciador unPotenciador : lPotenciadores) { 
 	      JSONObject potenciador = new JSONObject(); 
-	      raquetas.put("nombre", xxx); 
-	      raquetas.put("width", xxx); 
-	      raquetas.put("height", sss); 
-	      raquetas.put("x", asklf); 
-	      raquetas.put("y", dfff); 
+	      potenciador.put("nombre", xxx); 
+	      potenciador.put("width", xxx); 
+	      potenciador.put("height", sss); 
+	      potenciador.put("x", asklf); 
+	      potenciador.put("y", dfff); 
 	       
 	      listaObjetos.add(potenciador); 
 	    } 
