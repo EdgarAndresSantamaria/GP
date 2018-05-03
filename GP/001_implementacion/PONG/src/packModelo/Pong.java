@@ -4,6 +4,9 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import packVista.Renderer;
 
 public class Pong {
@@ -45,6 +48,52 @@ public class Pong {
 	
 	public JSONArray mostrar() {
 		//generar un json con los atributos de los elementos
+		JSONArray listaObjetos = new JSONArray();
+		
+		//Raquetas, bolas, potenciadores (dimension y posicion)
+		// datos: [{nombre: String, width: int, height: int, x: int, y:int},... ]
+		JSONObject raquetas = new JSONObject();
+		raquetas.put("nombre", xxx);
+		raquetas.put("width", xxx);
+		raquetas.put("height", sss);
+		raquetas.put("x", asklf);
+		raquetas.put("y", dfff);
+		
+		listaObjetos.add(raquetas);
+		
+		raquetas = new JSONObject();
+		raquetas.put("nombre", xxx);
+		raquetas.put("width", xxx);
+		raquetas.put("height", sss);
+		raquetas.put("x", asklf);
+		raquetas.put("y", dfff);
+		
+		listaObjetos.add(raquetas);
+		
+		for(Bola unaBola : lBola) {
+			JSONObject bola = new JSONObject();
+			raquetas.put("nombre", xxx);
+			raquetas.put("width", xxx);
+			raquetas.put("height", sss);
+			raquetas.put("x", asklf);
+			raquetas.put("y", dfff);
+			
+			listaObjetos.add(bola);
+		}
+		
+		for(Potenciador unPotenciador : lPotenciadores) {
+			JSONObject potenciador = new JSONObject();
+			raquetas.put("nombre", xxx);
+			raquetas.put("width", xxx);
+			raquetas.put("height", sss);
+			raquetas.put("x", asklf);
+			raquetas.put("y", dfff);
+			
+			listaObjetos.add(potenciador);
+		}
+		
+		return listaObjetos;
+		
 	}
 	
 	public boolean update() {
