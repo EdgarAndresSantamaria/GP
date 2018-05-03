@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import packModelo.Pong;
+
 import java.awt.Color;
 import java.awt.Dimension;
 
@@ -159,12 +162,16 @@ public class F04MenuJuego extends JFrame {
 			String action = e.getActionCommand();
 			if (action.equals("IA")) 
 			{
+				Pong.getPong().setOponente("IA");
+				
 				F05MenuDificultad dif = new F05MenuDificultad();
 				dispose();
 			}
 			else if (action.equals("2j"))
 			{
 				//Jugar 2 jugadores
+				
+				Pong.getPong().setOponente("2Jugadores");
 			}
 			else if(action.equals("ranking"))
 			{
