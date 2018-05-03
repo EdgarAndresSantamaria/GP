@@ -1,11 +1,13 @@
 package packModelo;
 
 import java.awt.Rectangle;
+import java.util.Collection;
 
 public class Raqueta extends Elemento{
 	
 	private Jugador jugador;//jugador asociado a la raqueta
 	private boolean campo ;//campo de jugador (true->izq,false->drch)
+	private Collection<Potenciador> lPotenciadores;//lista potenciadores del jugador
 	
 	private int dy; //variable a updatear
 	
@@ -50,8 +52,21 @@ public class Raqueta extends Elemento{
 
 
 	public void addPotenciador(Potenciador golpeado) {
-		// TODO Auto-generated method stub
+		lPotenciadores.add(golpeado);
 		
+	}
+
+
+	public boolean posiblePotenciar(int max) {
+		return lPotenciadores.size()<max;
+	}
+
+	public void moverRaqueta(Boolean pDir) {
+		//direccion( true-> hacia arriba , false -> hacia abajo )
+		if((pDir && dy<0 )||(!pDir && dy>0)) {
+		//si queremos ir hacia arriba y vamos hacia abajo...o si queremos ir hacia abajo y vamos hacia arriba..
+			dy=-dy;
+		}	
 	}
 
 }

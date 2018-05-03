@@ -15,6 +15,7 @@ public class Bola extends Elemento {
 	}
 
 	public Potenciador emular() {
+		//gestión de fisicas de la bola
 		Potenciador golpeado=Pong.getPong().golpeaPotenciador(getShape());
 		if(Pong.getPong().golpeaRaqueta(getShape()) || golpeado!=null) {
 			//tanto raquetas como potenciadores provocan rebote
@@ -33,6 +34,10 @@ public class Bola extends Elemento {
 	public boolean campoApotenciar() {
 		//campo de jugador (true->izq,false->drch)
 		return !(dx<0);
+	}
+
+	public Boolean marcado() {
+		return Pong.getPong().marca(getShape());
 	}
 
 }

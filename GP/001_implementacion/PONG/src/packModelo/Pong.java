@@ -8,14 +8,15 @@ import packVista.Renderer;
 
 public class Pong {
 	
-	private Collection<Bola> lBola ; //lista bolas
-	private Collection<Rank> lPuntuacion ;//ranking del jugador1
-	private Collection<Potenciador> lPotenciadores;//lista potenciadores en el campo
+	private ArrayList<Bola> lBola ; //lista bolas
+	private ArrayList<Rank> lPuntuacion ;//ranking del jugador1
+	private ArrayList<Potenciador> lPotenciadores;//lista potenciadores en el campo
 	private Raqueta jug1;
 	private Raqueta jug2;
 	private Renderer renderer;
 	private static Pong instancia;
 	private Rectangle bounds;
+	private double probabilidadPotenciador;
 	
 	private Pong() {}
 	
@@ -36,16 +37,18 @@ public class Pong {
 		lBola=new ArrayList<>();
 		Bola principal=new Bola(false);
 		lBola.add(principal);
+		lPuntuacion=new ArrayList<>();
 		lPuntuacion=GestorBD.getGestorBD().cargar(pJugador1);//cargar puntuación historica
 		bounds=pBounds;
+		probabilidadPotenciador=0.6;
 	}
 	
-	public void jugar() {
-		update();
+	public json mostrar() {
+		//generar un json con los atributos de los elementos
 	}
 	
-	
-	private void update() {
+	public boolean update() {
+		boolean acabado=false;
 		//emular el movimiento de las bolas
 		for (Bola tmp : lBola ) {
 			Potenciador golpeado=tmp.emular();
@@ -54,37 +57,80 @@ public class Pong {
 					//es potenciador de raqueta
 					if(tmp.campoApotenciar()) {
 						//campo de jugador (true->izq,false->drch)
-						if(//posible potenciar)
-						jug1.addPotenciador(golpeado);
+						if(jug1.posiblePotenciar(golpeado.getMax())) {//si es posible potenciar campo izquierdo
+							jug1.addPotenciador(golpeado);
+						}
 					}else {
-						if(//posible potenciar)
-						jug2.addPotenciador(golpeado);
+						if(jug2.posiblePotenciar(golpeado.getMax())) {//si es posible potenciar campo derecho
+							jug2.addPotenciador(golpeado);
+						}
 					}
 				}else {
 					//es potenciador multiplicador
-					if(//posible multiplicar)
-					lBola.add(new Bola(true));
+					if(posibleMultiplicar(golpeado.getMax())) {
+						lBola.add(new Bola(true));
+					}
 				}
-			}else {
-				//comprobar si ha marcado
-				
-				if(marcado)//comprobar fin dejugo
+			}else {	
+				Boolean marcado=tmp.marcado();
+				if(marcado != null){//comprobar fin de juego
+					if(marcado==true) {//marca campo izquierdo
+						 lPuntuacion.get(lPuntuacion.size()-1).marcarJug1();//marcar campo izquierdo
+					}else {//marca campo derecho
+						lPuntuacion.get(lPuntuacion.size()-1).marcarJug2();//marcar campo derecho
+					}
+					Boolean ganador=finJuego();
+					//comprobar fin de juego
+					if(ganador!=null) {
+						acabado=ganador;
+						GestorBD.getGestorBD().guardar(lPuntuacion);//guardar nueva puntuación historica
+					}
+				}
 			}
 		}
-		
+
 		//emular el movimiento de la raqueta
 		jug1.emular();
+		if(jug2.getNombre().contains("IA")) {
+			//calcular siguiente movimiento de la IA
+			jug2
+		}
 		jug2.emular();
-		
+
 		//comprobar si desaparecen potenciadores
 		for (Potenciador tmp : lPotenciadores ) {
-			if(tmp.expirado()) {
+			if(tmp.expirado()){
 				lPotenciadores.remove(tmp);
 			}
 		}
-		// lanzar nuevos potenciadores
+		
+		lanzarPotenciador();	
+		return acabado;
 	}
 	
+	private boolean finJuego() {
+		return lPuntuacion.get(lPuntuacion.size()-1).fin();//marcar campo derecho;
+	}
+
+	private void lanzarPotenciador() {
+		//lanzar un nuevo potenciador random
+		if()
+		
+	}
+	
+	public void  moverRaqueta(Boolean pDir,Boolean pCampo) {
+		//campo de jugador (true->izq,false->drch)
+		if(pCampo==true) {//campo izquierdo
+			jug1.moverRaqueta(pDir);
+		}else {//campo derecho
+			jug2.moverRaqueta(pDir);
+		}
+	}
+
+	private boolean posibleMultiplicar(int max) {
+		return lBola.size()<max;
+	}
+
 	public Potenciador golpeaPotenciador(Rectangle bola) {
 		Potenciador result=null;
 		for(Potenciador tmp : lPotenciadores) {
@@ -101,5 +147,16 @@ public class Pong {
 
 	public boolean dentroCampo(Rectangle shape) {
 		return bounds.intersects(shape);
+	}
+
+	public Boolean marca(Rectangle bola) {
+		Object marcado = null;
+		//campo de jugador (true->izq,false->drch,null->no marca)
+		if(bounds.getMinX()==bola.getX()) {//marcar campo izquierdo
+				marcado=true;
+		}else if(bounds.getMaxX()==bola.getX()) {//marcar campo derecho
+			marcado=false;
+		}
+		return (Boolean)marcado;
 	}
 }

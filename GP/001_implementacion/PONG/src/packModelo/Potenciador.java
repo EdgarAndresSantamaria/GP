@@ -3,9 +3,11 @@ package packModelo;
 public class Potenciador extends Elemento {
 	
 	private int tiempo;
+	private int maxNum;
 
-	public Potenciador(String pTipo) {
-		super(pTipo);
+	public Potenciador(int pMax) {
+		super("potenciador");
+		maxNum=pMax;
 		tiempo=60*10;//60 segundos 
 	}
 
@@ -15,6 +17,10 @@ public class Potenciador extends Elemento {
 			tiempo--;
 		}
 		return expirado;
+	}
+
+	public int getMax() {
+		return maxNum;
 	}
 
 }
