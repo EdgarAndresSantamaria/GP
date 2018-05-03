@@ -4,58 +4,45 @@ import java.awt.Rectangle;
 import java.util.Collection;
 
 public class Raqueta extends Elemento{
-	
 	private Jugador jugador;//jugador asociado a la raqueta
-	private boolean campo ;//campo de jugador (true->izq,false->drch)
-	private Collection<Potenciador> lPotenciadores;//lista potenciadores del jugador
+	private Collection<DyRaqueta> lPotenciadores;//lista potenciadores del jugador
+	private int dy; //variable velocidad desplazamiento vertical, defecto : (2 pixel / update)
 	
-	private int dy; //variable a updatear
+	//constantes
+	private final int defaultDy=2;
 	
-
 	public Raqueta(String pNombre, Boolean pCampo) {
 		super("raqueta");
 		if(pNombre.contains("IA")) {
 			jugador=new IA(pNombre);
-			campo=pCampo;
-			setCoord();//generamos raqueta parte drcha  a media altura
 		}else {
 			jugador=new Usuario(pNombre);
-			campo=pCampo;
-			if(campo) {
-				setCoord();//generamos raqueta parte izquierda  a media altura
-			}else {
-				setCoord();//generamos raqueta parte drcha  a media altura
-			}
-			
 		}
-		// TODO Auto-generated constructor stub
 	}
-
 
 	public String getNombre() {
 		return jugador.getNombre();
 	}
 
-
-	public boolean golpeaRaqueta(Rectangle bola) {
-		return golpea(bola);
+	public int golpeaRaqueta(Rectangle bola) {
+		if(golpea(bola)) {
+			return dy;
+		}else {
+			return 0;
+		}
 	}
-
 
 	public void emular() {
 		if(Pong.getPong().dentroCampo(getShape())){
 			incrementarY(dy);
-		}else {
+		}else{
 			invertirY(dy);
 		}
 	}
 
-
-	public void addPotenciador(Potenciador golpeado) {
-		lPotenciadores.add(golpeado);
-		
+	public void addPotenciador(DyRaqueta golpeado) {
+		lPotenciadores.add(golpeado);	
 	}
-
 
 	public boolean posiblePotenciar(int max) {
 		return lPotenciadores.size()<max;
@@ -63,10 +50,47 @@ public class Raqueta extends Elemento{
 
 	public void moverRaqueta(Boolean pDir) {
 		//direccion( true-> hacia arriba , false -> hacia abajo )
-		if((pDir && dy<0 )||(!pDir && dy>0)) {
-		//si queremos ir hacia arriba y vamos hacia abajo...o si queremos ir hacia abajo y vamos hacia arriba..
-			dy=-dy;
-		}	
+		if(pDir) {
+			dy=defaultDy;
+		}else {
+			dy=-defaultDy;
+		}
+	}
+	
+	public void pararRaqueta() {
+		dy=0;
+		
+	}
+
+	public void activarPotenciadores() {
+		for(DyRaqueta tmp : lPotenciadores) {
+			dy*=tmp.actuar();
+		}
+	}
+
+	public void addPwd(String pwd) {
+		Usuario es = (Usuario) jugador;
+		es.setPwd(pwd);		
+	}
+	
+	public void siguienteMov() {
+		IA es = (IA) jugador;
+		es.siguienteMov();		
+		
+	}
+
+	public void desactivarPotenciadores() {
+		dy=2;//resetear velocidad
+		for(DyRaqueta tmp : lPotenciadores) {
+			if(tmp.expirado()) {//eliminar los potenciadores expirados 
+				lPotenciadores.remove(tmp);
+			}
+		}
+		
+	}
+	
+	public int getDy() {
+		return dy;
 	}
 
 }
