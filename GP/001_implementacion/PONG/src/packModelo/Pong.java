@@ -45,9 +45,8 @@ public class Pong {
 		lPuntuacion.add(new Rank(jug1.getNombre(),jug2.getNombre())); //generar nuevo Rank para la partida}
 	}
 	
-	public void setConfig(String pJugador1,String pwd,Rectangle pBounds ) {//inicialización del juego
+	public void setConfig(String pJugador1, Rectangle pBounds ) {//inicialización del juego
 		jug1=new Raqueta(pJugador1,true);
-		jug1.addPwd(pwd);
 		lBola=new ArrayList<>();
 		Bola principal=new Bola(false);
 		inicializarBolaPpal(principal);
@@ -58,6 +57,9 @@ public class Pong {
 		tipoPotenciador=true;//tipo Potenciador true -> Multiplicador/false -> DyRaqueta
 	}
 	
+	public Boolean validarLogin(String pwd) {
+		return GestorBD.getGestorBD().loginValido(jug1.getNombre(),pwd);
+	}
 	private void inicializarRaquetas() {
 		int xMax=(int) bounds.getMaxX();
 		double yMax= bounds.getMaxY();

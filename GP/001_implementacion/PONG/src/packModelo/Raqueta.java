@@ -16,7 +16,7 @@ public class Raqueta extends Elemento{
 		if(pNombre.contains("IA")) {
 			jugador=new IA(pNombre);
 		}else {
-			jugador=new Usuario(pNombre);
+			jugador=new Jugador(pNombre);
 		}
 	}
 
@@ -68,10 +68,7 @@ public class Raqueta extends Elemento{
 		}
 	}
 
-	public void addPwd(String pwd) {
-		Usuario es = (Usuario) jugador;
-		es.setPwd(pwd);		
-	}
+	
 	
 	public void siguienteMov() {
 		IA es = (IA) jugador;
