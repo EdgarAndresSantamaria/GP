@@ -8,5 +8,9 @@ public class IA extends Jugador {
 		estrategia=new Estrategia(pNombre.split("")[1]); // IA facil || IA dificil
 		
 	}
+	
+	public void siguienteMov() {
+		estrategia.siguienteMov();
+	}
 
 }

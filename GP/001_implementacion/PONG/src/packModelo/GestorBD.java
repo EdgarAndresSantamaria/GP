@@ -36,7 +36,6 @@ public class GestorBD {
 		return miGestorBD;
 	}
 
-	
 	/**
 	 * metodo para abrir una nueva conexion hacia la BD
 	 * @param serverAddress
@@ -76,12 +75,6 @@ public class GestorBD {
 		return resultado;
 	}
 	
-	/**
-	 * to do los métodos que carguen y guarden la clasificación del juego
-	 * @param pJugador1
-	 * @return
-	 */
-
 	public ArrayList<Rank> cargar(String pJugador1) {
 		//cargar el ranking del jugador especificado
 		return null;
@@ -89,5 +82,11 @@ public class GestorBD {
 	
 	public void guardar(ArrayList<Rank> ranking) {
 		//guardar el ranking del jugador especificado
+	}
+
+	public Boolean loginValido(String nombre, String pwd) {
+		return null;
+		// TODO Auto-generated method stub
+		
 	}
 }
