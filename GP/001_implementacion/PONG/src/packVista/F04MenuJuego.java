@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 
 import javax.swing.JButton;
@@ -162,7 +163,7 @@ public class F04MenuJuego extends JFrame {
 			String action = e.getActionCommand();
 			if (action.equals("IA")) 
 			{
-				Pong.getPong().setOponente("IA");
+				Pong.getPong().setConfig("Persona", new Rectangle (0, 0, getWidth(), getHeight() / 2));
 				
 				F05MenuDificultad dif = new F05MenuDificultad();
 				dispose();
@@ -171,7 +172,11 @@ public class F04MenuJuego extends JFrame {
 			{
 				//Jugar 2 jugadores
 				
+				Pong.getPong().setConfig("Persona", new Rectangle (0, 0, getWidth(), getHeight() / 2));
 				Pong.getPong().setOponente("2Jugadores");
+				
+				new F07Pong();
+				dispose();
 			}
 			else if(action.equals("ranking"))
 			{

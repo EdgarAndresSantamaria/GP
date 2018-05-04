@@ -46,6 +46,7 @@ public class Pong {
 	}
 	
 	public void setConfig(String pJugador1, Rectangle pBounds ) {//inicialización del juego
+		bounds=pBounds;
 		jug1=new Raqueta(pJugador1,true);
 		lBola=new ArrayList<>();
 		Bola principal=new Bola(false);
@@ -54,7 +55,7 @@ public class Pong {
 		lBola.add(principal);
 		lPuntuacion=new ArrayList<>();
 		lPuntuacion=GestorBD.getGestorBD().cargar(pJugador1);//cargar puntuación historica
-		bounds=pBounds;
+		
 		tipoPotenciador=true;//tipo Potenciador true -> Multiplicador/false -> DyRaqueta
 		
 		fronteraSeguraJug1=(int)bounds.getX()+25;

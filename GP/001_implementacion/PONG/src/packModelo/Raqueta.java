@@ -13,7 +13,7 @@ public class Raqueta extends Elemento{
 	
 	public Raqueta(String pNombre, Boolean pCampo) {
 		super("raqueta");
-		if(pNombre.contains("IA")) {
+		if(pNombre.contains("IA")) { //IA facil o IA dificil
 			jugador=new IA(pNombre);
 		}else {
 			jugador=new Jugador(pNombre);

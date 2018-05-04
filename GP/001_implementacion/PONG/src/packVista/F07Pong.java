@@ -28,7 +28,7 @@ public class F07Pong implements ActionListener
 	
 	private F09Ball ball;
 
-	private F07Pong()
+	public F07Pong()
 	{
 //		Timer timer = new Timer(20, this);
 	
