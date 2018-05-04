@@ -64,6 +64,11 @@ public class Pong {
 	public Boolean existeUsuario(String username, String pwd) {
 		return GestorBD.getGestorBD().existeUsuario(username,pwd);
 	}
+	
+	public Boolean registroUsuario(String username, String pwd) {
+		return GestorBD.getGestorBD().registroUsuario(username, pwd);
+	}
+	
 	private void inicializarRaquetas() {
 		int xMax=(int) bounds.getMaxX();
 		double yMax= bounds.getMaxY();

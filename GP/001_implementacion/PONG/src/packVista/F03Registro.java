@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import packModelo.Pong;
+
 import java.awt.Color;
 import java.awt.Dimension;
 
@@ -171,20 +174,26 @@ public class F03Registro extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String action = e.getActionCommand();
+			
 			if (action.equals("registrar")) 
 			{
-				if(Contraseña.getText() != (RepiteContraseña.getText()))
+				String username = usuario.getText();
+				String pass1 = Contraseña.getText();
+				String pass2 = RepiteContraseña.getText();
+				if(!pass1.equals(pass2))
 				{
 					JOptionPane.showMessageDialog(rootPane, "Las contraseñas no coinciden");
 				}
-				/*else if (el usuario coinicde con algun usuario de la BD)
-				{
-					JOptionPane.showMessageDialog(rootPane, "Ese nombre de usuario ya existe");
-				}
-				*/
 				else
 				{
 					//almacenar en la BD el usuario y la contraseña
+					Boolean registroOK = Pong.getPong().registroUsuario(username, pass1);
+					if(registroOK) {
+						dispose();
+						new F02MenuIdentificacion();
+					}else {
+						JOptionPane.showMessageDialog(rootPane, "Error en el registro.");
+					}
 				}
 			}
 			else if (action.equals("volver"))

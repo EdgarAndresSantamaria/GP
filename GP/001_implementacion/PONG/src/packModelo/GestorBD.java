@@ -130,8 +130,6 @@ public class GestorBD {
 			conectar();
 
 			// Se inserta
-			//asdjfalksjfñladslkf
-
 
 			// Se cierra
 			cerrarConexion();
