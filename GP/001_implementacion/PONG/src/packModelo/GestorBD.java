@@ -103,7 +103,7 @@ public class GestorBD {
 
 			// Se pide
 			ResultSet myRs = exeSQLSelect("SELECT * FROM users WHERE username='" + nombre + "' AND password=md5('"+ pwd + "')");
-			
+
 			// Se procesa el resultado
 			encontrado = myRs != null && myRs.next();
 
@@ -116,6 +116,34 @@ public class GestorBD {
 		}
 
 		return encontrado;
+
+	}
+
+	public boolean registroUsuario(String nombreUsuario, String pwd) {
+		try {
+			if(existeUsuario(nombreUsuario, pwd)) {
+				return false;
+			}
+
+			//Se crea el usuario y devuelve true
+			// Se conecta
+			conectar();
+
+			// Se inserta
+			//asdjfalksjfñladslkf
+
+
+			// Se cierra
+			cerrarConexion();
+
+			return true;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return false;
 
 	}
 }
