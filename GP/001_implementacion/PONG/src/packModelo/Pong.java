@@ -138,7 +138,7 @@ public class Pong {
 
 		return listaObjetos; 
 
-	}
+	} 
 
 	public Boolean jugar() {
 		boolean acabado=false;
