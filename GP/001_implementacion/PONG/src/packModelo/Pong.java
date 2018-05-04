@@ -43,6 +43,8 @@ public class Pong {
 	public void setOponente(String pJugador2) { // selección de oponente
 		jug2=new Raqueta(pJugador2,false);	
 		lPuntuacion.add(new Rank(jug1.getNombre(),jug2.getNombre())); //generar nuevo Rank para la partida}
+		inicializarRaquetas();
+
 	}
 	
 	public void setConfig(String pJugador1, Rectangle pBounds ) {//inicialización del juego
@@ -51,10 +53,8 @@ public class Pong {
 		lBola=new ArrayList<>();
 		Bola principal=new Bola(false);
 		inicializarBolaPpal(principal);
-		inicializarRaquetas();
 		lBola.add(principal);
-		lPuntuacion=new ArrayList<>();
-		lPuntuacion=GestorBD.getGestorBD().cargar(pJugador1);//cargar puntuación historica
+		lPuntuacion=new ArrayList<Rank>();
 		
 		tipoPotenciador=true;//tipo Potenciador true -> Multiplicador/false -> DyRaqueta
 		
