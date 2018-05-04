@@ -24,15 +24,9 @@ public class Pong {
 	//constantes
 	private final double probabilidadPotenciador=0.6;
 	private final int DxBola= -2;//cte velocidad de la bola (es negativa porque inicia hacia jug1)
-<<<<<<< HEAD
 	private int fronteraSeguraJug1;//area jugador 1
 	private int fronteraSeguraJug2;//area jugador 2
 
-=======
-	private final int fronteraSeguraJug1=(int)bounds.getX()+25;//area jugador 1
-	private final int fronteraSeguraJug2=(int)bounds.getMaxX()-25;;//area jugador 2
-	
->>>>>>> 1a121cbf3eeb32d768cf85856f5af03e9933d928
 	//invariables
 	private static Pong instancia;
 
@@ -48,21 +42,18 @@ public class Pong {
 	public void setOponente(String pJugador2) { // selección de oponente
 		jug2=new Raqueta(pJugador2,false);	
 		lPuntuacion.add(new Rank(jug1.getNombre(),jug2.getNombre())); //generar nuevo Rank para la partida}
-<<<<<<< HEAD
 		lPotenciadores = new ArrayList<Potenciador>();
 		inicializarRaquetas();
 
-=======
->>>>>>> 1a121cbf3eeb32d768cf85856f5af03e9933d928
 	}
 
 	public void setConfig(String pJugador1, Rectangle pBounds ) {//inicialización del juego
+		bounds=pBounds;
 		jug1=new Raqueta(pJugador1,true);
 		lBola=new ArrayList<>();
 		Bola principal=new Bola(false);
 		inicializarBolaPpal(principal);
 		lBola.add(principal);
-<<<<<<< HEAD
 		lPuntuacion=new ArrayList<Rank>();
 
 		tipoPotenciador=true;//tipo Potenciador true -> Multiplicador/false -> DyRaqueta
@@ -77,16 +68,6 @@ public class Pong {
 
 	public Boolean registroUsuario(String username, String pwd) {
 		return GestorBD.getGestorBD().registroUsuario(username, pwd);
-=======
-		lPuntuacion=new ArrayList<>();
-		lPuntuacion=GestorBD.getGestorBD().cargar(pJugador1);//cargar puntuación historica
-		bounds=pBounds;
-		tipoPotenciador=true;//tipo Potenciador true -> Multiplicador/false -> DyRaqueta
-	}
-	
-	public Boolean validarLogin(String pwd) {
-		return GestorBD.getGestorBD().loginValido(jug1.getNombre(),pwd);
->>>>>>> 1a121cbf3eeb32d768cf85856f5af03e9933d928
 	}
 
 	private void inicializarRaquetas() {
@@ -120,7 +101,6 @@ public class Pong {
 		nuevoPotenciador.setCoord(x, y);
 	}
 
-<<<<<<< HEAD
 	public JSONArray mostrar() {
 		//generar un json con los atributos de los elementos 
 		JSONArray listaObjetos = new JSONArray(); 
@@ -160,57 +140,6 @@ public class Pong {
 
 	}
 
-=======
-	/**
-	 * método que devuelve un array de objetos JSON 
-	 * con su posición  en el campo
-	 * @return
-	 */
-	public JSONArray mostrar() {
-		//generar un json con los atributos de los elementos 
-	    JSONArray listaObjetos = new JSONArray(); 	     
-	    //Raquetas, bolas, potenciadores (dimension y posicion) 
-	    // datos: [{nombre: String, width: int, height: int, x: int, y:int},... ] 
-	    JSONObject raqueta1 = new JSONObject(); 
-	    raqueta1.put("nombre", "raqueta1"); 
-	    raqueta1.put("width",(int) jug1.getShape().getWidth()); 
-	    raqueta1.put("height",(int) jug1.getShape().getHeight()); 
-	    raqueta1.put("x",(int) jug1.getShape().getX()); 
-	    raqueta1.put("y",(int) jug1.getShape().getY()); 	     
-	    listaObjetos.add(raqueta1); 
-	     
-	    JSONObject  raqueta2 = new JSONObject(); 
-	    raqueta2.put("nombre","raqueta2"); 
-	    raqueta2.put("width",(int) jug2.getShape().getWidth()); 
-	    raqueta2.put("height",(int) jug2.getShape().getHeight()); 
-	    raqueta2.put("x",(int) jug2.getShape().getX()); 
-	    raqueta2.put("y",(int) jug2.getShape().getY()); 	     
-	    listaObjetos.add(raqueta2); 
-	     
-	    for(Bola unaBola : lBola){ 
-	      JSONObject bola = new JSONObject(); 
-	      bola.put("nombre", "bola"); 
-	      bola.put("width",(int) unaBola.getShape().getWidth()); 
-	      bola.put("height",(int) unaBola.getShape().getHeight()); 
-	      bola.put("x",(int) unaBola.getShape().getX()); 
-	      bola.put("y",(int) unaBola.getShape().getY()); 	       
-	      listaObjetos.add(bola); 
-	    } 
-	     
-	    for(Potenciador unPotenciador : lPotenciadores){ 
-	      JSONObject potenciador = new JSONObject(); 
-	      potenciador.put("nombre", "potenciador"); 
-	      potenciador.put("width",(int) unPotenciador.getShape().getWidth()); 
-	      potenciador.put("height",(int) unPotenciador.getShape().getHeight()); 
-	      potenciador.put("x",(int) unPotenciador.getShape().getX()); 
-	      potenciador.put("y",(int) unPotenciador.getShape().getY()); 	       
-	      listaObjetos.add(potenciador); 
-	    }  
-	    
-	    return listaObjetos;      
-	}
-	
->>>>>>> 1a121cbf3eeb32d768cf85856f5af03e9933d928
 	public Boolean jugar() {
 		boolean acabado=false;
 		//emular el movimiento de las bolas
@@ -311,14 +240,6 @@ public class Pong {
 		}
 	}
 
-	public void pararRaqueta(Boolean pCampo) {
-		if(pCampo==true) {//campo izquierdo
-			jug1.pararRaqueta();
-		}else {//campo derecho
-			jug2.pararRaqueta();
-		}
-	}
-
 	public Potenciador golpeaPotenciador(Rectangle bola) {
 		Potenciador result=null;
 		for(Potenciador tmp : lPotenciadores) {
@@ -338,12 +259,6 @@ public class Pong {
 		return bounds.intersects(shape);
 	}
 
-	/**
-	 * método que permite saber si la bola a llegado al extremo del campo
-	 * en caso de marcar devolvera : true -> campo izquierdo 
-	 * @param bola
-	 * @return
-	 */
 	public Boolean marca(Rectangle bola) {
 		Object marcado = null;
 		//campo de jugador (true->izq,false->drch,null->no marca)
@@ -355,13 +270,7 @@ public class Pong {
 		return (Boolean)marcado;
 	}
 
-<<<<<<< HEAD
 
-=======
-	/**
-	 * el juego de IA facil consiste en seguir la bola más cercana
-	 */
->>>>>>> 1a121cbf3eeb32d768cf85856f5af03e9933d928
 	public void seguirBola() {//pero cual?? ... ahi reside su inteligencia y su perdición...., la más cercana
 		int xBolaCercana=0;//inicializamos en la otra punta del campo
 		Boolean dir;
@@ -378,9 +287,6 @@ public class Pong {
 
 	}
 
-	/**
-	 * el juego de IA facil consiste en manejar la raqueta de lado a lado del campo
-	 */
 	public void deLadoAlado() {
 		int ry=(int)jug2.getShape().getY();//0 de la raqueta
 		int rmaxY= (int)jug2.getShape().getMaxY();//height de la raqueta
@@ -390,9 +296,6 @@ public class Pong {
 		}else {//hacia arriba cuando se invierta su direccion por fin de campo y solo suba....ciclo
 			jug2.moverRaqueta(true);
 		}
-<<<<<<< HEAD
 
-=======
->>>>>>> 1a121cbf3eeb32d768cf85856f5af03e9933d928
 	}
 }
