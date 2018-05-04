@@ -43,8 +43,8 @@ public class GestorBD {
 	 * @param user
 	 * @param password
 	 */
-	public void OpenConnection(String serverAddress, String port, String user, String password) throws SQLException {
-			connection= DriverManager.getConnection("jdbc:mysql://"+serverAddress+":"+port+"/"+bd, user, password);
+	public void OpenConnection() throws SQLException {
+			connection= DriverManager.getConnection("jdbc:mysql://galan.ehu.eus:3306/Xpdejaime001_pong", "Xpdejaime001", "AIC7nDBJ");
 			instruccion = connection.createStatement();
 	}
 
