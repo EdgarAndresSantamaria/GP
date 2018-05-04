@@ -13,7 +13,7 @@ public class Usuario extends Jugador {
 	}
 	
 	public Boolean loginValido() {
-		return GestorBD.getGestorBD().loginValido(getNombre(),pwd);
+		return GestorBD.getGestorBD().existeUsuario(getNombre(),pwd);
 	}
 	
 }

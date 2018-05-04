@@ -84,7 +84,7 @@ public class GestorBD {
 		//guardar el ranking del jugador especificado
 	}
 
-	public Boolean loginValido(String nombre, String pwd) {
+	public Boolean existeUsuario(String nombre, String pwd) {
 		return null;
 		// TODO Auto-generated method stub
 		

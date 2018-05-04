@@ -27,7 +27,6 @@ public class F01MenuPrincipal extends JFrame {
 
 	private JPanel contentPane;
 	private JButton btnLogin;
-	private JButton btnRegister;
 	private JButton btnInvitado;
 
 	/**
@@ -66,13 +65,6 @@ public class F01MenuPrincipal extends JFrame {
 		btnLogin.setForeground(new Color(0, 0, 0));
 		btnLogin.setBackground(new Color(0, 255, 0));
 		
-		btnRegister = new JButton("Registro");
-		btnRegister.setActionCommand("registro");
-		btnRegister.addActionListener(new Controlador());
-		btnRegister.setForeground(new Color(0, 0, 0));
-		btnRegister.setBackground(new Color(0, 255, 0));
-		btnRegister.setFont(new Font("Tahoma", Font.BOLD, 15));
-		
 		btnInvitado = new JButton("Invitado");
 		btnInvitado.setActionCommand("invitado");
 		btnInvitado.addActionListener(new Controlador());
@@ -87,20 +79,17 @@ public class F01MenuPrincipal extends JFrame {
 					.addGap(157)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
 						.addComponent(btnInvitado, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnLogin, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
-						.addComponent(btnRegister, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addContainerGap(166, Short.MAX_VALUE))
+						.addComponent(btnLogin, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE))
+					.addContainerGap(168, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(32)
 					.addComponent(btnLogin)
-					.addGap(36)
-					.addComponent(btnRegister)
-					.addGap(39)
+					.addGap(102)
 					.addComponent(btnInvitado)
-					.addContainerGap(61, Short.MAX_VALUE))
+					.addContainerGap(63, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 		
@@ -128,13 +117,7 @@ public class F01MenuPrincipal extends JFrame {
 				F02MenuIdentificacion id = new F02MenuIdentificacion();
 				dispose();
 			}
-			else if (action.equals("registro"))
-			{
-				F03Registro reg = new F03Registro();
-				dispose();
-				
-			}
-			else if (action.equals("invitado"))
+			else if(action.equals("invitado"))
 			{
 				F04MenuJuego jugar = new F04MenuJuego(true);
 				dispose();

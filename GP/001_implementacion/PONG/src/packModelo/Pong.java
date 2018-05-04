@@ -26,7 +26,7 @@ public class Pong {
 	private final double probabilidadPotenciador=0.6;
 	private final int DxBola= -2;//cte velocidad de la bola (es negativa porque inicia hacia jug1)
 	private final int fronteraSeguraJug1=(int)bounds.getX()+25;//area jugador 1
-	private final int fronteraSeguraJug2=(int)bounds.getMaxX()-25;;//area jugador 2
+	private final int fronteraSeguraJug2=(int)bounds.getMaxX()-25;//area jugador 2
 	
 	//invariables
 	private static Pong instancia;
@@ -50,6 +50,7 @@ public class Pong {
 		lBola=new ArrayList<>();
 		Bola principal=new Bola(false);
 		inicializarBolaPpal(principal);
+		inicializarRaquetas();
 		lBola.add(principal);
 		lPuntuacion=new ArrayList<>();
 		lPuntuacion=GestorBD.getGestorBD().cargar(pJugador1);//cargar puntuación historica
@@ -57,8 +58,8 @@ public class Pong {
 		tipoPotenciador=true;//tipo Potenciador true -> Multiplicador/false -> DyRaqueta
 	}
 	
-	public Boolean validarLogin(String pwd) {
-		return GestorBD.getGestorBD().loginValido(jug1.getNombre(),pwd);
+	public Boolean existeUsuario(String username, String pwd) {
+		return GestorBD.getGestorBD().existeUsuario(username,pwd);
 	}
 	private void inicializarRaquetas() {
 		int xMax=(int) bounds.getMaxX();

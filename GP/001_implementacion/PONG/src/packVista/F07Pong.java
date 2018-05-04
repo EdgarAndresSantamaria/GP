@@ -30,9 +30,10 @@ public class F07Pong implements ActionListener
 
 	private F07Pong()
 	{
-		Timer timer = new Timer(20, this);
+//		Timer timer = new Timer(20, this);
 	
 		jframe = new JFrame("PONG TAEP");
+		jframe.setResizable(false);
 
 		renderer = new Renderer();
 
@@ -40,11 +41,11 @@ public class F07Pong implements ActionListener
 		jframe.setVisible(true);
 		jframe.setLocationRelativeTo(null);
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		jframe.add(renderer);
+		jframe.getContentPane().add(renderer);
 		
 		start();
 
-		timer.start();
+//		timer.start();
 				
 	}
 

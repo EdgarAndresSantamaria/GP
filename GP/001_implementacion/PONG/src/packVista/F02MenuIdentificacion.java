@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import packModelo.Pong;
+
 import java.awt.Color;
 import java.awt.Dimension;
 
@@ -35,8 +38,7 @@ public class F02MenuIdentificacion extends JFrame {
 	private JTextField textField;
 	private JButton btnVolver;
 	private JButton btnLogin;
-	private boolean invitado = true;
-	
+
 	/**
 	 * Create the frame.
 	 */
@@ -48,26 +50,26 @@ public class F02MenuIdentificacion extends JFrame {
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		
+
 		JLabel lblUsuario = new JLabel("Usuario:");
 		lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblUsuario.setForeground(Color.GREEN);
-		
+
 		JLabel lblContrasena = new JLabel("Contrase\u00F1a:");
 		lblContrasena.setForeground(Color.GREEN);
 		lblContrasena.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		
+
 		passwordField = new JPasswordField();
-		
+
 		textField = new JTextField();
 		textField.setColumns(10);
-		
+
 		btnVolver = new JButton("Volver");
 		btnVolver.setActionCommand("volver");
 		btnVolver.addActionListener(new Controlador());
 		btnVolver.setBackground(Color.WHITE);
 		btnVolver.setForeground(new Color(0, 0, 0));
-		
+
 		btnLogin = new JButton("Login");
 		btnLogin.setActionCommand("login");
 		btnLogin.addActionListener(new Controlador());
@@ -75,40 +77,40 @@ public class F02MenuIdentificacion extends JFrame {
 		btnLogin.setFont(new Font("Tahoma", Font.BOLD, 15));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(57)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblContrasena, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblUsuario))
-							.addGap(33)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(textField)
-								.addComponent(passwordField, GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-								.addComponent(btnLogin)))
-						.addComponent(btnVolver))
-					.addContainerGap(112, Short.MAX_VALUE))
-		);
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+										.addGap(57)
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+												.addComponent(lblContrasena, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
+												.addComponent(lblUsuario))
+										.addGap(33)
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+												.addComponent(textField)
+												.addComponent(passwordField, GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+												.addComponent(btnLogin)))
+								.addComponent(btnVolver))
+						.addContainerGap(112, Short.MAX_VALUE))
+				);
 		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(btnVolver)
-					.addGap(57)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblUsuario)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblContrasena, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
-						.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-					.addComponent(btnLogin)
-					.addContainerGap())
-		);
+						.addComponent(btnVolver)
+						.addGap(57)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblUsuario)
+								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGap(18)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblContrasena, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+								.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+						.addComponent(btnLogin)
+						.addContainerGap())
+				);
 		contentPane.setLayout(gl_contentPane);
-		
+
 		// Codigo para centrar el frame
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension frameSize = getSize();
@@ -121,7 +123,7 @@ public class F02MenuIdentificacion extends JFrame {
 		setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2);
 
 	}
-	
+
 	private class Controlador extends WindowAdapter implements ActionListener 
 	{
 		@Override
@@ -134,24 +136,22 @@ public class F02MenuIdentificacion extends JFrame {
 			}
 			else if (action.equals("login"))
 			{
-				String user = textField.getText();
+				String user = textField.getText().toString();
 				String password = passwordField.getText();
-				/*if(user == usuarioBD && password == passwordBD del usuario){
-					JOptionPane.showMessageDialog(rootPane, "BIENVENIDO  "+user);
-					F04MenuJuego jugar = new F04MenuJuego();
-					invitado = false;
+
+				boolean existe = Pong.getPong().existeUsuario(user, password);
+				if(existe) {
+					new F04MenuJuego(false);
 					dispose();
-				  else if(user == usuarioBD && password != passwordBD del usuario){
-				  	JOptionPane.showMessageDialog(rootPane, "La contrase�a no es correcta");
-				  else
-				  	JOptionPane.showMessageDialog(rootPane, "Usuario no registrado, por favor REGISTRATE");
-				*/
+				}else {
+					JOptionPane.showMessageDialog(null,
+							"El usuario no existe o la contrasena no es valida.",
+							"Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		}
 	}
-	
-	public boolean getInvitado()
-	{
-		return invitado;
-	}
+
+
 }
