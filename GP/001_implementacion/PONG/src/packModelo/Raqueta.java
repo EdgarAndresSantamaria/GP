@@ -1,11 +1,12 @@
 package packModelo;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class Raqueta extends Elemento{
 	private Jugador jugador;//jugador asociado a la raqueta
-	private Collection<DyRaqueta> lPotenciadores;//lista potenciadores del jugador
+	private ArrayList<DyRaqueta> lPotenciadores;//lista potenciadores del jugador
 	private int dy; //variable velocidad desplazamiento vertical, defecto : (2 pixel / update)
 	
 	//constantes
@@ -13,6 +14,7 @@ public class Raqueta extends Elemento{
 	
 	public Raqueta(String pNombre, Boolean pCampo) {
 		super("raqueta");
+		lPotenciadores = new ArrayList<DyRaqueta>();
 		if(pNombre.contains("IA")) { //IA facil o IA dificil
 			jugador=new IA(pNombre);
 		}else {

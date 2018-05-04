@@ -2,6 +2,9 @@ package packModelo;
 
 import java.awt.Rectangle;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 public class Elemento {
 	
 	private Rectangle dimension;
@@ -51,4 +54,12 @@ public class Elemento {
 		return dimension;
 	}
 
+	public JSONObject getDimensionesYPos() {
+		 JSONObject elemento = new JSONObject(); 
+		 elemento.put("width", dimension.getWidth()); 
+		 elemento.put("height", dimension.getHeight()); 
+		 elemento.put("x", x); 
+		 elemento.put("y", y); 
+		 return elemento;
+	}
 }

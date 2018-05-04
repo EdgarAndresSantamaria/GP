@@ -15,7 +15,7 @@ public class Renderer extends JPanel
 	{
 		super.paintComponent(g);
 
-		F07Pong.getPong().render((Graphics2D) g);
+		F07PongOriginal.getPong().render((Graphics2D) g);
 	}
 
 }

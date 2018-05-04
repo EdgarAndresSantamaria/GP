@@ -12,7 +12,7 @@ public class F08Raqueta
 
 	private int score;
 
-	public F08Raqueta(F07Pong pong, int pNumRaqueta)
+	public F08Raqueta(F07PongOriginal pong, int pNumRaqueta)
 	{
 		this.numRaqueta = pNumRaqueta;
 

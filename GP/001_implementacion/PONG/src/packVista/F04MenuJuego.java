@@ -45,10 +45,11 @@ public class F04MenuJuego extends JFrame {
 	 * Create the frame.
 	 */
 	public F04MenuJuego(boolean pInvitado) {
+		setResizable(false);
 		invitado = pInvitado;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 581, 476);
+		setBounds(100, 100, 722, 473);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -97,48 +98,50 @@ public class F04MenuJuego extends JFrame {
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(184)
+					.addGap(205)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-						.addComponent(btnJugarVsIa, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-						.addComponent(btnRanking, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+						.addComponent(btnJugarVsIa, GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+						.addComponent(btnRanking, GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE))
+					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(label)
 						.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 8, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(162, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(194)
-					.addComponent(lblPongTaep)
-					.addContainerGap(216, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(226)
-					.addComponent(btnLogout)
-					.addContainerGap(244, Short.MAX_VALUE))
+					.addContainerGap(200, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblganaQuienMarque)
-					.addContainerGap(364, Short.MAX_VALUE))
+					.addContainerGap(548, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(291)
+					.addComponent(btnLogout)
+					.addContainerGap(332, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(270)
+					.addComponent(lblPongTaep)
+					.addContainerGap(293, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
+					.addGap(22)
 					.addComponent(lblPongTaep)
-					.addGap(55)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnJugarVsIa)
-						.addComponent(label))
-					.addGap(39)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnNewButton)
-						.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
-					.addGap(43)
-					.addComponent(btnRanking)
-					.addGap(49)
-					.addComponent(btnLogout)
-					.addPreferredGap(ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-					.addComponent(lblganaQuienMarque)
+					.addGap(44)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(label)
+							.addGap(39)
+							.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 239, Short.MAX_VALUE)
+							.addComponent(lblganaQuienMarque))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(btnJugarVsIa)
+							.addGap(39)
+							.addComponent(btnNewButton)
+							.addGap(43)
+							.addComponent(btnRanking)
+							.addGap(49)
+							.addComponent(btnLogout)))
 					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
@@ -175,7 +178,7 @@ public class F04MenuJuego extends JFrame {
 				Pong.getPong().setConfig("Persona", new Rectangle (0, 0, getWidth(), getHeight() / 2));
 				Pong.getPong().setOponente("2Jugadores");
 				
-				new F07Pong();
+				new F07Pong("Jugador");
 				dispose();
 			}
 			else if(action.equals("ranking"))

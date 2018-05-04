@@ -11,42 +11,42 @@ import org.json.simple.JSONObject;
 import packVista.Renderer;
 
 public class Pong {
-	
+
 	private ArrayList<Bola> lBola ; //lista bolas
 	private ArrayList<Rank> lPuntuacion ;//ranking del jugador1
 	private ArrayList<Potenciador> lPotenciadores;//lista potenciadores en el campo
 	private Raqueta jug1;
 	private Raqueta jug2;
-	private Renderer renderer;
 	private Rectangle bounds;
-	
+
 	private Boolean tipoPotenciador;
-	
+
 	//constantes
 	private final double probabilidadPotenciador=0.6;
 	private final int DxBola= -2;//cte velocidad de la bola (es negativa porque inicia hacia jug1)
 	private int fronteraSeguraJug1;//area jugador 1
 	private int fronteraSeguraJug2;//area jugador 2
-	
+
 	//invariables
 	private static Pong instancia;
-	
+
 	private Pong() {}
-	
+
 	public static Pong getPong() {
 		if(instancia==null) {
 			instancia=new Pong();
 		}
 		return instancia;
 	}
-	
+
 	public void setOponente(String pJugador2) { // selección de oponente
 		jug2=new Raqueta(pJugador2,false);	
 		lPuntuacion.add(new Rank(jug1.getNombre(),jug2.getNombre())); //generar nuevo Rank para la partida}
+		lPotenciadores = new ArrayList<Potenciador>();
 		inicializarRaquetas();
 
 	}
-	
+
 	public void setConfig(String pJugador1, Rectangle pBounds ) {//inicialización del juego
 		bounds=pBounds;
 		jug1=new Raqueta(pJugador1,true);
@@ -55,28 +55,28 @@ public class Pong {
 		inicializarBolaPpal(principal);
 		lBola.add(principal);
 		lPuntuacion=new ArrayList<Rank>();
-		
+
 		tipoPotenciador=true;//tipo Potenciador true -> Multiplicador/false -> DyRaqueta
-		
+
 		fronteraSeguraJug1=(int)bounds.getX()+25;
 		fronteraSeguraJug2=(int)bounds.getMaxX()-25;
 	}
-	
+
 	public Boolean existeUsuario(String username, String pwd) {
 		return GestorBD.getGestorBD().existeUsuario(username,pwd);
 	}
-	
+
 	public Boolean registroUsuario(String username, String pwd) {
 		return GestorBD.getGestorBD().registroUsuario(username, pwd);
 	}
-	
+
 	private void inicializarRaquetas() {
 		int xMax=(int) bounds.getMaxX();
 		double yMax= bounds.getMaxY();
 		jug1.setCoord(10,(int) (yMax/2));//campo izquierdo a media altura
 		jug2.setCoord(xMax-10,(int) (yMax/2));//campo derecho a media altura
 	}
-	
+
 	private void inicializarBolaPpal(Bola nuevaBola) {
 		double xMax=bounds.getMaxX();
 		double yMax=bounds.getMaxY();
@@ -86,12 +86,12 @@ public class Pong {
 		nuevaBola.setCoord(pX, pY);
 		nuevaBola.setDx(DxBola);
 	}
-	
+
 	private void inicializarBolaSecundaria(Bola nuevaBola,Rectangle pShape,int pDx) {
 		nuevaBola.setCoord((int)(pShape.getWidth()/2), (int)(pShape.getHeight()/2));//la bola aparece en el centro del potenciador
 		nuevaBola.setDx(-pDx);//al contrario que la bola original
 	}
-	
+
 	private void inicializarPotenciador(Potenciador nuevoPotenciador) {
 		int x = new Random().nextInt(fronteraSeguraJug2);
 		if(x<fronteraSeguraJug1) {
@@ -101,56 +101,45 @@ public class Pong {
 		nuevoPotenciador.setCoord(x, y);
 	}
 
-	/*public JSONArray mostrar() {
-		 //generar un json con los atributos de los elementos 
-	    JSONArray listaObjetos = new JSONArray(); 
-	     
-	    //Raquetas, bolas, potenciadores (dimension y posicion) 
-	    // datos: [{nombre: String, width: int, height: int, x: int, y:int},... ] 
-	    JSONObject raquetas = new JSONObject(); 
-	    raquetas.put("nombre", xxx); 
-	    raquetas.put("width", xxx); 
-	    raquetas.put("height", sss); 
-	    raquetas.put("x", asklf); 
-	    raquetas.put("y", dfff); 
-	     
-	    listaObjetos.add(raquetas); 
-	     
-	    raquetas = new JSONObject(); 
-	    raquetas.put("nombre", xxx); 
-	    raquetas.put("width", xxx); 
-	    raquetas.put("height", sss); 
-	    raquetas.put("x", asklf); 
-	    raquetas.put("y", dfff); 
-	     
-	    listaObjetos.add(raquetas); 
-	     
-	    for(Bola unaBola : lBola) { 
-	      JSONObject bola = new JSONObject(); 
-	      bola.put("nombre", xxx); 
-	      bola.put("width", xxx); 
-	      bola.put("height", sss); 
-	      bola.put("x", asklf); 
-	      bola.put("y", dfff); 
-	       
-	      listaObjetos.add(bola); 
-	    } 
-	     
-	    for(Potenciador unPotenciador : lPotenciadores) { 
-	      JSONObject potenciador = new JSONObject(); 
-	      potenciador.put("nombre", xxx); 
-	      potenciador.put("width", xxx); 
-	      potenciador.put("height", sss); 
-	      potenciador.put("x", asklf); 
-	      potenciador.put("y", dfff); 
-	       
-	      listaObjetos.add(potenciador); 
-	    } 
-	     
-	    return listaObjetos; 
-	     
-	}*/
-	
+	public JSONArray mostrar() {
+		//generar un json con los atributos de los elementos 
+		JSONArray listaObjetos = new JSONArray(); 
+
+		//Raquetas, bolas, potenciadores (dimension y posicion) 
+		// datos: [{nombre: String, width: int, height: int, x: int, y:int},... ] 
+		JSONObject raquetaIzqda = jug1.getDimensionesYPos();
+		raquetaIzqda.put("nombre", "raquetaIzqda"); 
+
+		listaObjetos.add(raquetaIzqda); 
+
+		JSONObject raquetaDcha = jug2.getDimensionesYPos();
+		raquetaDcha.put("nombre", "raquetaDcha"); 
+
+		listaObjetos.add(raquetaDcha); 
+
+		for(Bola unaBola : lBola) {
+			JSONObject bola = unaBola.getDimensionesYPos();
+			bola.put("nombre", "bola");
+
+			listaObjetos.add(bola); 
+		} 
+
+		for(Potenciador unPotenciador : lPotenciadores) { 
+			JSONObject potenciador = unPotenciador.getDimensionesYPos();
+			if(unPotenciador instanceof Multiplicador) {
+				potenciador.put("nombre", "multiplicador");
+			}else if(unPotenciador instanceof DyRaqueta) {
+				potenciador.put("nombre","dyRaqueta");
+			}else {
+				potenciador.put("nombre", "potenciador");
+			}
+			listaObjetos.add(potenciador); 
+		} 
+
+		return listaObjetos; 
+
+	}
+
 	public Boolean jugar() {
 		boolean acabado=false;
 		//emular el movimiento de las bolas
@@ -181,7 +170,7 @@ public class Pong {
 				Boolean marcado=tmp.marcado();
 				if(marcado != null){//comprobar fin de juego
 					if(marcado==true) {//marca campo izquierdo
-						 lPuntuacion.get(lPuntuacion.size()-1).marcarJug1();//marcar campo izquierdo
+						lPuntuacion.get(lPuntuacion.size()-1).marcarJug1();//marcar campo izquierdo
 					}else {//marca campo derecho
 						lPuntuacion.get(lPuntuacion.size()-1).marcarJug2();//marcar campo derecho
 					}
@@ -218,7 +207,7 @@ public class Pong {
 		lanzarPotenciador();	
 		return acabado;//retornará acabado cuando haya finalizado la simulación
 	}
-	
+
 	private boolean finJuego() {
 		return lPuntuacion.get(lPuntuacion.size()-1).fin();//marcar campo derecho;
 	}
@@ -274,14 +263,14 @@ public class Pong {
 		Object marcado = null;
 		//campo de jugador (true->izq,false->drch,null->no marca)
 		if(bounds.getMinX()==bola.getX()) {//marcar campo izquierdo
-				marcado=true;
+			marcado=true;
 		}else if(bounds.getMaxX()==bola.getX()) {//marcar campo derecho
 			marcado=false;
 		}
 		return (Boolean)marcado;
 	}
 
-	
+
 	public void seguirBola() {//pero cual?? ... ahi reside su inteligencia y su perdición...., la más cercana
 		int xBolaCercana=0;//inicializamos en la otra punta del campo
 		Boolean dir;
@@ -295,7 +284,7 @@ public class Pong {
 				}
 			}
 		}
-		
+
 	}
 
 	public void deLadoAlado() {
@@ -307,6 +296,6 @@ public class Pong {
 		}else {//hacia arriba cuando se invierta su direccion por fin de campo y solo suba....ciclo
 			jug2.moverRaqueta(true);
 		}
-		
+
 	}
 }

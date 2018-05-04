@@ -9,16 +9,12 @@ public class F09Ball
 	private int x,y,ancho=25,alto=25;
 
 	
-	public F09Ball(F07Pong pPong)
+	public F09Ball(int w, int h)
 	{
-		this.x = pPong.getAnchura()/2 - this.ancho/2;
-		this.y = pPong.getAltura()/2 - this.alto/2;
+		this.x = w/2 - this.ancho/2;
+		this.y = h/2 - this.alto/2;
 	}
 
-	public void update(F08Raqueta raqueta1, F08Raqueta raqueta2)
-	{
-		
-	}
 	
 	
 

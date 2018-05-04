@@ -1,103 +1,133 @@
 package packVista;
 
 import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
 import java.awt.Graphics2D;
-import java.awt.Toolkit;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
-import javax.swing.Timer;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
-public class F07Pong implements ActionListener
-{
+import org.json.simple.JSONArray;
 
-	private static F07Pong pong;
+import packModelo.Pong;
 
-	private int ancho = 700, alto = 700;
+import java.awt.Color;
+import java.awt.Canvas;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
+import javax.swing.JButton;
+import java.awt.SystemColor;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
-	private Renderer renderer;
+public class F07Pong extends JFrame {
 
-	private F08Raqueta player1;
+	private JPanel contentPane;
+	private Canvas raquetaizqud;
+	private Canvas raquetaderech;
+	private String tipoJugador;
 
-	private F08Raqueta player2;
-
-	private JFrame jframe;
-	
-	private F09Ball ball;
-
-	public F07Pong()
-	{
-//		Timer timer = new Timer(20, this);
-	
-		jframe = new JFrame("PONG TAEP");
-		jframe.setResizable(false);
-
-		renderer = new Renderer();
-
-		jframe.setSize(ancho+15, alto);
-		jframe.setVisible(true);
-		jframe.setLocationRelativeTo(null);
-		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		jframe.getContentPane().add(renderer);
+	/**
+	 * Create the frame.
+	 */
+	public F07Pong(String tipoJugador) {
+		this.tipoJugador = tipoJugador; //Jugador o IA
 		
-		start();
+		setVisible(true);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 722, 473);
 
-//		timer.start();
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.BLACK);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		raquetaizqud = new Canvas();
+		
+		raquetaizqud.setBackground(Color.WHITE);
+		raquetaizqud.setBounds(0, 78, 26, 110);
+		contentPane.add(raquetaizqud);
+
+		raquetaderech = new Canvas();
+		
+		raquetaderech.setBackground(Color.WHITE);
+		raquetaderech.setBounds(690, 78, 26, 110);
+		contentPane.add(raquetaderech);
+
+		JSeparator separator = new JSeparator();
+		separator.setForeground(Color.GREEN);
+		separator.setOrientation(SwingConstants.VERTICAL);
+		separator.setBounds(348, 0, 200, 444);
+		contentPane.add(separator);
+		
+		Canvas canvas = new Canvas();
+		canvas.setBackground(SystemColor.scrollbar);
+		canvas.setBounds(89, 106, 22, 22);
+		contentPane.add(canvas);
+		
+		inicializarListeners();
+		
+		loopJuego();
+	}
+	
+	private void inicializarListeners() {
+		raquetaizqud.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				int id = arg0.getKeyCode();
+
+				if (id == KeyEvent.VK_W)
+				{
+					Pong.getPong().moverRaqueta(true, true);
+				}
+				else if (id == KeyEvent.VK_S)
+				{
+					Pong.getPong().moverRaqueta(false, true);
+				}
 				
-	}
-
-	public void start()
-	{
-		player1 = new F08Raqueta(this, 1);
-		player2 = new F08Raqueta(this, 2);
-		ball = new F09Ball(this);
-	}
-
-	public void update()
-	{
-	}
-
-	public void render(Graphics2D g)
-	{
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, ancho, alto);
+			}
+		});
 		
-		g.setColor(Color.GREEN);
-		g.setStroke(new BasicStroke(5));
-		g.drawLine(ancho/2, 0, ancho/2, alto);
-		
-		player1.render(g);
-		player2.render(g);
-		ball.render(g);
-	}
+		if(tipoJugador.contains("Jugador")) {
+			raquetaderech.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					int id = e.getKeyCode();
+					
+					if (id == KeyEvent.VK_UP)
+					{
+						Pong.getPong().moverRaqueta(true, false);
+						///jakñlsdfjlkasdflkasdkñfajdlfjalksdjfk
 
-	@Override
-	public void actionPerformed(ActionEvent e)
-	{
-		update();
-		renderer.repaint();
-	}
-
-	public int getAltura() 
-	{
-		return alto;
-	}
-
-	public int getAnchura() 
-	{
-		return ancho;
-	}
-
-	public static F07Pong getPong() 
-	{
-		if(pong == null)
-		{
-			pong = new F07Pong();
+					}
+					else if (id == KeyEvent.VK_DOWN)
+					{
+						Pong.getPong().moverRaqueta(false, false);
+						//asdklfjñasdlkjflakdsjfadslkajsldkfjlsd
+					}
+				}
+			});
 		}
-		return pong;
 	}
-	
+
+	private void loopJuego() {
+		//metodo mostrar elementos, obtener coordenadas de estos, y pintarlos en pantalla
+		//metodo play que "juega"
+		boolean terminado = false;
+		while(!terminado) {
+			terminado = Pong.getPong().jugar();
+			JSONArray coordenadasElementos = Pong.getPong().mostrar();
+			System.out.println(coordenadasElementos);
+			//un metood para pintar todos los elementos desde lo anterior
+		}
+		
+	}
+
 }
