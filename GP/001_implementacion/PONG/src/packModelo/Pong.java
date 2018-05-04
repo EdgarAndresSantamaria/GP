@@ -25,8 +25,8 @@ public class Pong {
 	//constantes
 	private final double probabilidadPotenciador=0.6;
 	private final int DxBola= -2;//cte velocidad de la bola (es negativa porque inicia hacia jug1)
-	private final int fronteraSeguraJug1=(int)bounds.getX()+25;//area jugador 1
-	private final int fronteraSeguraJug2=(int)bounds.getMaxX()-25;//area jugador 2
+	private int fronteraSeguraJug1;//area jugador 1
+	private int fronteraSeguraJug2;//area jugador 2
 	
 	//invariables
 	private static Pong instancia;
@@ -56,6 +56,9 @@ public class Pong {
 		lPuntuacion=GestorBD.getGestorBD().cargar(pJugador1);//cargar puntuación historica
 		bounds=pBounds;
 		tipoPotenciador=true;//tipo Potenciador true -> Multiplicador/false -> DyRaqueta
+		
+		fronteraSeguraJug1=(int)bounds.getX()+25;
+		fronteraSeguraJug2=(int)bounds.getMaxX()-25;
 	}
 	
 	public Boolean existeUsuario(String username, String pwd) {
@@ -92,7 +95,7 @@ public class Pong {
 		nuevoPotenciador.setCoord(x, y);
 	}
 
-	public JSONArray mostrar() {
+	/*public JSONArray mostrar() {
 		 //generar un json con los atributos de los elementos 
 	    JSONArray listaObjetos = new JSONArray(); 
 	     
@@ -140,7 +143,7 @@ public class Pong {
 	     
 	    return listaObjetos; 
 	     
-	}
+	}*/
 	
 	public Boolean jugar() {
 		boolean acabado=false;

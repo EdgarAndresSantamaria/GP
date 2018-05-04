@@ -38,6 +38,7 @@ public class F02MenuIdentificacion extends JFrame {
 	private JTextField textField;
 	private JButton btnVolver;
 	private JButton btnLogin;
+	private boolean invitado = true;
 
 	/**
 	 * Create the frame.
@@ -138,7 +139,6 @@ public class F02MenuIdentificacion extends JFrame {
 			{
 				String user = textField.getText().toString();
 				String password = passwordField.getText();
-
 				boolean existe = Pong.getPong().existeUsuario(user, password);
 				if(existe) {
 					new F04MenuJuego(false);
@@ -153,5 +153,10 @@ public class F02MenuIdentificacion extends JFrame {
 		}
 	}
 
+	
+	public boolean getInvitado()
+	{
+		return invitado;
+	}
 
 }

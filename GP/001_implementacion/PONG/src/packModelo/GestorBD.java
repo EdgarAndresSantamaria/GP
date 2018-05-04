@@ -7,9 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import packExcepciones.ExcepcionDatoActualizado;
-import packExcepciones.ExcepcionDatoNoActualizado;
-import packGestores.GestorBD;
 
 public class GestorBD {
 	private static GestorBD miGestorBD;
@@ -45,7 +42,7 @@ public class GestorBD {
 	public void conectar() throws SQLException {
 
 		// 1. Get a connection to database
-		myConn = DriverManager.getConnection("jdbc:mysql://galan.ehu.eus:3306/Xpdejaime001_pong", "Xpdejaime001", "AIC7nDBJ");
+		myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pongtaep", "root", "");
 
 		System.out.println("Database connection successful!\n");
 
@@ -105,8 +102,8 @@ public class GestorBD {
 			conectar();
 
 			// Se pide
-			ResultSet myRs = exeSQLSelect("SELECT * FROM users WHERE username='" + nombre + "' AND password='"+ pwd + "'");
-
+			ResultSet myRs = exeSQLSelect("SELECT * FROM users WHERE username='" + nombre + "' AND password=md5('"+ pwd + "')");
+			
 			// Se procesa el resultado
 			encontrado = myRs != null && myRs.next();
 
