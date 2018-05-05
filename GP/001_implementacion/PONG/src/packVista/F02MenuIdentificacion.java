@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 
 import javax.swing.JPasswordField;
@@ -145,6 +146,9 @@ public class F02MenuIdentificacion extends JFrame {
 				String password = passwordField.getText();
 				boolean existe = Pong.getPong().existeUsuario(user, password);
 				if(existe) {
+					//inicializar jugador 1 con el usuario
+					Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+					Pong.getPong().setConfig(user, new Rectangle(0, 0,(int)screenSize.getWidth(),(int) screenSize.getHeight()));
 					new F04MenuJuego(false);
 					dispose();
 				}else {

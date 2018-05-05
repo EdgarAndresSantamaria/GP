@@ -7,7 +7,11 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import packModelo.Pong;
+
 import java.awt.GridBagLayout;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 
 import javax.swing.GroupLayout;
@@ -154,7 +158,10 @@ public class F01MenuPrincipal extends JFrame {
 			}
 			else if (action.equals("invitado"))
 			{
-				F04MenuJuego jugar = new F04MenuJuego(true);
+				//inicializar jugador 1 con el invitado
+				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+				Pong.getPong().setConfig("Invitado", new Rectangle(0, 0,(int)screenSize.getWidth(),(int) screenSize.getHeight()));
+				F04MenuJuego jugar = new F04MenuJuego(true);	
 				dispose();
 			}
 			

@@ -173,18 +173,13 @@ public class F04MenuJuego extends JFrame {
 			String action = e.getActionCommand();
 			if (action.equals("IA")) 
 			{
-				Pong.getPong().setConfig("Persona", new Rectangle (0, 0, getWidth(), getHeight() / 2));
-				
 				F05MenuDificultad dif = new F05MenuDificultad();
 				dispose();
 			}
 			else if (action.equals("2j"))
 			{
 				//Jugar 2 jugadores
-				
-				Pong.getPong().setConfig("Persona", new Rectangle (0, 0, getWidth(), getHeight() / 2));
 				Pong.getPong().setOponente("2Jugadores");
-				
 				new F07Pong("Jugador");
 				dispose();
 			}

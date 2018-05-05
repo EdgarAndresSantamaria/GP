@@ -12,6 +12,12 @@ public class Raqueta extends Elemento{
 	//constantes
 	private final int defaultDy=2;
 	
+	/**
+	 * constructora de raqueta, genera una nueva raqueta parada con
+	 * el nombre y campo especificados
+	 * @param pNombre
+	 * @param pCampo
+	 */
 	public Raqueta(String pNombre, Boolean pCampo) {
 		super("raqueta");
 		lPotenciadores = new ArrayList<DyRaqueta>();
@@ -20,25 +26,35 @@ public class Raqueta extends Elemento{
 		}else {
 			jugador=new Jugador(pNombre);
 		}
+		//inicializar sin movimiento
+		pararRaqueta();
 	}
 
 	public String getNombre() {
 		return jugador.getNombre();
 	}
 
-	public int golpeaRaqueta(Rectangle bola) {
-		if(golpea(bola)) {
-			return dy;
-		}else {
-			return 0;
-		}
+	/**
+	 * devuelve la velocidad de la raqueta en caso de ser golpeada y null en caso de no ser golpeada 
+	 * @param bola
+	 * @return
+	 */
+	public Boolean golpeaRaqueta(Rectangle bola) {
+		return golpea(bola);
+			
 	}
 
+	/**
+	 * metodo encargado de aplicar los cambios en la posicion sde la raqueta (y)
+	 * segun la direccion(dy)
+	 */
 	public void emular() {
 		if(Pong.getPong().dentroCampo(getShape())){
+			System.out.println("incrementar dy raqueta");
 			incrementarY(dy);
 		}else{
-			invertirY(dy);
+			System.out.println("invertir dy raqueta");
+			decrementarY(dy);
 		}
 	}
 
@@ -51,6 +67,7 @@ public class Raqueta extends Elemento{
 	}
 
 	public void moverRaqueta(Boolean pDir) {
+		
 		//direccion( true-> hacia arriba , false -> hacia abajo )
 		if(pDir) {
 			dy=defaultDy;
@@ -60,8 +77,7 @@ public class Raqueta extends Elemento{
 	}
 	
 	public void pararRaqueta() {
-		dy=0;
-		
+		dy=0;	
 	}
 
 	public void activarPotenciadores() {
@@ -70,8 +86,6 @@ public class Raqueta extends Elemento{
 		}
 	}
 
-	
-	
 	public void siguienteMov() {
 		IA es = (IA) jugador;
 		es.siguienteMov();		
@@ -79,7 +93,7 @@ public class Raqueta extends Elemento{
 	}
 
 	public void desactivarPotenciadores() {
-		dy=2;//resetear velocidad
+		pararRaqueta();
 		for(DyRaqueta tmp : lPotenciadores) {
 			if(tmp.expirado()) {//eliminar los potenciadores expirados 
 				lPotenciadores.remove(tmp);

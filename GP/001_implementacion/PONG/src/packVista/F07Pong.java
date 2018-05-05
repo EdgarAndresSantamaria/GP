@@ -3,8 +3,10 @@ package packVista;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.Stroke;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import packModelo.Pong;
 
@@ -27,18 +30,23 @@ import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Rectangle2D;
+import java.util.Iterator;
 
 public class F07Pong extends JFrame {
 
 	private JPanel contentPane;
 	private Canvas raquetaizqud;
 	private Canvas raquetaderech;
+	
 	private String tipoJugador;
+	private Dimension screenSize;
 
 	/**
 	 * Create the frame.
 	 */
 	public F07Pong(String tipoJugador) {
+		super("Pong TM");
 		this.tipoJugador = tipoJugador; //Jugador o IA
 		
 		ImageIcon img = new ImageIcon(F00Inicio.class.getResource("/packImagenes/pong5.jpg"));
@@ -46,10 +54,11 @@ public class F07Pong extends JFrame {
 		setVisible(true);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 722, 473);
-		
 		// Codigo para centrar el frame
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		screenSize = Toolkit.getDefaultToolkit().getScreenSize();	
+		setSize(screenSize.getSize());
+		
+		/**
 		Dimension frameSize = getSize();
 		if (frameSize.height > screenSize.height) {
 			frameSize.height = screenSize.height;
@@ -58,43 +67,25 @@ public class F07Pong extends JFrame {
 			frameSize.width = screenSize.width;
 		}
 		setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2);
-		
+		 **/
+		/**
+		//crear campo
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.BLACK);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
 		raquetaizqud = new Canvas();
-		
-		raquetaizqud.setBackground(Color.WHITE);
-		raquetaizqud.setBounds(0, 78, 26, 110);
-		contentPane.add(raquetaizqud);
-
-		raquetaderech = new Canvas();
-		
-		raquetaderech.setBackground(Color.WHITE);
-		raquetaderech.setBounds(690, 78, 26, 110);
-		contentPane.add(raquetaderech);
-
-		JSeparator separator = new JSeparator();
-		separator.setForeground(Color.GREEN);
-		separator.setOrientation(SwingConstants.VERTICAL);
-		separator.setBounds(348, 0, 200, 444);
-		contentPane.add(separator);
-		
+		raquetaderech = new Canvas();	
 		Canvas canvas = new Canvas();
 		canvas.setBackground(SystemColor.scrollbar);
-		canvas.setBounds(89, 106, 22, 22);
-		contentPane.add(canvas);
-		
-		inicializarListeners();
-		
+		contentPane.add(canvas);	
+		**/
+		inicializarListeners();	
 		loopJuego();
 	}
 	
 	private void inicializarListeners() {
-		raquetaizqud.addKeyListener(new KeyAdapter() {
+		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
 				int id = arg0.getKeyCode();
@@ -107,12 +98,11 @@ public class F07Pong extends JFrame {
 				{
 					Pong.getPong().moverRaqueta(false, true);
 				}
-				
 			}
 		});
 		
 		if(tipoJugador.contains("Jugador")) {
-			raquetaderech.addKeyListener(new KeyAdapter() {
+			addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyPressed(KeyEvent e) {
 					int id = e.getKeyCode();
@@ -120,13 +110,11 @@ public class F07Pong extends JFrame {
 					if (id == KeyEvent.VK_UP)
 					{
 						Pong.getPong().moverRaqueta(true, false);
-						///jakñlsdfjlkasdflkasdkñfajdlfjalksdjfk
 
 					}
 					else if (id == KeyEvent.VK_DOWN)
 					{
 						Pong.getPong().moverRaqueta(false, false);
-						//asdklfjñasdlkjflakdsjfadslkajsldkfjlsd
 					}
 				}
 			});
@@ -134,16 +122,69 @@ public class F07Pong extends JFrame {
 	}
 
 	private void loopJuego() {
-		//metodo mostrar elementos, obtener coordenadas de estos, y pintarlos en pantalla
-		//metodo play que "juega"
-		boolean terminado = false;
-		while(!terminado) {
-			terminado = Pong.getPong().jugar();
-			JSONArray coordenadasElementos = Pong.getPong().mostrar();
-			System.out.println(coordenadasElementos);
-			//un metood para pintar todos los elementos desde lo anterior
+		while(true) {
+			try {
+				Thread.sleep(8000);
+				if(Pong.getPong().jugar()){//si terminado terminar ejecucion
+					// fin
+				}	
+				repaint();
+				System.out.println("vuelta");
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
+			
 		}
 		
 	}
-
+	public void update(Graphics g) {
+		System.out.println("hola");
+		paintComponents(g);
+	}
+	
+	public void paintComponents( Graphics g) {
+		super.paintComponents( g );
+		System.out.println("painting....");
+		Graphics2D g2d = ( Graphics2D ) g;
+		g2d.setBackground(Color.BLACK);
+		JSONArray pLmostrar=Pong.getPong().mostrar();
+		Iterator tmp=pLmostrar.iterator();
+		while(tmp.hasNext()) {
+			JSONObject sig=(JSONObject) tmp.next();
+			if(sig.get("nombre").equals("raquetaIzqda")){
+				g2d.setPaint(Color.WHITE);
+			    g2d.setStroke(new BasicStroke( 10.0f ) );            
+				g2d.draw( new Rectangle2D.Double((int)sig.get("x"),(int)sig.get("y"),(int)sig.get("width"),(int)sig.get("height")));
+			
+			}else if(sig.get("nombre").equals("raquetaDrcha")) {
+				g2d.setPaint(Color.WHITE);
+			    g2d.setStroke(new BasicStroke( 10.0f ) );            
+				g2d.draw( new Rectangle2D.Double((int)sig.get("x"),(int)sig.get("y"),(int)sig.get("width"),(int)sig.get("height")));
+			
+			}else if(sig.get("nombre").equals("bola")) {
+				g2d.setPaint(Color.WHITE);
+			    g2d.setStroke(new BasicStroke( 10.0f ) );            
+				g2d.draw( new Rectangle2D.Double((int)sig.get("x"),(int)sig.get("y"),(int)sig.get("width"),(int)sig.get("height")));
+			
+			}else if(sig.get("nombre").equals("potenciador")) {
+				g2d.setPaint(Color.WHITE);
+			    g2d.setStroke(new BasicStroke( 10.0f ) );            
+				g2d.draw( new Rectangle2D.Double((int)sig.get("x"),(int)sig.get("y"),(int)sig.get("width"),(int)sig.get("height")));
+			
+			}else if(sig.get("nombre").equals("areaIzq")) {
+				g2d.setPaint(Color.GREEN);
+			    g2d.setStroke(new BasicStroke( 10.0f ) );            
+				g2d.draw( new Rectangle2D.Double((int)sig.get("x"),0,10,screenSize.height));
+			
+			}else if(sig.get("nombre").equals("areaDrch")) {
+				g2d.setPaint(Color.GREEN);
+			    g2d.setStroke(new BasicStroke( 10.0f ) );            
+				g2d.draw( new Rectangle2D.Double((int)sig.get("x"),0,10,screenSize.height));
+			
+			}
+			
+			
+		}
+	}
 }

@@ -8,18 +8,17 @@ import org.json.simple.JSONObject;
 public class Elemento {
 	
 	private Rectangle dimension;
-	private int x,y;
 	
 	public Elemento(String pTipo) {
 		dimension = new Rectangle();
 		if(pTipo.equals("bola")) {//medidas de la bola
-			dimension.setSize(5, 5);
+			dimension.setSize(10, 10);
 
 		}else if (pTipo.equals("potenciador")) {// medidas del potenciador
-			dimension.setSize(5, 10);
+			dimension.setSize(10, 20);
 							
 		}else {//medidas de la raqueta
-			dimension.setSize(5, 20);		
+			dimension.setSize(10, 40);		
 		}
 	}
 	
@@ -28,22 +27,33 @@ public class Elemento {
 		dimension.y=pY;
 	}
 	
-	public void invertirX(int pDx) {
-		dimension.x+=pDx;
-		dimension.x=-dimension.x;
+	public void decrementarX(int pDx) {
+		System.out.println(dimension.x);
+		System.out.println("decrementada x......");
+		dimension.x-=pDx;
+		System.out.println(dimension.x);
 	}
 	
-	public void invertirY(int pDy) {
-		dimension.y+=pDy;
-		dimension.y=-dimension.y;
+	public void decrementarY(int pDy) {
+		System.out.println(dimension.y);
+		System.out.println("decrementada y......");
+		dimension.y-=pDy;
+		System.out.println(dimension.y);
+		
 	}
 	
 	public void incrementarX(int pDx) {
+		System.out.println(dimension.x);
+		System.out.println("incrementada x......");
 		dimension.x+=pDx;
+		System.out.println(dimension.x);
 	}
 	
 	public void incrementarY(int pDy) {
+		System.out.println(dimension.y);
+		System.out.println("incrementada y......");
 		dimension.y+=pDy;
+		System.out.println(dimension.y);
 	}
 	
 	public boolean golpea(Rectangle bola) {
@@ -56,10 +66,10 @@ public class Elemento {
 
 	public JSONObject getDimensionesYPos() {
 		 JSONObject elemento = new JSONObject(); 
-		 elemento.put("width", dimension.getWidth()); 
-		 elemento.put("height", dimension.getHeight()); 
-		 elemento.put("x", x); 
-		 elemento.put("y", y); 
+		 elemento.put("width", (int)dimension.getWidth()); 
+		 elemento.put("height",(int) dimension.getHeight()); 
+		 elemento.put("x", (int)dimension.getX()); 
+		 elemento.put("y",(int) dimension.getY()); 
 		 return elemento;
 	}
 }
