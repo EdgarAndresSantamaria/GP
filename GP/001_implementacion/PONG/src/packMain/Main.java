@@ -1,9 +1,6 @@
 package packMain;
 
 import packVista.F00Inicio;
-import packVista.F01MenuPrincipal;
-import packVista.F04MenuJuego;
-import packVista.F07PongOriginal;
 
 public class Main {
 

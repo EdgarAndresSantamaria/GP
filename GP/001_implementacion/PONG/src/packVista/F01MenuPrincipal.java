@@ -11,6 +11,7 @@ import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -29,6 +30,7 @@ public class F01MenuPrincipal extends JFrame {
 	private JButton btnLogin;
 	private JButton btnRegister;
 	private JButton btnInvitado;
+	private JButton btnVolver;
 
 	/**
 	 * Launch the application.
@@ -57,6 +59,8 @@ public class F01MenuPrincipal extends JFrame {
 		contentPane.setBackground(new Color(0, 0, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		ImageIcon img = new ImageIcon(F00Inicio.class.getResource("/packImagenes/pong5.jpg"));
+		setIconImage(img.getImage());
 		setVisible(true);
 		
 		btnLogin = new JButton("Login");
@@ -80,27 +84,40 @@ public class F01MenuPrincipal extends JFrame {
 		btnInvitado.setBackground(new Color(0, 255, 0));
 		btnInvitado.setFont(new Font("Tahoma", Font.BOLD, 15));
 		
+		btnVolver = new JButton("Volver");
+		btnVolver.setActionCommand("volver");
+		btnVolver.addActionListener(new Controlador());
+		
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(157)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-						.addComponent(btnInvitado, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnLogin, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
-						.addComponent(btnRegister, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addContainerGap(166, Short.MAX_VALUE))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(btnRegister, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+								.addComponent(btnInvitado, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
+							.addGap(158))))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addComponent(btnVolver)
+					.addContainerGap(325, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(32)
-					.addComponent(btnLogin)
-					.addGap(36)
-					.addComponent(btnRegister)
-					.addGap(39)
-					.addComponent(btnInvitado)
-					.addContainerGap(61, Short.MAX_VALUE))
+					.addComponent(btnVolver)
+					.addGap(5)
+					.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+					.addGap(28)
+					.addComponent(btnRegister, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+					.addGap(27)
+					.addComponent(btnInvitado, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(45, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 		
@@ -139,9 +156,14 @@ public class F01MenuPrincipal extends JFrame {
 				F04MenuJuego jugar = new F04MenuJuego(true);
 				dispose();
 			}
+			
+			else if (action.equals("volver")) 
+			{
+				F00Inicio ppal = new F00Inicio();
+				dispose();
+			}
 		
 		}
 		
 	}
-
 }

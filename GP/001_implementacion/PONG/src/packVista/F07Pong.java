@@ -17,11 +17,14 @@ import org.json.simple.JSONArray;
 import packModelo.Pong;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Canvas;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -38,11 +41,24 @@ public class F07Pong extends JFrame {
 	public F07Pong(String tipoJugador) {
 		this.tipoJugador = tipoJugador; //Jugador o IA
 		
+		ImageIcon img = new ImageIcon(F00Inicio.class.getResource("/packImagenes/pong5.jpg"));
+		setIconImage(img.getImage());
 		setVisible(true);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 722, 473);
-
+		
+		// Codigo para centrar el frame
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		Dimension frameSize = getSize();
+		if (frameSize.height > screenSize.height) {
+			frameSize.height = screenSize.height;
+		}
+		if (frameSize.width > screenSize.width) {
+			frameSize.width = screenSize.width;
+		}
+		setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2);
+		
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

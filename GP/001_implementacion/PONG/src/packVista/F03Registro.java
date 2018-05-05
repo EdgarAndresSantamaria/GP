@@ -13,6 +13,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -66,6 +67,8 @@ public class F03Registro extends JFrame {
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		ImageIcon img = new ImageIcon(F00Inicio.class.getResource("/packImagenes/pong5.jpg"));
+		setIconImage(img.getImage());
 		setVisible(true);
 		
 		JLabel lblNombreDeUsuario = new JLabel("Nombre de Usuario:");

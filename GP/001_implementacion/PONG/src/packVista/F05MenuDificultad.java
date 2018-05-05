@@ -13,6 +13,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -42,11 +43,13 @@ public class F05MenuDificultad extends JFrame {
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		ImageIcon img = new ImageIcon(F00Inicio.class.getResource("/packImagenes/pong5.jpg"));
+		setIconImage(img.getImage());
 		setVisible(true);
 		
 		JLabel lblEligeLaDificultad = new JLabel("Elige la Dificultad");
 		lblEligeLaDificultad.setForeground(Color.GREEN);
-		lblEligeLaDificultad.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblEligeLaDificultad.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		
 		btnFcil = new JButton("F\u00C1CIL");
 		btnFcil.setBackground(Color.GREEN);
@@ -72,15 +75,12 @@ public class F05MenuDificultad extends JFrame {
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addComponent(btnVolver)
-					.addGap(111)
-					.addComponent(lblEligeLaDificultad)
-					.addGap(180))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(195)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnDifcil, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-						.addComponent(btnFcil, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
-					.addGap(197))
+					.addGap(136)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(btnDifcil, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnFcil, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(lblEligeLaDificultad, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addGap(155))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -88,13 +88,13 @@ public class F05MenuDificultad extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(lblEligeLaDificultad)
-							.addGap(39)
-							.addComponent(btnFcil, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-							.addGap(42)
-							.addComponent(btnDifcil, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE))
+							.addComponent(lblEligeLaDificultad))
 						.addComponent(btnVolver))
-					.addContainerGap(106, Short.MAX_VALUE))
+					.addGap(71)
+					.addComponent(btnFcil, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+					.addGap(52)
+					.addComponent(btnDifcil, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(64, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 		

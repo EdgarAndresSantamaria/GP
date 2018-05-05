@@ -8,8 +8,6 @@ import java.util.Random;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import packVista.Renderer;
-
 public class Pong {
 
 	private ArrayList<Bola> lBola ; //lista bolas

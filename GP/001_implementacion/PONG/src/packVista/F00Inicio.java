@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.Color;
@@ -39,6 +40,7 @@ public class F00Inicio extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
 					F00Inicio frame = new F00Inicio();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -60,6 +62,8 @@ public class F00Inicio extends JFrame {
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		ImageIcon img = new ImageIcon(F00Inicio.class.getResource("/packImagenes/pong5.jpg"));
+		setIconImage(img.getImage());
 		setVisible(true);
 		
 		JLabel label = new JLabel("");
@@ -91,36 +95,36 @@ public class F00Inicio extends JFrame {
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(46)
-							.addComponent(label, GroupLayout.PREFERRED_SIZE, 485, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(122)
-							.addComponent(lblPulsaespacioPara))
+						.addComponent(btnTaep)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(210)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(continuar, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-								.addComponent(btnSalir, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)))
-						.addComponent(btnTaep))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(continuar, 0, 0, Short.MAX_VALUE)
+								.addComponent(btnSalir, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE))))
+					.addContainerGap(216, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(131, Short.MAX_VALUE)
+					.addComponent(lblPulsaespacioPara)
+					.addGap(125))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(46, Short.MAX_VALUE)
+					.addComponent(label, GroupLayout.PREFERRED_SIZE, 485, GroupLayout.PREFERRED_SIZE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addComponent(label)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(13)
 							.addComponent(lblPulsaespacioPara)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGap(18)
 							.addComponent(continuar)
-							.addPreferredGap(ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
 							.addComponent(btnSalir)
 							.addContainerGap())
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnTaep))))
+						.addComponent(btnTaep)))
 		);
 		contentPane.setLayout(gl_contentPane);
 		

@@ -13,6 +13,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -54,9 +55,12 @@ public class F04MenuJuego extends JFrame {
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		ImageIcon img = new ImageIcon(F00Inicio.class.getResource("/packImagenes/pong5.jpg"));
+		setIconImage(img.getImage());
 		setVisible(true);
 		
-		JLabel lblPongTaep = new JLabel("PONG TAEP");
+		JLabel lblPongTaep = new JLabel("");
+		lblPongTaep.setIcon(new ImageIcon(F04MenuJuego.class.getResource("/packImagenes/Titulo.png")));
 		lblPongTaep.setForeground(new Color(0, 255, 0));
 		lblPongTaep.setFont(new Font("Tahoma", Font.BOLD, 25));
 		
@@ -98,50 +102,53 @@ public class F04MenuJuego extends JFrame {
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblganaQuienMarque)
+					.addContainerGap(517, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(205)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
 						.addComponent(btnJugarVsIa, GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
 						.addComponent(btnRanking, GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(label)
-						.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 8, GroupLayout.PREFERRED_SIZE))
+						.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 8, GroupLayout.PREFERRED_SIZE)
+						.addComponent(label))
 					.addContainerGap(200, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblganaQuienMarque)
-					.addContainerGap(548, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(291)
-					.addComponent(btnLogout)
-					.addContainerGap(332, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(270)
+					.addGap(124)
 					.addComponent(lblPongTaep)
-					.addContainerGap(293, Short.MAX_VALUE))
+					.addContainerGap(134, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(306)
+					.addComponent(btnLogout)
+					.addContainerGap(317, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(22)
-					.addComponent(lblPongTaep)
-					.addGap(44)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblPongTaep)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(label))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(150)
+							.addComponent(btnJugarVsIa, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)))
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(label)
-							.addGap(39)
-							.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 239, Short.MAX_VALUE)
-							.addComponent(lblganaQuienMarque))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(btnJugarVsIa)
-							.addGap(39)
-							.addComponent(btnNewButton)
-							.addGap(43)
-							.addComponent(btnRanking)
+							.addGap(31)
+							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
 							.addGap(49)
-							.addComponent(btnLogout)))
+							.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)))
+					.addGap(35)
+					.addComponent(btnRanking, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+					.addComponent(btnLogout)
+					.addGap(23)
+					.addComponent(lblganaQuienMarque)
 					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);

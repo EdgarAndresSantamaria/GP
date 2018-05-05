@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="librerias/miglayout-src.zip"/>
 	<classpathentry kind="lib" path="librerias/miglayout15-swing.jar"/>
 	<classpathentry kind="lib" path="librerias/mysql-connector-java-5.1.45-bin.jar"/>
+	<classpathentry kind="lib" path="librerias/JTattooDemo.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
