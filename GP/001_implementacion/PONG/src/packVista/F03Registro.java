@@ -60,6 +60,7 @@ public class F03Registro extends JFrame {
 	 * Create the frame.
 	 */
 	public F03Registro() {
+		setResizable(false);
 		setTitle("PONG TAEP");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 573, 419);

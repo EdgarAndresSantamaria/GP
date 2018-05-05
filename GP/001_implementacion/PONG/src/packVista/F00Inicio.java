@@ -54,6 +54,7 @@ public class F00Inicio extends JFrame {
 	 * Create the frame.
 	 */
 	public F00Inicio() {
+		setResizable(false);
 		setTitle("PONG TAEP");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 559, 385);

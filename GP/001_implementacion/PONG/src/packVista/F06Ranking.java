@@ -54,6 +54,7 @@ public class F06Ranking extends JFrame {
 	 * Create the frame.
 	 */
 	public F06Ranking() {
+		setResizable(false);
 		setTitle("PONG TAEP");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 569, 374);

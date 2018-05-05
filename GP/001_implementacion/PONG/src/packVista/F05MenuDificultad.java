@@ -36,6 +36,7 @@ public class F05MenuDificultad extends JFrame {
 	 * Create the frame.
 	 */
 	public F05MenuDificultad() {
+		setResizable(false);
 		setTitle("PONG TAEP");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 543, 358);

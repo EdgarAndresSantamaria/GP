@@ -52,6 +52,7 @@ public class F01MenuPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public F01MenuPrincipal() {
+		setResizable(false);
 		setTitle("PONG TAEP");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);

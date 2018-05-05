@@ -45,6 +45,7 @@ public class F02MenuIdentificacion extends JFrame {
 	 * Create the frame.
 	 */
 	public F02MenuIdentificacion() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ImageIcon img = new ImageIcon(F00Inicio.class.getResource("/packImagenes/pong5.jpg"));
 		setIconImage(img.getImage());
