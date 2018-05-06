@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="lib" path="librerias/json-simple-1.1.jar"/>
+	<classpathentry kind="lib" path="librerias/JTattooDemo.jar"/>
+	<classpathentry kind="lib" path="librerias/miglayout-src.zip"/>
+	<classpathentry kind="lib" path="librerias/miglayout15-swing.jar"/>
+	<classpathentry kind="lib" path="librerias/mysql-connector-java-5.1.45-bin.jar"/>
+	<classpathentry kind="output" path=""/>
+</classpath>
