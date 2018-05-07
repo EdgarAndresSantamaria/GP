@@ -36,7 +36,7 @@ public class TableroJuego extends Canvas {
 				try {
 					createBufferStrategy(2);
 					BufferStrategy bs=getBufferStrategy();
-					wait(100);
+					wait(1);
 					//preparar siguiente frame
 					quienGano=Pong.getPong().jugar();
 					if(quienGano!=-1){
@@ -104,6 +104,5 @@ public class TableroJuego extends Canvas {
 			
 			}
 		}
-		g2d.setBackground(Color.BLACK);
 	}
 }
