@@ -32,7 +32,7 @@ public class Bola extends Elemento {
 			dx=-dx;//invertir dirección orizontal
 			incrementarY(dy);
 		}else{
-			if(Pong.getPong().dentroCampo(getShape())){
+			if(Pong.getPong().dentroCampo(getShape(),dx,dy)){
 				System.out.println("continuar movimiento...");
 				incrementarY(dy);
 				incrementarX(dx);
@@ -41,6 +41,7 @@ public class Bola extends Elemento {
 				System.out.println("rebote fin campo...");
 				decrementarY(dy);
 				incrementarX(dx);
+				dy=-dy;
 			}
 		}
 		return potenciadorGolpeado;

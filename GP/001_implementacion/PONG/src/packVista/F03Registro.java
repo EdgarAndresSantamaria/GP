@@ -1,6 +1,5 @@
 package packVista;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -27,16 +26,14 @@ import javax.swing.JPasswordField;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 
 public class F03Registro extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField usuario;
-	private JPasswordField Contraseña;
-	private JPasswordField RepiteContraseña;
+	private JPasswordField Contrasena;
+	private JPasswordField RepiteContrasena;
 	private JButton btnRegistrarse;
 	private JButton btnVolver;
 
@@ -98,11 +95,11 @@ public class F03Registro extends JFrame {
 		usuario.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		usuario.setColumns(10);
 		
-		Contraseña = new JPasswordField();
-		Contraseña.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		Contrasena = new JPasswordField();
+		Contrasena.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
-		RepiteContraseña = new JPasswordField();
-		RepiteContraseña.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		RepiteContrasena = new JPasswordField();
+		RepiteContrasena.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setActionCommand("volver");
@@ -125,8 +122,8 @@ public class F03Registro extends JFrame {
 								.addComponent(lblRepiteLaContrasea))
 							.addGap(27)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(RepiteContraseña)
-								.addComponent(Contraseña)
+								.addComponent(RepiteContrasena)
+								.addComponent(Contrasena)
 								.addComponent(usuario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
 					.addGap(134))
 				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
@@ -146,11 +143,11 @@ public class F03Registro extends JFrame {
 					.addGap(26)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblContrasea)
-						.addComponent(Contraseña, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(Contrasena, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(27)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblRepiteLaContrasea)
-						.addComponent(RepiteContraseña, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(RepiteContrasena, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
 					.addComponent(btnRegistrarse)
 					.addGap(24))
@@ -182,15 +179,15 @@ public class F03Registro extends JFrame {
 			if (action.equals("registrar")) 
 			{
 				String username = usuario.getText();
-				String pass1 = Contraseña.getText();
-				String pass2 = RepiteContraseña.getText();
+				String pass1 = Contrasena.getText();
+				String pass2 = RepiteContrasena.getText();
 				if(!pass1.equals(pass2))
 				{
-					JOptionPane.showMessageDialog(rootPane, "Las contraseñas no coinciden");
+					JOptionPane.showMessageDialog(rootPane, "Las contraseï¿½as no coinciden");
 				}
 				else
 				{
-					//almacenar en la BD el usuario y la contraseña
+					//almacenar en la BD el usuario y la contraseï¿½a
 					Boolean registroOK = Pong.getPong().registroUsuario(username, pass1);
 					if(registroOK) {
 						dispose();

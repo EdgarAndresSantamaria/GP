@@ -43,7 +43,7 @@ public class Pong {
 	 * @param pJugador2
 	 */
 	public void setOponente(String pJugador2) { // selección de oponente
-		System.out.println("inicializando oponente...");
+		//System.out.println("inicializando oponente...");
 		//generar campo derecho con el jugador
 		jug2=new Raqueta(pJugador2,false);	
 		lPuntuacion.add(new Rank(jug1.getNombre(),jug2.getNombre())); //generar nuevo Rank para la partida}
@@ -58,7 +58,7 @@ public class Pong {
 	 * @param pBounds
 	 */
 	public void setConfig(String pJugador1, Rectangle pBounds ) {//inicialización del juego y el campo
-		System.out.println("inicializando....");
+		//System.out.println("inicializando....");
 		//inicializar campo
 		bounds=pBounds;
 		//inicializar listas
@@ -76,8 +76,8 @@ public class Pong {
 		int distanciaArea=(int)(bounds.getX()+bounds.getMaxX()/4);//25% del campo
 		fronteraSeguraJug1=distanciaArea;//25 % campo izquierdo seguro
 		fronteraSeguraJug2=(int)(bounds.getMaxX()-distanciaArea); //25 % campo derecho seguro	
-		System.out.println("esquina superior: "+bounds.getX()+" "+ bounds.getY());
-		System.out.println("altura/anchura: "+bounds.getWidth()+" "+ bounds.getHeight());
+		//System.out.println("esquina superior: "+bounds.getX()+" "+ bounds.getY());
+		//System.out.println("altura/anchura: "+bounds.getWidth()+" "+ bounds.getHeight());
 	}
 
 	public Boolean existeUsuario(String username, String pwd) {
@@ -92,7 +92,7 @@ public class Pong {
 	 * método que inicializa la posición de la raquetas en el juego
 	 */
 	private void inicializarRaquetas() {
-		System.out.println("inicializando raquetas...");
+		//System.out.println("inicializando raquetas...");
 		//recoger cotas del campo
 		int xMax=(int) bounds.getMaxX();
 		double yMax= bounds.getMaxY();
@@ -100,8 +100,8 @@ public class Pong {
 		//inicializar raquetas:
 		jug1.setCoord(distanciaRaqueta,(int) (yMax/2));//campo izquierdo a media altura
 		jug2.setCoord(xMax-distanciaRaqueta,(int) (yMax/2));//campo derecho a media altura
-		System.out.println("coordenadas jugador 1: "+jug1.getShape().x+" "+jug1.getShape().y);
-		System.out.println("coordenadas jugador 2: "+jug2.getShape().x+" "+jug2.getShape().y);
+		//System.out.println("coordenadas jugador 1: "+jug1.getShape().x+" "+jug1.getShape().y);
+		//System.out.println("coordenadas jugador 2: "+jug2.getShape().x+" "+jug2.getShape().y);
 	}
 
 	/**
@@ -119,8 +119,8 @@ public class Pong {
 		nuevaBola.setCoord(pX, pY);
 		nuevaBola.setDx(DxBola);
 		nuevaBola.setDy(DyBola);
-		System.out.println("coordenadas de la bola:"+nuevaBola.getShape().x+" "+nuevaBola.getShape().y);
-		System.out.println("direccion de la bola:"+nuevaBola.getDx()+" "+nuevaBola.getDy());
+		//System.out.println("coordenadas de la bola:"+nuevaBola.getShape().x+" "+nuevaBola.getShape().y);
+		//System.out.println("direccion de la bola:"+nuevaBola.getDx()+" "+nuevaBola.getDy());
 	}
 
 	/**
@@ -144,10 +144,10 @@ public class Pong {
 		if(x<fronteraSeguraJug1) {
 			inicializarPotenciador( nuevoPotenciador); //no debe aparecer dentro de la frontera segura
 		}
-		System.out.println("Inicializando potenciador....");
+		//System.out.println("Inicializando potenciador....");
 		int y=new Random().nextInt((int) bounds.getHeight());//generar nuevo numero aleatorio dentro de la altura
 		nuevoPotenciador.setCoord(x, y);
-		System.out.println("coordenadas potenciador: "+nuevoPotenciador.getShape().x+" "+nuevoPotenciador.getShape().y);
+		//System.out.println("coordenadas potenciador: "+nuevoPotenciador.getShape().x+" "+nuevoPotenciador.getShape().y);
 	}
 	
 	/**
@@ -208,11 +208,11 @@ public class Pong {
 	public int jugar() {
 		int acabado=-1;
 		//emular el movimiento de las bolas
-		System.out.println("comprobando bolas...");
+		//System.out.println("comprobando bolas...");
 		for (Bola tmp : lBola ) {
 			Potenciador golpeado=tmp.emular();
 			if(golpeado!=null) {
-				System.out.println("golpea potenciador...");
+				//System.out.println("golpea potenciador...");
 				if(golpeado instanceof DyRaqueta) {
 					//es potenciador de raqueta
 					if(tmp.campoApotenciar()) {
@@ -234,20 +234,20 @@ public class Pong {
 					}
 				}
 			}else{	
-				System.out.println("comprobar si marca...");
+				//System.out.println("comprobar si marca...");
 				Boolean marcado=tmp.marcado();
 				if(marcado != null){//comprobar fin de juego
 					if(marcado==true) {//marca campo izquierdo
-						System.out.println("marca en campo izquierdo...");
+						//System.out.println("marca en campo izquierdo...");
 						lPuntuacion.get(lPuntuacion.size()-1).marcarJug1();//marcar campo izquierdo
 					}else {//marca campo derecho
-						System.out.println("marca en campo derecho...");
+						//System.out.println("marca en campo derecho...");
 						lPuntuacion.get(lPuntuacion.size()-1).marcarJug2();//marcar campo derecho
 					}
 					Boolean ganador=finJuego();
 					//comprobar fin de juego
 					if(ganador!=null) {
-						System.out.println("ha ganado ...");
+						//System.out.println("ha ganado ...");
 						if(ganador) {
 							acabado=1;
 						}else {
@@ -258,34 +258,34 @@ public class Pong {
 				}
 			}
 		}
-		System.out.println("activando potenciadores...");
+		//System.out.println("activando potenciadores...");
 		//expansión de los buff
 		jug1.activarPotenciadores();
 		jug2.activarPotenciadores();
 		//emular el movimiento de la raqueta
-		System.out.println("emular jugador1...");
+		//System.out.println("emular jugador1...");
 		jug1.emular();
 		if(jug2.getNombre().contains("IA")) {
-			System.out.println("si es IA calcular sig movimiento...");
+			//System.out.println("si es IA calcular sig movimiento...");
 			//calcular siguiente movimiento de la IA
 			jug2.siguienteMov();
 		}
-		System.out.println("emular jugador2...");
+		//System.out.println("emular jugador2...");
 		jug2.emular();
-		System.out.println("desactivando potenciadores...");
+		//System.out.println("desactivando potenciadores...");
 		//contracción y update de los buff
 		jug1.desactivarPotenciadores();
 		jug2.desactivarPotenciadores();
-		System.out.println("comprobar potenciadores expirados en el campo...");
+		//System.out.println("comprobar potenciadores expirados en el campo...");
 		//comprobar si desaparecen potenciadores
 		for (Potenciador tmp : lPotenciadores ) {
 			if(tmp.expirado()){
-				System.out.println("borrando potenciador...");
+				//System.out.println("borrando potenciador...");
 				lPotenciadores.remove(tmp);
 			}
 		}
 		//generar Potenciador .... o no
-		System.out.println("lanzar nuevo potenciador...");
+		//System.out.println("lanzar nuevo potenciador...");
 		lanzarPotenciador();
 		return acabado;//retornará acabado cuando haya finalizado la simulación
 	}
@@ -323,8 +323,8 @@ public class Pong {
 	 * @param pCampo
 	 */
 	public void  moverRaqueta(Boolean pDir,Boolean pCampo) {
-		System.out.println("		entra jugador: (true=1,false=2)  :"+pCampo);
-		System.out.println("		direccion: (true=arriba,false=abajo)  :"+pDir);
+		//System.out.println("		entra jugador: (true=1,false=2)  :"+pCampo);
+		//System.out.println("		direccion: (true=arriba,false=abajo)  :"+pDir);
 		//distincion de campos para el caso player vs player
 		//campo de jugador (true->izq,false->drch)
 		if(pCampo==true) {//campo izquierdo
@@ -340,7 +340,7 @@ public class Pong {
 	 * @param pCampo
 	 */
 	public void  pararRaqueta(Boolean pCampo) {
-		System.out.println("		entra jugador: (true=1,false=2)  :"+pCampo);
+		//System.out.println("		entra jugador: (true=1,false=2)  :"+pCampo);
 		//distincion de campos para el caso player vs player
 		//campo de jugador (true->izq,false->drch)
 		if(pCampo==true) {//campo izquierdo
@@ -371,8 +371,43 @@ public class Pong {
 		}
 	}
 
-	public boolean dentroCampo(Rectangle shape) {
-		return bounds.intersects(shape);
+	public boolean dentroCampo(Rectangle shape, int dx, int dy) {
+		System.err.println("comprobando dentro campo:....");
+		System.err.println("		shape     Y:...."+(int)shape.getY());
+		System.err.println("		shape     X:...."+(int)shape.getX());
+		System.err.println("		shape     maxY:...."+(int)shape.getWidth());
+		System.err.println("		shape     maxX:...."+(int)shape.getHeight());
+		System.err.println("		shape     DY:...."+dy);
+		System.err.println("		shape     DX:...."+dx);
+		
+		int posicionEsperadaY;
+		int posicionEsperadaX;
+		int x0=(int)bounds.getX();
+		int y0=(int)bounds.getY();
+		int xmax=(int)bounds.getWidth();
+		int ymax=(int)bounds.getHeight();
+		System.err.println("		bounds     Y:...."+(int)bounds.getY());
+		System.err.println("		bounds     X:...."+(int)bounds.getX());
+		System.err.println("		bounds     maxY:...."+(int)bounds.getWidth());
+		System.err.println("		bounds     maxX:...."+(int)bounds.getHeight());
+		if(dy>0 ||dy==0) {
+			posicionEsperadaY= (int)shape.getY()+dy;
+		}else {
+			posicionEsperadaY= (int)shape.getY()+dy+(int)shape.getHeight();
+		}
+		if(dx>0||dx==0) {
+			posicionEsperadaX= (int)shape.getX()+dx;
+		}else {
+			posicionEsperadaX= (int)shape.getX()+dx+(int)shape.getWidth();
+		}
+		System.err.println("		Posicion esperada X:...."+posicionEsperadaX);
+		System.err.println("		Posicion esperada Y:...."+posicionEsperadaY);
+		
+		Boolean dentroY=ymax>posicionEsperadaY && posicionEsperadaY>y0;
+		Boolean dentroX=(xmax>posicionEsperadaX && posicionEsperadaY>x0);
+		System.err.println("		dentroX?:...."+dentroX); 
+		System.err.println("		dentroY?:...."+dentroY); 
+		return dentroX && dentroY;
 	}
 
 	public Boolean marca(Rectangle bola) {
@@ -402,22 +437,6 @@ public class Pong {
 					jug2.moverRaqueta(false);
 				}
 			}
-		}
-
-	}
-
-	public void deLadoAlado() {
-		int ry=(int)jug2.getShape().getY();//0 de la raqueta
-		int rmaxY= (int)jug2.getShape().getMaxY();//height de la raqueta
-		int dy =jug2.getDy();
-		if(dy>0 &&  (int) bounds.getHeight()>rmaxY) {//hacia abajo si solo si va hacia abajo y queda campo
-			System.out.println("		entra IA facil");
-			System.out.println("		direccion: (true=arriba,false=abajo)  :"+false);
-			jug2.moverRaqueta(false);
-		}else {//hacia arriba cuando se invierta su direccion por fin de campo y solo suba....ciclo
-			System.out.println("		entra IA facil");
-			System.out.println("		direccion: (true=arriba,false=abajo)  :"+true);
-			jug2.moverRaqueta(true);
 		}
 
 	}

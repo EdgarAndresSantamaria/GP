@@ -23,11 +23,13 @@ public class Raqueta extends Elemento{
 		lPotenciadores = new ArrayList<DyRaqueta>();
 		if(pNombre.contains("IA")) { //IA facil o IA dificil
 			jugador=new IA(pNombre);
+			moverRaqueta(true);//iniciar en movimiento
 		}else {
 			jugador=new Jugador(pNombre);
+			pararRaqueta();//iniciar parada
 		}
-		//inicializar sin movimiento
-		pararRaqueta();
+		
+		
 	}
 
 	public String getNombre() {
@@ -49,12 +51,13 @@ public class Raqueta extends Elemento{
 	 * segun la direccion(dy)
 	 */
 	public void emular() {
-		if(Pong.getPong().dentroCampo(getShape())){
+		if(Pong.getPong().dentroCampo(getShape(),0,dy)){
 			System.out.println("incrementar dy raqueta");
 			incrementarY(dy);
 		}else{
 			System.out.println("invertir dy raqueta");
 			decrementarY(dy);
+			dy=-dy;
 		}
 	}
 

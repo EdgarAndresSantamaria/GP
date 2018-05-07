@@ -14,8 +14,6 @@ public class Estrategia {
 	public void siguienteMov() {//AI scripted
 		if(dificultad) {
 			Pong.getPong().seguirBola();
-		}else {
-			Pong.getPong().deLadoAlado();
 		}
 	}
 }
