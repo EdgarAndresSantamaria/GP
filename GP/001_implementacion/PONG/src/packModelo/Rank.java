@@ -27,9 +27,9 @@ public class Rank {
 	public boolean fin() {
 		Object fin=null;
 		if(puntosJug1==maxPuntos) {
-			fin=true;
+			fin=true;//gana jugador 1
 		}else if(puntosJug2==maxPuntos){
-			fin=false;
+			fin=false;//gana jugador 2
 		}
 		return (Boolean) fin;
 	}

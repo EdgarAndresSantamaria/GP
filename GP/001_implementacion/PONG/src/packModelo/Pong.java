@@ -205,8 +205,8 @@ public class Pong {
 	 * y relizara todas las comprobaciones pertinentes
 	 * @return
 	 */
-	public Boolean jugar() {
-		boolean acabado=false;
+	public int jugar() {
+		int acabado=-1;
 		//emular el movimiento de las bolas
 		System.out.println("comprobando bolas...");
 		for (Bola tmp : lBola ) {
@@ -248,7 +248,11 @@ public class Pong {
 					//comprobar fin de juego
 					if(ganador!=null) {
 						System.out.println("ha ganado ...");
-						acabado=ganador;
+						if(ganador) {
+							acabado=1;
+						}else {
+							acabado=2;
+						}
 						GestorBD.getGestorBD().guardar(lPuntuacion);//guardar nueva puntuación historica
 					}
 				}
@@ -291,7 +295,7 @@ public class Pong {
 	 * @return
 	 */
 	private boolean finJuego() {
-		return lPuntuacion.get(lPuntuacion.size()-1).fin();//marcar campo derecho;
+		return lPuntuacion.get(lPuntuacion.size()-1).fin();
 	}
 
 	private void lanzarPotenciador() {
@@ -327,6 +331,22 @@ public class Pong {
 			jug1.moverRaqueta(pDir);
 		}else {//campo derecho
 			jug2.moverRaqueta(pDir);
+		}
+	}
+	
+	/**
+	 * método que mueve la raqueta (pCampo) en direccion (pDir)
+	 * @param pDir
+	 * @param pCampo
+	 */
+	public void  pararRaqueta(Boolean pCampo) {
+		System.out.println("		entra jugador: (true=1,false=2)  :"+pCampo);
+		//distincion de campos para el caso player vs player
+		//campo de jugador (true->izq,false->drch)
+		if(pCampo==true) {//campo izquierdo
+			jug1.pararRaqueta();;
+		}else {//campo derecho
+			jug2.pararRaqueta();
 		}
 	}
 
