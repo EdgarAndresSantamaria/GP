@@ -36,7 +36,7 @@ public class TableroJuego extends Canvas {
 				try {
 					createBufferStrategy(2);
 					BufferStrategy bs=getBufferStrategy();
-					wait(1);
+					wait(10);
 					//preparar siguiente frame
 					quienGano=Pong.getPong().jugar();
 					if(quienGano!=-1){
