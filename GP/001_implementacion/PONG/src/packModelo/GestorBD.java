@@ -130,6 +130,7 @@ public class GestorBD {
 			conectar();
 
 			// Se inserta
+			exeSQLUpdate("INSERT INTO users (username,password) VALUES ("+nombreUsuario+",md5('"+pwd+"')");
 
 			// Se cierra
 			cerrarConexion();
