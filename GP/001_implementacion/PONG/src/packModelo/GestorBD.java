@@ -124,14 +124,11 @@ public class GestorBD {
 			if(existeUsuario(nombreUsuario, pwd)) {
 				return false;
 			}
-
 			//Se crea el usuario y devuelve true
 			// Se conecta
 			conectar();
-
 			// Se inserta
 			exeSQLUpdate("INSERT INTO users (username,password) VALUES ("+nombreUsuario+",md5('"+pwd+"')");
-
 			// Se cierra
 			cerrarConexion();
 

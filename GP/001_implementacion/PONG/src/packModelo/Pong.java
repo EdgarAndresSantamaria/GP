@@ -423,7 +423,6 @@ public class Pong {
 
 	public void seguirBola() {//pero cual?? ... ahi reside su inteligencia y su perdición...., la más cercana
 		int xBolaCercana=0;//inicializamos en la otra punta del campo
-		Boolean dir;
 		for(Bola tmp:lBola) {
 			if(xBolaCercana<(int)tmp.getShape().getX() && tmp.getDx()>0) {//aun mas cercana y en nuestra dirección y no interceptamos....
 				xBolaCercana=(int)tmp.getShape().getX();
