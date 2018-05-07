@@ -18,12 +18,15 @@ import java.awt.event.KeyEvent;
 import java.awt.geom.Rectangle2D;
 import java.awt.print.PrinterJob;
 import java.util.Iterator;
+import javax.swing.JButton;
+import java.awt.Canvas;
 
 public class F07Pong extends JFrame {
 
 	private TableroJuego juego;
 	private String tipoJugador;
 	private Dimension screenSize;
+	private Canvas canvas;
 
 	/**
 	 * Create the frame.
@@ -38,14 +41,22 @@ public class F07Pong extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();	
 		setSize(screenSize.getSize());
+		getContentPane().setLayout(null);
+		
+		canvas = new Canvas();
+		canvas.setBounds(0, 64, 100, 100);
+		getContentPane().add(canvas);
+		
 		juego=new TableroJuego(getSize());
-		add(juego);;
+		juego.setBackground(Color.BLACK);
+		juego.setBounds(0, 0, 1360, 739);
+		getContentPane().add(juego);
 		inicializarListeners();	
 		juego.loopJuego();
 	}
 	
 	private void inicializarListeners() {
-		addKeyListener(new KeyAdapter() {
+		canvas.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
 				int id = arg0.getKeyCode();
@@ -53,6 +64,7 @@ public class F07Pong extends JFrame {
 				if (id == KeyEvent.VK_W)
 				{
 					System.err.println("up....");
+					canvas.setLocation(canvas.getX(), canvas.getY()-1);
 					Pong.getPong().moverRaqueta(true, true);
 				}
 				else if (id == KeyEvent.VK_S)
@@ -107,5 +119,4 @@ public class F07Pong extends JFrame {
 			});
 		}
 	}
-
 }
