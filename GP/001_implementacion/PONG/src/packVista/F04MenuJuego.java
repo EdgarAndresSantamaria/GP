@@ -41,6 +41,7 @@ public class F04MenuJuego extends JFrame {
 	private JLabel label;
 	private JLabel label_1;
 	private boolean invitado;
+	
 
 	/**
 	 * Create the frame.

@@ -23,7 +23,7 @@ public class Raqueta extends Elemento{
 		lPotenciadores = new ArrayList<DyRaqueta>();
 		if(pNombre.contains("IA")) { //IA facil o IA dificil
 			jugador=new IA(pNombre);
-			moverRaqueta(true);//iniciar en movimiento
+			moverRaqueta(true);//iniciar en movimiento hacia arriba
 		}else {
 			jugador=new Jugador(pNombre);
 			pararRaqueta();//iniciar parada
@@ -56,8 +56,8 @@ public class Raqueta extends Elemento{
 			incrementarY(dy);
 		}else{
 			System.out.println("invertir dy raqueta");
-			decrementarY(dy);
 			dy=-dy;
+			incrementarY(dy);	
 		}
 	}
 
@@ -96,7 +96,15 @@ public class Raqueta extends Elemento{
 	}
 
 	public void desactivarPotenciadores() {
-		pararRaqueta();
+		if(jugador.getNombre().contains("IA facil")){//si IA facil
+			if(dy>0) {
+				moverRaqueta(true);//resetear dy positivo
+			}else {
+				moverRaqueta(false);//resetear dy negativo
+			}
+		}else {
+			pararRaqueta();
+		}
 		for(DyRaqueta tmp : lPotenciadores) {
 			if(tmp.expirado()) {//eliminar los potenciadores expirados 
 				lPotenciadores.remove(tmp);

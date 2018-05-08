@@ -1,15 +1,19 @@
 package packVista;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
-import java.awt.Color;
+import java.awt.event.KeyListener;
 
 public class F07Pong extends JFrame {
 
 	private TableroJuego juego;
 	private Dimension screenSize;
+	private JLabel label;
 
 	/**
 	 * Create the frame.
@@ -24,12 +28,9 @@ public class F07Pong extends JFrame {
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();	
 		setSize(screenSize.getSize());
 		juego=new TableroJuego(getSize());
-		juego.setBackground(Color.DARK_GRAY);
-		getContentPane().add(juego);
-		juego.addKeyListener(new EventoTeclado());//eventos de jugador 1
-		if(tipoJugador.contains("Jugador")) {
-			juego.addKeyListener(new EventoTeclado1());//eventos de jugador 2
-		}
+		juego.setBackground(Color.BLACK);
+		label=new JLabel();
+		add(juego);
 		juego.loopJuego();
 	}
 

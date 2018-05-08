@@ -16,27 +16,28 @@ import org.json.simple.JSONObject;
 
 import packModelo.Pong;
 
-public class TableroJuego extends Canvas {
-	
+public class TableroJuego extends Canvas {	
 	public TableroJuego(Dimension dimension) {
 		setVisible(true);
 		setSize(dimension);
-		
+		EventoTeclado eventoTeclado = new EventoTeclado();
+		addKeyListener(eventoTeclado);//eventos de jugador 1
+		if(Pong.getPong().tipoJugador2().contains("Jugador")) {
+			EventoTeclado1 eventoTeclado1 = new EventoTeclado1();
+			addKeyListener(eventoTeclado1);//eventos de jugador 2
+		}
 	}
 	
+
 	public void loopJuego() {
-		System.out.println("antes del if...");
-		
 		Boolean ganado=false;
 		int quienGano=-1;
-		System.out.println("antes del while...");
-		
 		while(!ganado) {
 			synchronized (this){
 				try {
 					createBufferStrategy(2);
 					BufferStrategy bs=getBufferStrategy();
-					wait(10);
+					wait(1000/60);//60 fps
 					//preparar siguiente frame
 					quienGano=Pong.getPong().jugar();
 					if(quienGano!=-1){
@@ -68,13 +69,13 @@ public class TableroJuego extends Canvas {
 		while(tmp.hasNext()) {
 			JSONObject sig=(JSONObject) tmp.next();
 			if(sig.get("nombre").equals("raquetaIzqda")){
-				//System.out.println("		 raqueta....");
+				//System.out.println("		 raquetaizq....");
 				g2d.setPaint(Color.WHITE);
 			    g2d.setStroke(new BasicStroke( 10.0f ) );            
 				g2d.fill( new Rectangle2D.Double((int)sig.get("x"),(int)sig.get("y"),(int)sig.get("width"),(int)sig.get("height")));
 			
 			}else if(sig.get("nombre").equals("raquetaDrcha")) {
-				//System.out.println("		 raqueta....");
+				//System.out.println("		 raquetadrch....");
 				g2d.setPaint(Color.WHITE);
 			    g2d.setStroke(new BasicStroke( 10.0f ) );            
 				g2d.fill( new Rectangle2D.Double((int)sig.get("x"),(int)sig.get("y"),(int)sig.get("width"),(int)sig.get("height")));
@@ -84,9 +85,15 @@ public class TableroJuego extends Canvas {
 				g2d.setPaint(Color.WHITE);
 			    g2d.setStroke(new BasicStroke( 10.0f ) );            
 				g2d.fill( new Rectangle2D.Double((int)sig.get("x"),(int)sig.get("y"),(int)sig.get("width"),(int)sig.get("height")));
-			}else if(sig.get("nombre").equals("potenciador")) {
+			}else if(sig.get("nombre").equals("multiplicador")) {
 				//System.out.println("		 potenciador....");
-				g2d.setPaint(Color.WHITE);
+				g2d.setPaint(Color.BLUE);
+			    g2d.setStroke(new BasicStroke( 10.0f ) );            
+				g2d.fill( new Rectangle2D.Double((int)sig.get("x"),(int)sig.get("y"),(int)sig.get("width"),(int)sig.get("height")));
+			
+			}else if(sig.get("nombre").equals("dyRaqueta")) {
+				//System.out.println("		 potenciador....");
+				g2d.setPaint(Color.RED);
 			    g2d.setStroke(new BasicStroke( 10.0f ) );            
 				g2d.fill( new Rectangle2D.Double((int)sig.get("x"),(int)sig.get("y"),(int)sig.get("width"),(int)sig.get("height")));
 			
@@ -102,7 +109,19 @@ public class TableroJuego extends Canvas {
 			    g2d.setStroke(new BasicStroke( 10.0f ) );            
 				g2d.fill( new Rectangle2D.Double((int)sig.get("x"),0,10,getSize().height));
 			
+			}else if(sig.get("nombre").equals("puntosJug1")) {
+				//System.out.println("		 puntos jugador1....");
+				g2d.setPaint(Color.GREEN);
+			    g2d.setStroke(new BasicStroke( 10.0f ) );            
+			    g2d.drawString(Integer.toString((int)sig.get("puntos")), (getSize().width/2)-30, getSize().height/4);
+			
+			}else if(sig.get("nombre").equals("puntosJug2")) {
+				//System.out.println("		 puntos jugador 2....");
+				g2d.setPaint(Color.GREEN);
+			    g2d.setStroke(new BasicStroke( 10.0f ) );            
+				g2d.drawString( Integer.toString((int)sig.get("puntos")), (getSize().width/2)+30, getSize().height/4);
 			}
 		}
+		g2d.setBackground(Color.BLACK);
 	}
 }

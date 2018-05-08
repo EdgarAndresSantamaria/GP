@@ -1,5 +1,6 @@
 package packModelo;
 
+import java.awt.Component;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,7 +21,7 @@ public class Pong {
 	private Boolean tipoPotenciador;
 
 	//constantes
-	private final double probabilidadPotenciador=0.1;
+	private final double probabilidadPotenciador=0.6;
 	private final int DxBola= -2;//cte velocidad de la bola (es negativa porque inicia hacia jug1)
 	private final int DyBola=  0;
 	private int fronteraSeguraJug1;//area jugador 1
@@ -141,8 +142,8 @@ public class Pong {
 	 */
 	private void inicializarPotenciador(Potenciador nuevoPotenciador) {
 		int x = new Random().nextInt(fronteraSeguraJug2);//generar nuevo numero entre 0 y el area  
-		if(x<fronteraSeguraJug1) {
-			inicializarPotenciador( nuevoPotenciador); //no debe aparecer dentro de la frontera segura
+		while(x<fronteraSeguraJug1) {//mientras sea menor que la frontera segura 1...
+			x = new Random().nextInt(fronteraSeguraJug2);//generar nuevo numero entre 0 y el area  
 		}
 		//System.out.println("Inicializando potenciador....");
 		int y=new Random().nextInt((int) bounds.getHeight());//generar nuevo numero aleatorio dentro de la altura
@@ -176,6 +177,16 @@ public class Pong {
 		JSONObject raquetaDrcha = jug2.getDimensionesYPos();
 		raquetaDrcha.put("nombre", "raquetaDrcha"); 
 		listaObjetos.add(raquetaDrcha); 
+		//puntosJug1
+		JSONObject puntosJug1 = new JSONObject();
+		puntosJug1.put("puntos", lPuntuacion.get(lPuntuacion.size()-1).puntos1()); 
+		puntosJug1.put("nombre", "puntosJug1"); 
+		listaObjetos.add(puntosJug1); 
+		//puntosJug2
+		JSONObject puntosJug2 = new JSONObject();
+		puntosJug2.put("puntos", lPuntuacion.get(lPuntuacion.size()-1).puntos2()); 
+		puntosJug2.put("nombre", "puntosJug2"); 
+		listaObjetos.add(puntosJug2); 
 
 		for(Bola unaBola : lBola) {
 			//devolver dimensiones de cada bola
@@ -194,6 +205,7 @@ public class Pong {
 			}
 			listaObjetos.add(potenciador); 
 		} 
+		
 
 		return listaObjetos; 
 
@@ -236,24 +248,32 @@ public class Pong {
 			}else{	
 				//System.out.println("comprobar si marca...");
 				Boolean marcado=tmp.marcado();
-				if(marcado != null){//comprobar fin de juego
+				if(marcado != null){//cen caso de marcar...
+					//actualizar bola
+					if(tmp.esIndep()) {
+						lBola.remove(tmp);
+					}else {
+						inicializarBolaPpal(tmp);
+					}
+					//actualizar puntuacion
 					if(marcado==true) {//marca campo izquierdo
 						//System.out.println("marca en campo izquierdo...");
 						lPuntuacion.get(lPuntuacion.size()-1).marcarJug1();//marcar campo izquierdo
+						
 					}else {//marca campo derecho
-						//System.out.println("marca en campo derecho...");
+						System.out.println("marca en campo derecho...");
 						lPuntuacion.get(lPuntuacion.size()-1).marcarJug2();//marcar campo derecho
 					}
 					Boolean ganador=finJuego();
 					//comprobar fin de juego
 					if(ganador!=null) {
-						//System.out.println("ha ganado ...");
+						System.err.println("ha ganado ...");
 						if(ganador) {
 							acabado=1;
 						}else {
 							acabado=2;
 						}
-						GestorBD.getGestorBD().guardar(lPuntuacion);//guardar nueva puntuación historica
+						GestorBD.getGestorBD().guardar(lPuntuacion.get(lPuntuacion.size()-1));//guardar ultima puntuacion
 					}
 				}
 			}
@@ -286,7 +306,9 @@ public class Pong {
 		}
 		//generar Potenciador .... o no
 		//System.out.println("lanzar nuevo potenciador...");
-		lanzarPotenciador();
+		if(lPotenciadores.size()<5) {//máximo 4 potenciadores en campo
+			lanzarPotenciador();
+		}
 		return acabado;//retornará acabado cuando haya finalizado la simulación
 	}
 
@@ -301,7 +323,9 @@ public class Pong {
 	private void lanzarPotenciador() {
 		//lanzar un nuevo potenciador random ,tipos: true -> Multiplicador/ false -> DyRaqueta (-) / null -> DyRaqueta (+)
 		boolean seLanza=probabilidadPotenciador*new Random().nextInt(100)>50;//modelando el azar para la aparición de potnciadores
+		System.err.println("lanzando potenciador....");
 		if(seLanza){
+			System.err.println("		lanzado...."+ tipoPotenciador);
 			Potenciador lanzado;
 			if(tipoPotenciador==(Boolean) null){//lanzar potenciador tipo null
 				lanzado=new DyRaqueta(true);
@@ -371,54 +395,57 @@ public class Pong {
 		}
 	}
 
+	/**
+	 * metodo que comprueba si la bola se encuentra dentro de los limites verticales del campo
+	 * @param shape
+	 * @param dx
+	 * @param dy
+	 * @return
+	 */
 	public boolean dentroCampo(Rectangle shape, int dx, int dy) {
-		System.err.println("comprobando dentro campo:....");
-		System.err.println("		shape     Y:...."+(int)shape.getY());
-		System.err.println("		shape     X:...."+(int)shape.getX());
-		System.err.println("		shape     maxY:...."+(int)shape.getWidth());
-		System.err.println("		shape     maxX:...."+(int)shape.getHeight());
-		System.err.println("		shape     DY:...."+dy);
-		System.err.println("		shape     DX:...."+dx);
-		
 		int posicionEsperadaY;
-		int posicionEsperadaX;
-		int x0=(int)bounds.getX();
 		int y0=(int)bounds.getY();
-		int xmax=(int)bounds.getWidth();
 		int ymax=(int)bounds.getHeight();
-		System.err.println("		bounds     Y:...."+(int)bounds.getY());
-		System.err.println("		bounds     X:...."+(int)bounds.getX());
-		System.err.println("		bounds     maxY:...."+(int)bounds.getWidth());
-		System.err.println("		bounds     maxX:...."+(int)bounds.getHeight());
-		if(dy>0 ||dy==0) {
-			posicionEsperadaY= (int)shape.getY()+dy;
-		}else {
-			posicionEsperadaY= (int)shape.getY()+dy+(int)shape.getHeight();
-		}
-		if(dx>0||dx==0) {
-			posicionEsperadaX= (int)shape.getX()+dx;
-		}else {
-			posicionEsperadaX= (int)shape.getX()+dx+(int)shape.getWidth();
-		}
-		System.err.println("		Posicion esperada X:...."+posicionEsperadaX);
-		System.err.println("		Posicion esperada Y:...."+posicionEsperadaY);
 		
+		if(dy>0 ||dy==0) {
+			posicionEsperadaY= ((int)shape.getHeight()+(int)shape.getY());
+		}else {
+			posicionEsperadaY= (int)shape.getY()+dy;
+		}
 		Boolean dentroY=ymax>posicionEsperadaY && posicionEsperadaY>y0;
-		Boolean dentroX=(xmax>posicionEsperadaX && posicionEsperadaY>x0);
-		System.err.println("		dentroX?:...."+dentroX); 
-		System.err.println("		dentroY?:...."+dentroY); 
-		return dentroX && dentroY;
+		return dentroY;
 	}
 
-	public Boolean marca(Rectangle bola) {
-		Object marcado = null;
-		//campo de jugador (true->izq,false->drch,null->no marca)
-		if(bounds.getMinX()==bola.getX()) {//marcar campo izquierdo
-			marcado=true;
-		}else if(bounds.getMaxX()==bola.getX()) {//marcar campo derecho
-			marcado=false;
+	/**
+	 * metodo que devuelve en caso de marcar (true -> marca en campo izquierdo
+	 * false -> marca en campo derecho),y en caso de no marcar devuleve null
+	 * @param shape
+	 * @param dx
+	 * @param dy
+	 * @return
+	 */
+	public Boolean marca(Rectangle shape, int dx, int dy) {
+		System.out.println("marca.......");
+		int posicionEsperadaX;
+		int x0=(int)bounds.getX();
+		int xmax=(int)bounds.getWidth();
+		
+		if(dx>0||dx==0) {
+			posicionEsperadaX= ((int)shape.getWidth()+(int)shape.getX())+dx;
+		}else {
+			posicionEsperadaX= (int)shape.getX()+dx;
 		}
-		return (Boolean)marcado;
+		Boolean marca2=xmax<posicionEsperadaX;
+		Boolean marca1=posicionEsperadaX<x0;
+		if(marca1) {
+			return true;
+		}else if(marca2){
+			return false;
+		}else {
+		
+			return (Boolean) null;
+		}
+		
 	}
 
 	public void seguirBola() {//pero cual?? ... ahi reside su inteligencia y su perdición...., la más cercana
@@ -426,7 +453,7 @@ public class Pong {
 		for(Bola tmp:lBola) {
 			if(xBolaCercana<(int)tmp.getShape().getX() && tmp.getDx()>0) {//aun mas cercana y en nuestra dirección y no interceptamos....
 				xBolaCercana=(int)tmp.getShape().getX();
-				if((int)jug2.getShape().getY()>= (int)tmp.getShape().getY()) {//subir raqueta
+				if((int)jug2.getShape().getY()<= (int)tmp.getShape().getY()) {//subir raqueta
 					System.out.println("		entra IA dificil");
 					System.out.println("		direccion: (true=arriba,false=abajo)  :"+true);		
 					jug2.moverRaqueta(true);
@@ -438,5 +465,9 @@ public class Pong {
 			}
 		}
 
+	}
+
+	public String tipoJugador2() {
+		return jug2.getNombre();
 	}
 }

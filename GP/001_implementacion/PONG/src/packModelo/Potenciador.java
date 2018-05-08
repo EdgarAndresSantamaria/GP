@@ -8,7 +8,7 @@ public class Potenciador extends Elemento {
 	public Potenciador(int pMax) {
 		super("potenciador");
 		maxNum=pMax;
-		tiempo=60*10;//60 segundos 
+		tiempo=180*10;//180 segundos 
 	}
 
 	public boolean expirado() {

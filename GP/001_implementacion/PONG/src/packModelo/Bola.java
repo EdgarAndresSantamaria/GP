@@ -47,6 +47,10 @@ public class Bola extends Elemento {
 		return potenciadorGolpeado;
 	}
 	
+	public Boolean esIndep() {
+		return independiente;
+	}
+	
 	public boolean campoApotenciar() {
 		//campo de jugador (true->izq,false->drch)
 		return !(dx<0);//si es menor que 0 se dirige a la izquierda -> proviene de drcha
@@ -54,7 +58,7 @@ public class Bola extends Elemento {
 
 	public Boolean marcado() {
 		//preguntamos a ver si la dimensión de la bola se encuetra en la meta
-		return Pong.getPong().marca(getShape());	
+		return Pong.getPong().marca(getShape(),dx,dy);	
 	}
 	
 	public int getDx() {
@@ -66,7 +70,6 @@ public class Bola extends Elemento {
 	}
 
 	public int getDy() {
-		// TODO Auto-generated method stub
 		return dy;
 	}
 
@@ -74,5 +77,4 @@ public class Bola extends Elemento {
 		dy=pDy;		
 		
 	}
-	
 }

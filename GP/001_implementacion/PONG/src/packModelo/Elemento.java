@@ -15,7 +15,7 @@ public class Elemento {
 			dimension.setSize(10, 10);
 
 		}else if (pTipo.equals("potenciador")) {// medidas del potenciador
-			dimension.setSize(10, 20);
+			dimension.setSize(20, 20);
 							
 		}else {//medidas de la raqueta
 			dimension.setSize(10, 40);		

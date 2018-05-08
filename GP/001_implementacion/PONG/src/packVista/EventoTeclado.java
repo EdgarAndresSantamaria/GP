@@ -1,12 +1,12 @@
 package packVista;
 
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import packModelo.Pong;
 
-public class EventoTeclado extends KeyAdapter{
-	
+public class EventoTeclado implements KeyListener{
+		
 	public void keyPressed(KeyEvent e){
 		int id=e.getKeyCode();
 		System.err.println("key pressed....");
@@ -31,6 +31,12 @@ public class EventoTeclado extends KeyAdapter{
 			System.err.println("stop....");
 			Pong.getPong().pararRaqueta(true);
 		}
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
 		
 	}
 
