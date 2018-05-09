@@ -183,7 +183,10 @@ public class F04MenuJuego extends JFrame {
 			else if (action.equals("2j"))
 			{
 				//Jugar 2 jugadores
-				Pong.getPong().setOponente("2Jugadores");
+				  // prompt the user to enter their name
+			    String name = JOptionPane.showInputDialog(null, "¿Cómo se llama tu compañero?");
+
+				Pong.getPong().setOponente(name);
 				new F07Pong("Jugador");
 				dispose();
 			}
