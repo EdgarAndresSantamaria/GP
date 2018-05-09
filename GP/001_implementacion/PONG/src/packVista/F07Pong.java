@@ -3,6 +3,11 @@ package packVista;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import packModelo.Pong;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.ImageIcon;
@@ -32,6 +37,20 @@ public class F07Pong extends JFrame {
 		label=new JLabel();
 		add(juego);
 		juego.loopJuego();
+
+		if(!Pong.getPong().esInvitadoJugador1()) {
+			JSONArray ranking = Pong.getPong().getRanking();
+			if(ranking!=null) {
+				try {
+					new F06Ranking(ranking,true);
+					dispose();
+				} catch (JSONException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+			}
+		}
 	}
 
 }

@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import packModelo.Pong;
 
 import java.awt.Color;
@@ -192,9 +195,19 @@ public class F04MenuJuego extends JFrame {
 					btnRanking.setEnabled(false);
 				}
 				else
-				{
-					F06Ranking ranking = new F06Ranking();
-					dispose();
+				{	
+					JSONArray ranking = Pong.getPong().getRanking();
+					if(ranking!=null) {
+						try {
+							new F06Ranking(ranking, true);
+							dispose();
+						} catch (JSONException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
+					}
+					
 				}
 				
 			}

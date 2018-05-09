@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 
 import javax.swing.GroupLayout;
@@ -20,7 +21,15 @@ import java.awt.Toolkit;
 
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -33,27 +42,14 @@ public class F06Ranking extends JFrame {
 	private JTable table;
 	private boolean logueado = false;
 	private JButton btnVolver;
+	private DefaultTableModel model;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					F06Ranking frame = new F06Ranking();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
+	 * @throws JSONException 
 	 */
-	public F06Ranking() {
+	public F06Ranking(JSONArray pDatos, boolean logueado) throws JSONException {
 		setResizable(false);
 		setTitle("PONG TAEP");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,6 +61,8 @@ public class F06Ranking extends JFrame {
 		ImageIcon img = new ImageIcon(F00Inicio.class.getResource("/packImagenes/pong5.jpg"));
 		setIconImage(img.getImage());
 		setVisible(true);
+		
+		this.logueado = logueado;
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
@@ -106,18 +104,44 @@ public class F06Ranking extends JFrame {
 					.addContainerGap())
 		);
 		
-		table = new JTable();
-		table.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		table.setForeground(Color.GREEN);
-		table.setBackground(Color.BLACK);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"Ana", "11-8", "Edgar"},
-			},
-			new String[] {
-				"Player 1", "Scored", "Player 2"
+		model = new DefaultTableModel() {
+			@Override 
+			public boolean isCellEditable(int rowIndex, int mColIndex) {
+				return false;
 			}
-		));
+		};
+		
+		//Añadir las columnas de la tabla
+		model.addColumn("Player1");
+		model.addColumn("Scored1");
+		model.addColumn("Scored2");
+		model.addColumn("Player2");
+
+		//Añadir las filas a la tabla desde el fichero JSON
+		for (int i = 0; i < pDatos.length(); i++) {
+			JSONObject one = pDatos.getJSONObject(i);
+			model.addRow(new Object[]{one.get("jugador1"), one.get("puntuacion1"), one.get("puntuacion2"), one.get("jugador2")});
+		}
+		table = new JTable(model);
+		table.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		table.setAutoCreateRowSorter(true);
+		table.setShowVerticalLines(false);
+		ListSelectionModel cellSelectionModel = table.getSelectionModel();
+	    cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		table.setCellSelectionEnabled(true);
+		table.setPreferredScrollableViewportSize(new Dimension(450,63));
+		table.setFillsViewportHeight(true);		
+				
+		DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+		   tcr.setHorizontalAlignment(SwingConstants.CENTER);
+		table.setModel(model);
+		   table.getColumnModel().getColumn(0).setCellRenderer(tcr);
+		   table.getColumnModel().getColumn(1).setCellRenderer(tcr);
+		   table.getColumnModel().getColumn(2).setCellRenderer(tcr);
+		   table.getColumnModel().getColumn(3).setCellRenderer(tcr);
+		
 		scrollPane.setViewportView(table);
 		contentPane.setLayout(gl_contentPane);
 		

@@ -63,4 +63,12 @@ public class Rank {
 		return puntosJug2;
 	}
 
+	public String getJugador1() {
+		return jugador1;
+	}
+
+	public String getJugador2() {
+		return jugador2;
+	}
+
 }

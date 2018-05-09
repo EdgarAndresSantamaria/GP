@@ -7,5 +7,7 @@
 	<classpathentry kind="lib" path="librerias/miglayout-src.zip"/>
 	<classpathentry kind="lib" path="librerias/miglayout15-swing.jar"/>
 	<classpathentry kind="lib" path="librerias/mysql-connector-java-5.1.45-bin.jar"/>
+	<classpathentry kind="lib" path="jsoup-1.11.3.jar"/>
+	<classpathentry kind="lib" path="java-json.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>

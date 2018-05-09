@@ -85,8 +85,8 @@ public class Pong {
 		return GestorBD.getGestorBD().existeUsuario(username,pwd);
 	}
 
-	public Boolean registroUsuario(String username, String pwd) {
-		return GestorBD.getGestorBD().registroUsuario(username, pwd);
+	public Boolean registroUsuario(String username, String pwd, String email) {
+		return GestorBD.getGestorBD().registroUsuario(username, pwd, email);
 	}
 
 	/**
@@ -469,5 +469,14 @@ public class Pong {
 
 	public String tipoJugador2() {
 		return jug2.getNombre();
+	}
+	
+	public boolean esInvitadoJugador1() {
+		return jug1.getNombre().contains("nvitado");
+	}
+	
+	
+	public org.json.JSONArray getRanking() {
+		return GestorBD.getGestorBD().getRanking();
 	}
 }

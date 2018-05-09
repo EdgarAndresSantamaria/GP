@@ -36,6 +36,8 @@ public class F03Registro extends JFrame {
 	private JPasswordField RepiteContrasena;
 	private JButton btnRegistrarse;
 	private JButton btnVolver;
+	private JLabel lblEmail;
+	private JTextField email;
 
 	/**
 	 * Launch the application.
@@ -105,29 +107,39 @@ public class F03Registro extends JFrame {
 		btnVolver.setActionCommand("volver");
 		btnVolver.addActionListener(new Controlador());
 		btnVolver.setBackground(Color.WHITE);
+		
+		lblEmail = new JLabel("Email");
+		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblEmail.setForeground(Color.GREEN);
+		
+		email = new JTextField();
+		email.setColumns(10);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(btnVolver)
-							.addPreferredGap(ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
 							.addComponent(lblRegistroDeUsuario))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap(0, Short.MAX_VALUE)
+							.addContainerGap(123, Short.MAX_VALUE)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblNombreDeUsuario)
 								.addComponent(lblContrasea)
-								.addComponent(lblRepiteLaContrasea))
+								.addComponent(lblRepiteLaContrasea)
+								.addComponent(lblEmail))
 							.addGap(27)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(RepiteContrasena)
-								.addComponent(Contrasena)
-								.addComponent(usuario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(email)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+									.addComponent(RepiteContrasena)
+									.addComponent(Contrasena)
+									.addComponent(usuario)))))
 					.addGap(134))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(105, Short.MAX_VALUE)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(228, Short.MAX_VALUE)
 					.addComponent(btnRegistrarse)
 					.addGap(208))
 		);
@@ -148,12 +160,16 @@ public class F03Registro extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblRepiteLaContrasea)
 						.addComponent(RepiteContrasena, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+					.addGap(26)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblEmail)
+						.addComponent(email, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
 					.addComponent(btnRegistrarse)
 					.addGap(24))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addComponent(btnVolver)
-					.addContainerGap(337, Short.MAX_VALUE))
+					.addContainerGap(357, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 		
@@ -181,14 +197,15 @@ public class F03Registro extends JFrame {
 				String username = usuario.getText();
 				String pass1 = Contrasena.getText();
 				String pass2 = RepiteContrasena.getText();
+				String mail = email.getText();
 				if(!pass1.equals(pass2))
 				{
-					JOptionPane.showMessageDialog(rootPane, "Las contrase�as no coinciden");
+					JOptionPane.showMessageDialog(rootPane, "Las contrasenas no coinciden");
 				}
 				else
 				{
 					//almacenar en la BD el usuario y la contrase�a
-					Boolean registroOK = Pong.getPong().registroUsuario(username, pass1);
+					Boolean registroOK = Pong.getPong().registroUsuario(username, pass1, mail);
 					if(registroOK) {
 						dispose();
 						new F02MenuIdentificacion();

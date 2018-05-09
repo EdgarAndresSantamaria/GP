@@ -1,5 +1,6 @@
 package packModelo;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -7,11 +8,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
 
 public class GestorBD {
 	private static GestorBD miGestorBD;
-	private Connection myConn;
-	private Statement myStmt;
 
 
 	/**
@@ -32,109 +36,66 @@ public class GestorBD {
 		return miGestorBD;
 	}
 
-	/**
-	 * metodo para abrir una nueva conexion hacia la BD
-	 * @param serverAddress
-	 * @param port
-	 * @param user
-	 * @param password
-	 */
-	public void conectar() throws SQLException {
 
-		// 1. Get a connection to database
-		myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pongtaep", "root", "");
-
-		System.out.println("Database connection successful!\n");
-
-		// 2. Create a statement
-		myStmt = myConn.createStatement();
-	}
-
-	/**
-	 * metodo para cerrar la actual conexion hacia la BD
-	 */
-	public void cerrarConexion()  throws SQLException  {	
-		if (myStmt != null) {
-			myStmt.close();
-		}
-
-		if (myConn != null) {
-			myConn.close();
-		}
-	}
-
-	/**
-	 * metodo update que ejecuta sentencias SQL del tipo update,insert,delete
-	 * @param SentenciaSQL
-	 */
-	private void exeSQLUpdate(String SentenciaSQL)  throws SQLException  {
-		myStmt.executeUpdate(SentenciaSQL);
-
-	}
-
-	/**
-	 * metodo update que ejecuta sentencias SQL del tipo Select
-	 * resultado devuelto en formato ResultSet SQL
-	 * @param SentenciaSQL
-	 * @return
-	 * @throws SQLException
-	 */
-	private ResultSet exeSQLSelect(String SentenciaSQL) throws SQLException {
-		ResultSet myRs = null;
-		// 3. Execute SQL query
-		myRs = myStmt.executeQuery(SentenciaSQL);
-		return myRs;
-	}
-
-	public ArrayList<Rank> cargar(String pJugador1) {
-		//cargar el ranking del jugador especificado
-		return null;
-	}
-
-	public void guardar(ArrayList<Rank> ranking) {
-		//guardar el ranking del jugador especificado
-	}
-
-	public Boolean existeUsuario(String nombre, String pwd) {
-		Boolean encontrado = false;
+	public void guardar(Rank rank) {
+		//guardar el ranking
 		try {
-			// Se conecta
-			conectar();
 
 			// Se pide
-			ResultSet myRs = exeSQLSelect("SELECT * FROM users WHERE username='" + nombre + "' AND password=md5('"+ pwd + "')");
+			Document doc = Jsoup.connect("https://galan.ehu.es/pdejaime001/WEB/pong/Ranking.php").data("jugador1",rank.getJugador1()).data("jugador2",rank.getJugador2()).data("puntuacion1",String.valueOf(rank.puntos1())).data("puntuacion2",String.valueOf(rank.puntos2())).post();
 
-			// Se procesa el resultado
-			encontrado = myRs != null && myRs.next();
-
-			// Se cierra
-			cerrarConexion();
-
-		} catch (SQLException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		return encontrado;
-
 	}
-
-	public boolean registroUsuario(String nombreUsuario, String pwd) {
+	
+	public JSONArray getRanking() {
 		try {
-			if(existeUsuario(nombreUsuario, pwd)) {
-				return false;
+
+			// Se pide
+			Document doc = Jsoup.connect("https://galan.ehu.es/pdejaime001/WEB/pong/Ranking.php").get();
+			
+			// Se procesa el resultado
+			if(doc != null) {
+				String respuesta = doc.text();
+				if(respuesta.equals("false")) return null;
+				else {
+					//json
+					JSONArray ranking = new JSONArray(respuesta);
+					return ranking;
+				}
 			}
-			//Se crea el usuario y devuelve true
-			// Se conecta
-			conectar();
-			// Se inserta
-			exeSQLUpdate("INSERT INTO users (username,password) VALUES ("+nombreUsuario+",md5('"+pwd+"')");
-			// Se cierra
-			cerrarConexion();
 
-			return true;
 
-		} catch (SQLException e) {
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+	
+
+	public Boolean existeUsuario(String nombre, String pwd) {
+		try {
+
+			// Se pide
+			Document doc = Jsoup.connect("https://galan.ehu.es/pdejaime001/WEB/pong/LogearUsuario.php").data("username",nombre).data("password",pwd).maxBodySize(0).post();
+			
+			// Se procesa el resultado
+			if(doc != null) {
+				String respuesta = doc.text();
+				if(respuesta.equals("true")) return true;
+				else return false;
+			}
+
+
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -142,4 +103,32 @@ public class GestorBD {
 		return false;
 
 	}
+
+	public boolean registroUsuario(String nombreUsuario, String pwd, String email) {
+		try {
+			if(existeUsuario(nombreUsuario, pwd)) {
+				return false;
+			}
+			// Se pide
+			Document doc = Jsoup.connect("https://galan.ehu.es/pdejaime001/WEB/pong/RegistrarUsuario.php").data("username",nombreUsuario).data("email",email).data("password",pwd).maxBodySize(0).post();
+			
+			// Se procesa el resultado
+			if(doc != null) {
+				String respuesta = doc.text();
+				if(respuesta.equals("true")) return true;
+				else return false;
+			}
+
+			return true;
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return false;
+
+	}
+	
+
 }
