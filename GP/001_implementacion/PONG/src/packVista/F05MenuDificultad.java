@@ -123,17 +123,15 @@ public class F05MenuDificultad extends JFrame {
 				//Dificultad Facil
 				
 				Pong.getPong().setOponente("IA facil");
-				
-				new F07Pong("IA");
 				dispose();
+				new F07Pong("IA");
 			}
 			else if (action.equals("dificil"))
 			{
 				//Dificultad Dificil
 				Pong.getPong().setOponente("IA dificil");
-
-				new F07Pong("IA");
 				dispose();
+				new F07Pong("IA");
 			}
 			else if (action.equals("volver"))
 			{

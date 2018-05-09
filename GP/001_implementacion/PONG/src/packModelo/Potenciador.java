@@ -22,5 +22,7 @@ public class Potenciador extends Elemento {
 	public int getMax() {
 		return maxNum;
 	}
+	
+
 
 }

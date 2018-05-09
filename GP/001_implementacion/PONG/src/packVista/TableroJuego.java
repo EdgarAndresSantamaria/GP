@@ -33,11 +33,10 @@ public class TableroJuego extends Canvas {
 		Boolean ganado=false;
 		int quienGano=-1;
 		while(!ganado) {
-			synchronized (this){
 				try {
 					createBufferStrategy(2);
 					BufferStrategy bs=getBufferStrategy();
-					wait(1000/60);//60 fps
+					Thread.sleep(1000/60);//60 fps
 					//preparar siguiente frame
 					quienGano=Pong.getPong().jugar();
 					if(quienGano!=-1){
@@ -56,7 +55,6 @@ public class TableroJuego extends Canvas {
 				}
 				System.out.println("vuelta");
 			}
-		}
 
 	}
 	

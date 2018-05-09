@@ -379,7 +379,7 @@ public class Pong {
 		for(Potenciador tmp : lPotenciadores) {
 			if(tmp.golpea(bola)) {
 				lPotenciadores.remove(tmp);//eliminar de la lista el potenciador golpeado
-				return result; //rompe la ejecución del for al encontrar un golpeado
+				return tmp; //rompe la ejecución del for al encontrar un golpeado
 			}
 		}
 		return result;
