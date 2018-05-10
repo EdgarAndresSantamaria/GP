@@ -1,16 +1,12 @@
 package packVista;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.Color;
 import java.awt.Dimension;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
@@ -23,8 +19,6 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class F00Inicio extends JFrame {
 
@@ -32,7 +26,8 @@ public class F00Inicio extends JFrame {
 	private JButton btnSalir;
 	private JButton continuar;
 	private JButton btnTaep;
-
+	private PlayerThread nReproductor;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -54,6 +49,7 @@ public class F00Inicio extends JFrame {
 	 * Create the frame.
 	 */
 	public F00Inicio() {
+		
 		setResizable(false);
 		setTitle("PONG TAEP");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -139,8 +135,8 @@ public class F00Inicio extends JFrame {
 			frameSize.width = screenSize.width;
 		}
 		setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2);
-		
-		
+		nReproductor=new PlayerThread();
+		nReproductor.start();	
 	}
 	
 	private class Controlador extends WindowAdapter implements ActionListener 
@@ -154,25 +150,25 @@ public class F00Inicio extends JFrame {
 			}
 			else if(action.equals("continuar"))
 			{
-				F01MenuPrincipal ppal = new F01MenuPrincipal();
+				new F01MenuPrincipal();
 				dispose();
 			}
 			else if(action.equals("TAEP"))
 			{
 				String nl =  System.getProperty("line.separator");
-				JOptionPane.showMessageDialog(rootPane, "GRUPO TAEP: "
+				JOptionPane.showMessageDialog(rootPane, "Confederacion TAEP: "
 						+nl+ "Paula de Jaime"
-						+nl+ "Edgar Andrés Santa María"
-						+nl+ "Edurne López"
+						+nl+ "Edgar Andres Santamaria"
+						+nl+ "Edurne Lopez"
 						+nl+ "Ana Miranda" 
-						+nl+ "¡DISFRUTA EL JUEGO!");
+						+nl+ "DISFRUTA EL JUEGO!");
 			}
 		}
 	}
 	
 	public void cerrar(){
 		Object [] opciones ={"Aceptar","Cancelar"};
-		int eleccion = JOptionPane.showOptionDialog(rootPane,"¿Seguro que quieres salir?","Mensaje de Confirmacion",
+		int eleccion = JOptionPane.showOptionDialog(rootPane,"Seguro que quieres salir?","Mensaje de Confirmacion",
 		JOptionPane.YES_NO_OPTION,
 		JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
 		if (eleccion == JOptionPane.YES_OPTION)

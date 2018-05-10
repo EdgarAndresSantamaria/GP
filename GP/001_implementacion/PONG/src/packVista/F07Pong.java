@@ -1,28 +1,19 @@
 package packVista;
 
 import javax.swing.JFrame;
-
-
 import org.json.JSONArray;
 import org.json.JSONException;
-
-import javazoom.jl.player.jlp;
 import packModelo.Pong;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Rectangle;
-
 import javax.swing.ImageIcon;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class F07Pong extends JFrame  implements KeyListener , Runnable{
+public class F07Pong extends JFrame  implements Runnable{
 
-	private PlayerThread nReproductor;
 	private TableroJuego juego;
-	private Dimension screenSize;
 	
 	public static void main(String [] args) {
 		Rectangle campo=new Rectangle(600,600);
@@ -49,7 +40,8 @@ public class F07Pong extends JFrame  implements KeyListener , Runnable{
 		juego=new TableroJuego(getSize());
 		juego.setBackground(Color.BLACK);
 		add(juego);
-		addKeyListener(this);
+		addKeyListener(new EventoCampo1());
+		addKeyListener(new EventoCampo2());
 	}
 
 	public void loopJuego() {
@@ -81,61 +73,15 @@ public class F07Pong extends JFrame  implements KeyListener , Runnable{
 				}
 
 			}
+		}else {
+			new F04MenuJuego(true);//lanzar de nuevo el menu invitado
 		}
 
 	}
-	
-	@Override	
-	public void keyPressed(KeyEvent e){
-		int id=e.getKeyCode();
-		
-		if (id == KeyEvent.VK_W)
-		{
-			Pong.getPong().moverRaqueta(false,true);	
-		}
-		else if (id == KeyEvent.VK_S)
-		{
-			Pong.getPong().moverRaqueta(true,true);	
-		}
-		else if (id == KeyEvent.VK_UP)
-		{
-			if(!Pong.getPong().tipoJugador2().contains("IA")) {
-				Pong.getPong().moverRaqueta(false,false);	
-			}
-
-		}
-		else if (id == KeyEvent.VK_DOWN)
-		{
-			if(!Pong.getPong().tipoJugador2().contains("IA")) {
-				Pong.getPong().moverRaqueta(true,false);	
-			}
-		}
-		
-	}
-	
-	@Override
-	public void keyReleased(KeyEvent e){
-		int id=e.getKeyCode();
-		if (id == KeyEvent.VK_W || id == KeyEvent.VK_S)
-		{	
-			Pong.getPong().pararRaqueta(true);	
-		}
-		else if (id == KeyEvent.VK_UP || id == KeyEvent.VK_DOWN)
-		{
-			if(!Pong.getPong().tipoJugador2().contains("IA")) {
-				Pong.getPong().pararRaqueta(false);	
-			}
-		}
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent arg0) {}
 
 	@Override
 	public void run() {
-		nReproductor=new PlayerThread();
-		nReproductor.start();
+		
 		loopJuego();
 	}	
 	

@@ -23,8 +23,7 @@ public class TableroJuego extends Canvas   {
 	
 	public TableroJuego(Dimension dimension) {
 		setVisible(true);
-		setSize(dimension);
-		
+		setSize(dimension);	
 		tipoJugador=Pong.getPong().tipoJugador2();
 	}
 	

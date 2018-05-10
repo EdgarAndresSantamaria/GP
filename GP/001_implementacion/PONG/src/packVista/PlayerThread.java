@@ -1,8 +1,6 @@
 package packVista;
 
-import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.jlp;
-import packModelo.Pong;
 
 public class PlayerThread extends Thread{
 	
@@ -15,18 +13,13 @@ public class PlayerThread extends Thread{
 	}
 	
 	public void run() {
-		Boolean fin=false;
-		while(!fin) {
-			try {
-				fin=Pong.getPong().playMusic();
-				fin=true;
-			} catch (Exception e) {	
+		while(true) {	
 				try {
 					nReproductor.play();
-				} catch (JavaLayerException e1) {
+					Thread.sleep(30000);
+				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-			}
 		}
 		
 	}

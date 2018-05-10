@@ -1,8 +1,5 @@
 package packVista;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -29,8 +26,6 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 
 public class F02MenuIdentificacion extends JFrame {
@@ -137,7 +132,7 @@ public class F02MenuIdentificacion extends JFrame {
 			String action = e.getActionCommand();
 			if (action.equals("volver")) 
 			{
-				F01MenuPrincipal ppal = new F01MenuPrincipal();
+				new F01MenuPrincipal();
 				dispose();
 			}
 			else if (action.equals("login"))
@@ -147,10 +142,9 @@ public class F02MenuIdentificacion extends JFrame {
 				boolean existe = Pong.getPong().existeUsuario(user, password);
 				if(existe) {
 					//inicializar jugador 1 con el usuario
-					Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-					Pong.getPong().setConfig(user, new Rectangle(0, 0,(int)screenSize.getWidth(),(int) screenSize.getHeight()));
-					new F04MenuJuego(false);
+					Pong.getPong().setConfig(user, new Rectangle(600, 600));
 					dispose();
+					new F04MenuJuego(false);
 				}else {
 					JOptionPane.showMessageDialog(null,
 							"El usuario no existe o la contrasena no es valida.",

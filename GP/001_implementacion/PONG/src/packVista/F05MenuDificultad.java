@@ -1,17 +1,11 @@
 package packVista;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import packModelo.Pong;
-
 import java.awt.Color;
 import java.awt.Dimension;
-
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
@@ -22,7 +16,6 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
-
 import javax.swing.JButton;
 
 public class F05MenuDificultad extends JFrame {
@@ -124,8 +117,7 @@ public class F05MenuDificultad extends JFrame {
 				
 				Pong.getPong().setOponente("IA facil");
 				dispose();
-				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-				F07Pong miclase = new F07Pong(new Rectangle(screenSize.width/2,screenSize.height/2));
+				F07Pong miclase = new F07Pong(new Rectangle(600,600));
 				Thread elHilo = new Thread(miclase);
 				elHilo.start();
 			}
@@ -134,19 +126,18 @@ public class F05MenuDificultad extends JFrame {
 				//Dificultad Dificil
 				Pong.getPong().setOponente("IA dificil");
 				dispose();
-				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-				F07Pong miclase = new F07Pong(new Rectangle(screenSize.width/2,screenSize.height/2));
+				F07Pong miclase = new F07Pong(new Rectangle(600,600));
 				Thread elHilo = new Thread(miclase);
 				elHilo.start();
 			}
 			else if (action.equals("volver"))
 			{
 				dispose();
-				F02MenuIdentificacion id = new F02MenuIdentificacion();
-				id.dispose();
-				boolean pInvitado = id.getInvitado();
-				F04MenuJuego menu = new F04MenuJuego(pInvitado);
-			}
+				if(Pong.getPong().esInvitadoJugador1())
+					new F04MenuJuego(true);
+				}else {
+					new F04MenuJuego(false);
+				}
 		}
 	}
 
