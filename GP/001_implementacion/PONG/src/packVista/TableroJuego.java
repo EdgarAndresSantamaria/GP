@@ -16,15 +16,16 @@ import org.json.simple.JSONObject;
 
 import packModelo.Pong;
 
-public class TableroJuego extends Canvas implements KeyListener   {	
+public class TableroJuego extends Canvas   {	
+	
 	
 	private String tipoJugador;
 	
-	public TableroJuego(Dimension dimension,String pTipoJugador) {
+	public TableroJuego(Dimension dimension) {
 		setVisible(true);
 		setSize(dimension);
-		addKeyListener(this);
-		tipoJugador=pTipoJugador;
+		
+		tipoJugador=Pong.getPong().tipoJugador2();
 	}
 	
 
@@ -46,57 +47,7 @@ public class TableroJuego extends Canvas implements KeyListener   {
 				
 	}
 
-	
-	@Override	
-	public void keyPressed(KeyEvent e){
-		int id=e.getKeyCode();
-		System.err.println("key pressed........");
-		if (id == KeyEvent.VK_W)
-		{
-			
-			Pong.getPong().moverRaqueta(true,true);	
-		}
-		else if (id == KeyEvent.VK_S)
-		{
-			Pong.getPong().moverRaqueta(false,true);	
-		}
-		else if (id == KeyEvent.VK_UP)
-		{
-			if(!tipoJugador.contains("IA")) {
-				Pong.getPong().moverRaqueta(true,false);	
-			}
 
-		}
-		else if (id == KeyEvent.VK_DOWN)
-		{
-			if(!tipoJugador.contains("IA")) {
-				Pong.getPong().moverRaqueta(false,false);	
-			}
-		}
-		
-	}
-	
-	@Override
-	public void keyReleased(KeyEvent e){
-		int id=e.getKeyCode();
-		System.err.println("key released....");
-		if (id == KeyEvent.VK_W || id == KeyEvent.VK_S)
-		{	
-			Pong.getPong().pararRaqueta(true);	
-		}
-		else if (id == KeyEvent.VK_UP || id == KeyEvent.VK_DOWN)
-		{
-			if(!tipoJugador.contains("IA")) {
-				Pong.getPong().pararRaqueta(false);	
-			}
-		}
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent arg0) {}	
-	
-	
 	public void dibujar( Graphics g) {
 		//System.out.println("painting component....");
 		Graphics2D g2d = ( Graphics2D ) g;

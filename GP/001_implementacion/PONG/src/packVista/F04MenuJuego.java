@@ -188,12 +188,13 @@ public class F04MenuJuego extends JFrame {
 				//Jugar 2 jugadores
 				  // prompt the user to enter their name
 			    String name = JOptionPane.showInputDialog(null, "Como se llama tu companero?");
-			    if(name.equals(null)) {
+			    if(!name.equals(null)) {
 			    	Pong.getPong().setOponente(name);
 			    	dispose();
-			    	new F07Pong("Jugador");
-			    }else {
-			    	
+			    	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+			    	F07Pong miclase = new F07Pong(new Rectangle(screenSize.width/2,screenSize.height/2));
+					Thread elHilo = new Thread(miclase);
+					elHilo.start();
 			    }
 			}
 			else if(action.equals("ranking"))

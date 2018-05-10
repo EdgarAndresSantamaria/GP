@@ -160,7 +160,7 @@ public class F01MenuPrincipal extends JFrame {
 			{
 				//inicializar jugador 1 con el invitado
 				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-				Pong.getPong().setConfig("Invitado", new Rectangle(0, 0,(int)screenSize.getWidth(),(int) screenSize.getHeight()));
+				Pong.getPong().setConfig("invitado", new Rectangle(0, 0,(int)screenSize.getWidth()/2,(int) screenSize.getHeight()/2));
 				F04MenuJuego jugar = new F04MenuJuego(true);	
 				dispose();
 			}

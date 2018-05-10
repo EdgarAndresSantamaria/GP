@@ -53,7 +53,7 @@ public class Bola extends Elemento {
 	
 	public boolean campoApotenciar() {
 		//campo de jugador (true->izq,false->drch)
-		return !(dx<0);//si es menor que 0 se dirige a la izquierda -> proviene de drcha
+		return (dx<0);//si es menor que 0 se dirige a la izquierda -> proviene de drcha (nota:si ya lo ha golpeado ha cambiado su direccion)
 	}
 
 	public Boolean marcado() {

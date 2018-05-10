@@ -124,15 +124,20 @@ public class F05MenuDificultad extends JFrame {
 				
 				Pong.getPong().setOponente("IA facil");
 				dispose();
-				
-				new F07Pong("IA");
+				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+				F07Pong miclase = new F07Pong(new Rectangle(screenSize.width/2,screenSize.height/2));
+				Thread elHilo = new Thread(miclase);
+				elHilo.start();
 			}
 			else if (action.equals("dificil"))
 			{
 				//Dificultad Dificil
 				Pong.getPong().setOponente("IA dificil");
 				dispose();
-				new F07Pong("IA");
+				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+				F07Pong miclase = new F07Pong(new Rectangle(screenSize.width/2,screenSize.height/2));
+				Thread elHilo = new Thread(miclase);
+				elHilo.start();
 			}
 			else if (action.equals("volver"))
 			{

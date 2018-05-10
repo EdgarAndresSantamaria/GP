@@ -48,6 +48,7 @@ public class Pong {
 		jug2=new Raqueta(pJugador2,false);	
 		lPuntuacion.add(new Rank(jug1.getNombre(),jug2.getNombre())); //generar nuevo Rank para la partida}
 		inicializarRaquetas();//inicializar la posición e ambas raquetas
+		System.out.println("inicializado juego");
 
 	}
 
@@ -283,6 +284,11 @@ public class Pong {
 		jug2.activarPotenciadores();
 		//emular el movimiento de la raqueta
 		//System.out.println("emular jugador1...");
+		if(jug1.getNombre().contains("IA")) {
+			//System.out.println("si es IA calcular sig movimiento...");
+			//calcular siguiente movimiento de la IA
+			jug1.siguienteMov();
+		}
 		jug1.emular();
 		if(jug2.getNombre().contains("IA")) {
 			//System.out.println("si es IA calcular sig movimiento...");
@@ -318,7 +324,11 @@ public class Pong {
 	private boolean finJuego() {
 		return lPuntuacion.get(lPuntuacion.size()-1).fin();
 	}
-
+	
+	public boolean playMusic() {
+		Boolean fin=finJuego();
+		return fin==null;
+	}
 	private void lanzarPotenciador() {
 		//lanzar un nuevo potenciador random ,tipos: true -> Multiplicador/ false -> DyRaqueta (-) / null -> DyRaqueta (+)
 		boolean seLanza=probabilidadPotenciador*new Random().nextInt(100)>50;//modelando el azar para la aparición de potnciadores
@@ -373,6 +383,11 @@ public class Pong {
 		}
 	}
 
+	/**
+	 * metodo que devuelve el potenciador que ha golpeado la pelota
+	 * @param bola
+	 * @return
+	 */
 	public Potenciador golpeaPotenciador(Rectangle bola) {
 		Potenciador result=null;
 		for(Potenciador tmp : lPotenciadores) {

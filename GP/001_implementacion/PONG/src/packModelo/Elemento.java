@@ -18,7 +18,7 @@ public class Elemento {
 			dimension.setSize(20, 20);
 							
 		}else {//medidas de la raqueta
-			dimension.setSize(10, 40);		
+			dimension.setSize(5, 40);		
 		}
 	}
 	

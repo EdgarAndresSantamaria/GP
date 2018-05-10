@@ -32,17 +32,13 @@ public class Rank {
 	* @return
 	*/
 	public boolean fin() {
-		Object fin=null;
+		Boolean fin=null;
 		if(puntosJug1==maxPuntos) {
 			fin=true;//gana jugador 1
 		}else if(puntosJug2==maxPuntos){
 			fin=false;//gana jugador 2
 		}
-		System.err.println("finalizado..."+fin);
-		System.err.println("puntos jug 1..."+puntosJug1);
-		System.err.println("puntos jug 2..."+puntosJug2);
-		System.err.println("max puntos..."+maxPuntos);
-		return (Boolean) fin;
+		return fin;
 	}
 
 	/**
