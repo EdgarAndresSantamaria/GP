@@ -167,7 +167,10 @@ public class F04MenuJuego extends JFrame {
 			frameSize.width = screenSize.width;
 		}
 		setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2);
-
+		if(invitado)
+		{
+			btnRanking.setEnabled(false);
+		}
 	}
 	
 	private class Controlador extends WindowAdapter implements ActionListener 
@@ -184,21 +187,18 @@ public class F04MenuJuego extends JFrame {
 			{
 				//Jugar 2 jugadores
 				  // prompt the user to enter their name
-			    String name = JOptionPane.showInputDialog(null, "�C�mo se llama tu compa�ero?");
-
-				Pong.getPong().setOponente(name);
-				dispose();
-				new F07Pong("Jugador");
+			    String name = JOptionPane.showInputDialog(null, "Como se llama tu companero?");
+			    if(name.equals(null)) {
+			    	Pong.getPong().setOponente(name);
+			    	dispose();
+			    	new F07Pong("Jugador");
+			    }else {
+			    	
+			    }
 			}
 			else if(action.equals("ranking"))
 			{
-				if(invitado)
-				{
-					JOptionPane.showMessageDialog(contentPane, "Eres un Invitado, no puedes ver el Ranking");
-					btnRanking.setEnabled(false);
-				}
-				else
-				{	
+					
 					JSONArray ranking = Pong.getPong().getRanking();
 					if(ranking!=null) {
 						try {
@@ -211,8 +211,6 @@ public class F04MenuJuego extends JFrame {
 						
 					}
 					
-				}
-				
 			}
 			else if (action.equals("logout"))
 			{

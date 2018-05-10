@@ -6,8 +6,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferStrategy;
 import java.util.Iterator;
@@ -16,32 +16,22 @@ import org.json.simple.JSONObject;
 
 import packModelo.Pong;
 
-public class TableroJuego extends Canvas {	
-	public TableroJuego(Dimension dimension) {
+public class TableroJuego extends Canvas implements KeyListener   {	
+	
+	private String tipoJugador;
+	
+	public TableroJuego(Dimension dimension,String pTipoJugador) {
 		setVisible(true);
 		setSize(dimension);
-		EventoTeclado eventoTeclado = new EventoTeclado();
-		addKeyListener(eventoTeclado);//eventos de jugador 1
-		if(Pong.getPong().tipoJugador2().contains("Jugador")) {
-			EventoTeclado1 eventoTeclado1 = new EventoTeclado1();
-			addKeyListener(eventoTeclado1);//eventos de jugador 2
-		}
+		addKeyListener(this);
+		tipoJugador=pTipoJugador;
 	}
 	
 
-	public void loopJuego() {
-		Boolean ganado=false;
-		int quienGano=-1;
-		while(!ganado) {
-				try {
+	public void repaint() {
+			try {
 					createBufferStrategy(2);
 					BufferStrategy bs=getBufferStrategy();
-					Thread.sleep(1000/60);//60 fps
-					//preparar siguiente frame
-					quienGano=Pong.getPong().jugar();
-					if(quienGano!=-1){
-						ganado=true;
-					}
 					do {
 						do {
 							Graphics g= bs.getDrawGraphics();
@@ -53,10 +43,59 @@ public class TableroJuego extends Canvas {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				System.out.println("vuelta");
+				
+	}
+
+	
+	@Override	
+	public void keyPressed(KeyEvent e){
+		int id=e.getKeyCode();
+		System.err.println("key pressed........");
+		if (id == KeyEvent.VK_W)
+		{
+			
+			Pong.getPong().moverRaqueta(true,true);	
+		}
+		else if (id == KeyEvent.VK_S)
+		{
+			Pong.getPong().moverRaqueta(false,true);	
+		}
+		else if (id == KeyEvent.VK_UP)
+		{
+			if(!tipoJugador.contains("IA")) {
+				Pong.getPong().moverRaqueta(true,false);	
 			}
 
+		}
+		else if (id == KeyEvent.VK_DOWN)
+		{
+			if(!tipoJugador.contains("IA")) {
+				Pong.getPong().moverRaqueta(false,false);	
+			}
+		}
+		
 	}
+	
+	@Override
+	public void keyReleased(KeyEvent e){
+		int id=e.getKeyCode();
+		System.err.println("key released....");
+		if (id == KeyEvent.VK_W || id == KeyEvent.VK_S)
+		{	
+			Pong.getPong().pararRaqueta(true);	
+		}
+		else if (id == KeyEvent.VK_UP || id == KeyEvent.VK_DOWN)
+		{
+			if(!tipoJugador.contains("IA")) {
+				Pong.getPong().pararRaqueta(false);	
+			}
+		}
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {}	
+	
 	
 	public void dibujar( Graphics g) {
 		//System.out.println("painting component....");

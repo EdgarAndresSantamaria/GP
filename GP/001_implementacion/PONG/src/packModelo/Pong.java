@@ -1,13 +1,12 @@
 package packModelo;
 
-import java.awt.Component;
 import java.awt.Rectangle;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Random;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
 
 public class Pong {
 
@@ -22,7 +21,7 @@ public class Pong {
 
 	//constantes
 	private final double probabilidadPotenciador=0.6;
-	private final int DxBola= -2;//cte velocidad de la bola (es negativa porque inicia hacia jug1)
+	private final int DxBola= -4;//cte velocidad de la bola (es negativa porque inicia hacia jug1)
 	private final int DyBola=  0;
 	private int fronteraSeguraJug1;//area jugador 1
 	private int fronteraSeguraJug2;//area jugador 2

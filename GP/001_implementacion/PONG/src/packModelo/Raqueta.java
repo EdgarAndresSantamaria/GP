@@ -10,7 +10,7 @@ public class Raqueta extends Elemento{
 	private int dy; //variable velocidad desplazamiento vertical, defecto : (2 pixel / update)
 	
 	//constantes
-	private final int defaultDy=2;
+	private final int defaultDy=4;
 	
 	/**
 	 * constructora de raqueta, genera una nueva raqueta parada con
