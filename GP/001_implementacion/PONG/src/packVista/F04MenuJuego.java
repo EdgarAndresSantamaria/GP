@@ -1,37 +1,29 @@
 package packVista;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import packModelo.Pong;
-
-import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import java.awt.Font;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
-
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class F04MenuJuego extends JFrame {
 
@@ -86,8 +78,8 @@ public class F04MenuJuego extends JFrame {
 		btnRanking.setActionCommand("ranking");
 		btnRanking.addActionListener(new Controlador());
 		
-		btnLogout = new JButton("Logout");
-		btnLogout.setActionCommand("logout");
+		btnLogout = new JButton("volver");
+		btnLogout.setActionCommand("volver");
 		btnLogout.addActionListener(new Controlador());
 		btnLogout.setBackground(Color.WHITE);
 		btnLogout.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -191,8 +183,7 @@ public class F04MenuJuego extends JFrame {
 			    if(!name.equals(null)) {
 			    	Pong.getPong().setOponente(name);
 			    	dispose();
-			    	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-			    	F07Pong miclase = new F07Pong(new Rectangle(screenSize.width/2,screenSize.height/2));
+			    	F07Pong miclase = new F07Pong(new Rectangle(600,600));
 					Thread elHilo = new Thread(miclase);
 					elHilo.start();
 			    }
@@ -213,7 +204,7 @@ public class F04MenuJuego extends JFrame {
 					}
 					
 			}
-			else if (action.equals("logout"))
+			else if (action.equals("volver"))
 			{
 				//Cerrar Sesion
 				F00Inicio inicio = new F00Inicio();

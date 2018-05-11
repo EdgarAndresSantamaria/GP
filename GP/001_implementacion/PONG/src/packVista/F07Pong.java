@@ -1,15 +1,15 @@
 package packVista;
 
+import java.awt.Color;
+import java.awt.Rectangle;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+
 import org.json.JSONArray;
 import org.json.JSONException;
+
 import packModelo.Pong;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Rectangle;
-import javax.swing.ImageIcon;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class F07Pong extends JFrame  implements Runnable{
 
@@ -34,8 +34,6 @@ public class F07Pong extends JFrame  implements Runnable{
 		setVisible(true);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//screenSize = Toolkit.getDefaultToolkit().getScreenSize();	
-		//setSize(screenSize.getSize());
 		setSize(campo.width,campo.height);
 		juego=new TableroJuego(getSize());
 		juego.setBackground(Color.BLACK);
@@ -59,21 +57,21 @@ public class F07Pong extends JFrame  implements Runnable{
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				System.out.println("vuelta");
 		}
 
 		if(!Pong.getPong().esInvitadoJugador1()) {
 			JSONArray ranking = Pong.getPong().getRanking();
 			if(ranking!=null) {
 				try {
-					new F06Ranking(ranking,true);
 					dispose();
+					new F06Ranking(ranking,true);
 				} catch (JSONException e1) {
 					e1.printStackTrace();
 				}
 
 			}
 		}else {
+			dispose();
 			new F04MenuJuego(true);//lanzar de nuevo el menu invitado
 		}
 
@@ -81,8 +79,7 @@ public class F07Pong extends JFrame  implements Runnable{
 
 	@Override
 	public void run() {
-		
-		loopJuego();
+		loopJuego();//lanzar juego
 	}	
 	
 	

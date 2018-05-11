@@ -2,7 +2,6 @@ package packModelo;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class Raqueta extends Elemento{
 	private Jugador jugador;//jugador asociado a la raqueta

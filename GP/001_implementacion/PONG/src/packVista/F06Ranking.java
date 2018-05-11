@@ -1,40 +1,32 @@
 package packVista;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-
-import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JScrollPane;
-import javax.swing.JButton;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class F06Ranking extends JFrame {
 
@@ -111,13 +103,13 @@ public class F06Ranking extends JFrame {
 			}
 		};
 		
-		//Añadir las columnas de la tabla
+		//Aï¿½adir las columnas de la tabla
 		model.addColumn("Player1");
 		model.addColumn("Scored1");
 		model.addColumn("Scored2");
 		model.addColumn("Player2");
 
-		//Añadir las filas a la tabla desde el fichero JSON
+		//Aï¿½adir las filas a la tabla desde el fichero JSON
 		for (int i = 0; i < pDatos.length(); i++) {
 			JSONObject one = pDatos.getJSONObject(i);
 			model.addRow(new Object[]{one.get("jugador1"), one.get("puntuacion1"), one.get("puntuacion2"), one.get("jugador2")});

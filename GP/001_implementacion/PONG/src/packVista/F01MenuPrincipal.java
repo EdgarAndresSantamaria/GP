@@ -1,32 +1,24 @@
 package packVista;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import packModelo.Pong;
-
-import java.awt.GridBagLayout;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
-
-import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Window.Type;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
 
 public class F01MenuPrincipal extends JFrame {
 
@@ -159,15 +151,14 @@ public class F01MenuPrincipal extends JFrame {
 			else if (action.equals("invitado"))
 			{
 				//inicializar jugador 1 con el invitado
-				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 				Pong.getPong().setConfig("invitado", new Rectangle(600, 600));
-				F04MenuJuego jugar = new F04MenuJuego(true);	
+				new F04MenuJuego(true);	
 				dispose();
 			}
 			
 			else if (action.equals("volver")) 
 			{
-				F00Inicio ppal = new F00Inicio();
+				new F00Inicio();
 				dispose();
 			}
 		

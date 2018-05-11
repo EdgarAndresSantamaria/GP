@@ -1,24 +1,25 @@
 package packVista;
 
-import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Dimension;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.ImageIcon;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JButton;
-import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
+
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 
 public class F00Inicio extends JFrame {
 
@@ -26,8 +27,7 @@ public class F00Inicio extends JFrame {
 	private JButton btnSalir;
 	private JButton continuar;
 	private JButton btnTaep;
-	private PlayerThread nReproductor;
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -35,7 +35,12 @@ public class F00Inicio extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					//lanzar diseño de GUIs
 					UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
+					//lanzar musica cíclica
+					PlayerThread nReproductor=PlayerThread.getMusica();
+					nReproductor.start();	
+					//lanzar juego
 					F00Inicio frame = new F00Inicio();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -135,8 +140,6 @@ public class F00Inicio extends JFrame {
 			frameSize.width = screenSize.width;
 		}
 		setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2);
-		nReproductor=new PlayerThread();
-		nReproductor.start();	
 	}
 	
 	private class Controlador extends WindowAdapter implements ActionListener 
