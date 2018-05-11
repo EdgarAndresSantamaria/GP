@@ -40,7 +40,7 @@ session_start();
           <img src="images/pong.png"/>
           <br />
           <br />
-          <button id="botonDescarga" type="window.location.href='linkDescargaDirecta'" >Download </button>
+          <button id="botonDescarga" onclick="window.open('https://drive.google.com/open?id=1PofhfFbqmFYyhNsuM4TUJVs3afseqLPI')" >Download </button>
 
           <div id="anuncio1" class="espacioPublicitario mediano" style="display:none;">advertisement 262x168</div>
           <div id="anuncio2" class="espacioPublicitario mediano" style="display:none;">advertisement 262x168</div>
