@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="librerias/mysql-connector-java-5.1.45-bin.jar"/>
 	<classpathentry kind="lib" path="jsoup-1.11.3.jar"/>
 	<classpathentry kind="lib" path="java-json.jar"/>
+	<classpathentry kind="lib" path="jl1.0.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>

@@ -10,7 +10,7 @@ public class PlayerThread extends Thread{
 	
 	private PlayerThread() {
 		String[] args=new String[1];
-		args[0]="/home/edgar/Música/musicaPong.mp3"; //nota este path como se vuelve generico??
+		args[0]="packMusica/musicaPong.mp3"; //nota este path como se vuelve generico??
 		nReproductor=jlp.createInstance(args);
 		conMusica=true;
 	}
