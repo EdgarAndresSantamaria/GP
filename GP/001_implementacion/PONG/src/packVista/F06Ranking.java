@@ -27,6 +27,7 @@ import javax.swing.table.DefaultTableModel;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class F06Ranking extends JFrame {
 
@@ -69,6 +70,18 @@ public class F06Ranking extends JFrame {
 		lblRanking.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblRanking.setForeground(Color.GREEN);
 		lblRanking.setBackground(Color.BLACK);
+		
+		JLabel lblLink = new JLabel("Link1");
+		lblLink.setForeground(Color.WHITE);
+		
+		JLabel lblLink_1 = new JLabel("Link2");
+		lblLink_1.setForeground(Color.WHITE);
+		
+		JLabel lblLink_2 = new JLabel("Link3");
+		lblLink_2.setForeground(Color.WHITE);
+		
+		JLabel lblLink_3 = new JLabel("Link4");
+		lblLink_3.setForeground(Color.WHITE);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -80,19 +93,37 @@ public class F06Ranking extends JFrame {
 							.addComponent(lblRanking))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(12)
-							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)))
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(lblLink)
+									.addGap(130)
+									.addComponent(lblLink_1, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
+									.addComponent(lblLink_2, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+									.addGap(127)
+									.addComponent(lblLink_3, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
+								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE))))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnVolver)
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(lblRanking)))
-					.addGap(28)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnVolver)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addContainerGap()
+									.addComponent(lblRanking)))
+							.addGap(3)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblLink, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblLink_1, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(lblLink_3, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblLink_2, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		
